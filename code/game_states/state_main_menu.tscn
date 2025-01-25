@@ -19,6 +19,6 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 50
 text = "Main Menu:
-1 - Tutorial
+1 - Start Game
 2 - Quit Game"
 horizontal_alignment = 1
