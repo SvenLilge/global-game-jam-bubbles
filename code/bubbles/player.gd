@@ -5,6 +5,8 @@ var deadzone_threshold_trans = 0.3;
 var deadzone_threshold_rot = 0.6;
 var move_dir = Vector2(0,0);
 
+@onready var influence = $Influence;
+
 func _ready():
 	speed = 400;
 	emotions[Bubble.EMOTION.JOY] = 100.0;
