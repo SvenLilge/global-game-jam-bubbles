@@ -14,7 +14,6 @@ func _ready():
 func _physics_process(delta):
 	super._physics_process(delta)
 
-	
 	if(get_tree().paused == true):
 		return;
 	

@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://rbxebt8p0oep"]
+[gd_scene load_steps=8 format=3 uid="uid://rbxebt8p0oep"]
 
 [ext_resource type="Script" path="res://code/bubbles/bubble.gd" id="1_nwpj0"]
-[ext_resource type="Texture2D" uid="uid://b0il2kqjk42fq" path="res://resources/bubble_placeholder_blank.png" id="2_iufcc"]
+[ext_resource type="Texture2D" uid="uid://dywfl3gqjf7ra" path="res://resources/inner_bubble.png" id="3_2m0rx"]
+[ext_resource type="Texture2D" uid="uid://bw17f3ko5wfjc" path="res://resources/bubble_placeholder_new.png" id="3_qw7v7"]
 [ext_resource type="Texture2D" uid="uid://3eu3q43obekp" path="res://resources/bubble_aura.png" id="5_3hpjt"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2o1o0"]
@@ -42,30 +43,34 @@ collision_mask = 0
 shape = SubResource("CircleShape2D_ndb0c")
 debug_color = Color(0.318487, 0.625265, 9.62615e-07, 0.42)
 
+[node name="BG" type="Sprite2D" parent="."]
+z_index = -1
+texture = ExtResource("5_3hpjt")
+
 [node name="Old" type="Sprite2D" parent="."]
 scale = Vector2(1.5, 1.5)
-texture = ExtResource("5_3hpjt")
+texture = ExtResource("3_2m0rx")
 
 [node name="Mature" type="Sprite2D" parent="."]
 scale = Vector2(1.25, 1.25)
-texture = ExtResource("5_3hpjt")
+texture = ExtResource("3_2m0rx")
 
 [node name="YA" type="Sprite2D" parent="."]
-texture = ExtResource("5_3hpjt")
+texture = ExtResource("3_2m0rx")
 
 [node name="Teen" type="Sprite2D" parent="."]
 scale = Vector2(0.75, 0.75)
-texture = ExtResource("5_3hpjt")
+texture = ExtResource("3_2m0rx")
 
 [node name="Child" type="Sprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("5_3hpjt")
+texture = ExtResource("3_2m0rx")
 
 [node name="Infant" type="Sprite2D" parent="."]
 scale = Vector2(0.25, 0.25)
-texture = ExtResource("5_3hpjt")
+texture = ExtResource("3_2m0rx")
 
 [node name="Sprite" type="Sprite2D" parent="."]
-texture = ExtResource("2_iufcc")
+texture = ExtResource("3_qw7v7")
 
 [node name="TweenDelayTimer" type="Timer" parent="."]

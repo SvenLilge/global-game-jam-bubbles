@@ -1,7 +1,7 @@
 extends CharacterBody2D
 class_name Bubble
 
-enum EMOTION {JOY, ANGER, SADNESS, FEAR, DISGUST}
+enum EMOTION {JOY, ANGER, SADNESS}
 
 enum AGE {INFANT, CHILD, TEEN, YA, MATURE, OLD}
 
@@ -17,19 +17,20 @@ var influence_strength = 1;
 var aura_tween;
 
 # Add colors and color mixing (use a white bubble and then do some color modulation based on weights)
-var red_emotion =   [1.0, 1.0, 0.0, 1.0, 0.0];
-var green_emotion = [1.0, 0.0, 0.0, 0.0, 1.0];
-var blue_emotion =  [0.0, 0.0, 1.0, 1.0, 0.0];
+var red_emotion =   [0.0, 1.0, 0.0];
+var green_emotion = [1.0, 0.0, 0.0];
+var blue_emotion =  [0.0, 0.0, 1.0];
 
 # Moving
 var speed = 200
 
 # Emotions for each bubble
-var emotions = [0.0, 0.0, 0.0, 0.0, 0.0];
+var emotions = [0.0, 0.0, 0.0];
 var spreading_emotion;
 
-# Age
+# Age and Color
 var cur_age = AGE.INFANT;
+var cur_color;
 
 func _ready() -> void:
 	$TweenDelayTimer.one_shot = true;
@@ -44,6 +45,8 @@ func _ready() -> void:
 	colors.append(Color(0,1,0));
 	colors.append(Color(0,0,1));
 	set_age_state(AGE.YA,colors);
+	
+	$Sprite.modulate.a = 1;
 
 func _process(delta):
 	var sum_all = 0.0;
@@ -51,7 +54,7 @@ func _process(delta):
 	var red = 0.0;
 	var blue = 0.0;
 	var green = 0.0;
-	for i in range(0,5):
+	for i in range(0,3):
 		sum_all = sum_all + emotions[i];
 		red = red + red_emotion[i]*emotions[i];
 		green = green + green_emotion[i]*emotions[i];
@@ -59,6 +62,8 @@ func _process(delta):
 	red = red/sum_all;
 	green = green/sum_all;
 	blue = blue/sum_all;
+	
+	cur_color = Color(red,green,blue);
 	
 	if(sum_all == 0.0):
 		red = 1.0;
@@ -77,6 +82,7 @@ func _process(delta):
 			$Mature.modulate = Color(red,green,blue);
 		AGE.OLD:
 			$Old.modulate = Color(red,green,blue);
+	$BG.modulate = Color(red,green,blue);
 	$Influence/Shape.modulate = Color(red_emotion[spreading_emotion],green_emotion[spreading_emotion],blue_emotion[spreading_emotion]);
 	$Influence/Shape.modulate.a = 0.25
 
@@ -91,7 +97,9 @@ func _physics_process(_delta):
 
 func start_tween():
 	aura_tween = create_tween().set_loops();
+	aura_tween.tween_property($Influence/Shape,"modulate:a",0,0);
 	aura_tween.tween_property($Influence,"scale",aura_min_size,aura_inactive);
+	aura_tween.tween_property($Influence/Shape,"modulate:a",1,0);
 	aura_tween.tween_property($Influence,"scale",aura_max_size,0.5*aura_active);
 	aura_tween.tween_property($Influence,"scale",aura_min_size,0.5*aura_active);
 	aura_tween.loop_finished.connect(tween_loop_finished);
@@ -114,7 +122,7 @@ func set_age_state(age, colors):
 			$YA.modulate.a = 0.0;
 			$Mature.modulate.a = 0.0;
 			$Old.modulate.a = 0.0;
-			scale = $Infant.get_rect().size.x/$Sprite.get_rect().size.x*Vector2(1,1);
+			scale = $Infant.get_rect().size.x/$Mature.get_rect().size.x*Vector2(1,1);
 		AGE.CHILD: 
 			$Infant.modulate.a = 1.0;
 			$Infant.modulate = colors[0];
@@ -123,7 +131,7 @@ func set_age_state(age, colors):
 			$YA.modulate.a = 0.0;
 			$Mature.modulate.a = 0.0;
 			$Old.modulate.a = 0.0;
-			scale = $Child.get_rect().size.x/$Sprite.get_rect().size.x*Vector2(1,1);
+			scale = $Child.get_rect().size.x/$Mature.get_rect().size.x*Vector2(1,1);
 		AGE.TEEN: 
 			$Infant.modulate.a = 1.0;
 			$Infant.modulate = colors[0];
@@ -133,7 +141,7 @@ func set_age_state(age, colors):
 			$YA.modulate.a = 0.0;
 			$Mature.modulate.a = 0.0;
 			$Old.modulate.a = 0.0;
-			scale = $Teen.get_rect().size.x/$Sprite.get_rect().size.x*Vector2(1,1);
+			scale = $Teen.get_rect().size.x/$Mature.get_rect().size.x*Vector2(1,1);
 		AGE.YA: 
 			$Infant.modulate.a = 1.0;
 			$Infant.modulate = colors[0];
@@ -144,7 +152,7 @@ func set_age_state(age, colors):
 			$YA.modulate.a = 1.0;
 			$Mature.modulate.a = 0.0;
 			$Old.modulate.a = 0.0;
-			scale = $YA.get_rect().size.x/$Sprite.get_rect().size.x*Vector2(1,1);
+			scale = $YA.get_rect().size.x/$Mature.get_rect().size.x*Vector2(1,1);
 		AGE.MATURE: 
 			$Infant.modulate.a = 1.0;
 			$Infant.modulate = colors[0];
@@ -156,7 +164,7 @@ func set_age_state(age, colors):
 			$YA.modulate = colors[3];
 			$Mature.modulate.a = 1.0;
 			$Old.modulate.a = 0.0;
-			scale = $Mature.get_rect().size.x/$Sprite.get_rect().size.x*Vector2(1,1);
+			scale = $Mature.get_rect().size.x/$Mature.get_rect().size.x*Vector2(1,1);
 		AGE.OLD: 
 			$Infant.modulate.a = 1.0;
 			$Infant.modulate = colors[0];
@@ -169,27 +177,41 @@ func set_age_state(age, colors):
 			$Mature.modulate.a = 1.0;
 			$Mature.modulate = colors[4];
 			$Old.modulate.a = 1.0;
-			scale = $Old.get_rect().size.x/$Sprite.get_rect().size.x*Vector2(1,1);	
-	$Sprite.scale = scale;
+			scale = $Old.get_rect().size.x/$Mature.get_rect().size.x*Vector2(1,1);	
+	$Sprite.scale = scale*$Mature.get_rect().size.x/$Sprite.get_rect().size.x;
 	$GetInfluenced.scale = scale;
 	$CollisionShape2D.scale = scale;
+	$BG.scale = scale;
 	aura_min_size = scale;
 	aura_max_size = 3*scale;
 	
 	
 func age():
-	pass
+	if cur_age < AGE.OLD:
+		var colors = [];
+		if cur_age >= AGE.INFANT:
+			colors.append($Infant.modulate);
+		if cur_age >= AGE.CHILD:
+			colors.append($Child.modulate);
+		if cur_age >= AGE.TEEN:
+			colors.append($Teen.modulate);
+		if cur_age >= AGE.YA:
+			colors.append($YA.modulate);
+		if cur_age >= AGE.MATURE:
+			colors.append($Mature.modulate);
+		colors.append(cur_color);
+		set_age_state(cur_age+1,colors);
 
 func die():
 	pass
 
 func get_random_emotion():
 	var sum_all = 0;
-	for i in range (0,5):
+	for i in range (0,3):
 		sum_all = sum_all + emotions[i];
 	var random = randf_range(0, sum_all);
 	var cur_limit = emotions[0];
-	for i in range (0,5):
+	for i in range (0,3):
 		if random <= cur_limit:
 			return i;
 		if i < 4:
