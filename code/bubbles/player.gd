@@ -5,6 +5,11 @@ var deadzone_threshold_trans = 0.3;
 var deadzone_threshold_rot = 0.6;
 var move_dir = Vector2(0,0);
 
+var energy = 0;
+var entertainment = 0;
+var education_money = 0;
+var personal = 0;
+
 @onready var influence = $Influence;
 
 func _ready():
