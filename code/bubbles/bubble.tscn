@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://rbxebt8p0oep"]
+[gd_scene load_steps=7 format=3 uid="uid://rbxebt8p0oep"]
 
 [ext_resource type="Script" path="res://code/bubbles/bubble.gd" id="1_nwpj0"]
 [ext_resource type="Texture2D" uid="uid://b0il2kqjk42fq" path="res://resources/bubble_placeholder_blank.png" id="2_iufcc"]
@@ -12,21 +12,6 @@ radius = 51.0882
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ndb0c"]
 radius = 54.4518
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_rph8k"]
-atlas = ExtResource("2_iufcc")
-region = Rect2(0, 0, 102, 102)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_ip4bo"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_rph8k")
-}],
-"loop": true,
-"name": &"bubble",
-"speed": 5.0
-}]
 
 [node name="Bubble" type="CharacterBody2D"]
 collision_layer = 2
@@ -57,11 +42,30 @@ collision_mask = 0
 shape = SubResource("CircleShape2D_ndb0c")
 debug_color = Color(0.318487, 0.625265, 9.62615e-07, 0.42)
 
-[node name="Emotion" type="Sprite2D" parent="."]
+[node name="Old" type="Sprite2D" parent="."]
+scale = Vector2(1.5, 1.5)
 texture = ExtResource("5_3hpjt")
 
-[node name="Sprite" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_ip4bo")
-animation = &"bubble"
+[node name="Mature" type="Sprite2D" parent="."]
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("5_3hpjt")
+
+[node name="YA" type="Sprite2D" parent="."]
+texture = ExtResource("5_3hpjt")
+
+[node name="Teen" type="Sprite2D" parent="."]
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("5_3hpjt")
+
+[node name="Child" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("5_3hpjt")
+
+[node name="Infant" type="Sprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("5_3hpjt")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_iufcc")
 
 [node name="TweenDelayTimer" type="Timer" parent="."]

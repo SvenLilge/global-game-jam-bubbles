@@ -7,7 +7,7 @@ var move_dir = Vector2(0,0);
 
 func _ready():
 	speed = 400;
-	emotions[Bubble.EMOTION.JOY] = 0;
+	emotions[Bubble.EMOTION.JOY] = 100.0;
 	influence_strength = 0;
 	super._ready();
 

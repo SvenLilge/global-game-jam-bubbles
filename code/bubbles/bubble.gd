@@ -26,12 +26,20 @@ var speed = 200
 # Emotions for each bubble
 var emotions = [0.0, 0.0, 0.0, 0.0, 0.0];
 
+# Age
+var cur_age = AGE.INFANT;
+
 func _ready() -> void:
 	$TweenDelayTimer.one_shot = true;
 	$TweenDelayTimer.wait_time = randf_range(0,2);
 	$TweenDelayTimer.timeout.connect(start_tween);
 	$TweenDelayTimer.start();
 	
+	var colors = [];
+	colors.append(Color(1,0,0));
+	colors.append(Color(0,1,0));
+	colors.append(Color(0,0,1));
+	set_age_state(AGE.YA,colors);
 
 func _process(delta):
 	var sum_all = 0.0;
@@ -52,8 +60,19 @@ func _process(delta):
 		red = 1.0;
 		blue = 1.0;
 		green = 1.0;
-	print(Color(red,green,blue))
-	$Emotion.modulate = Color(red,green,blue);
+	match cur_age:
+		AGE.INFANT:
+			$Infant.modulate = Color(red,green,blue);
+		AGE.CHILD:
+			$Child.modulate = Color(red,green,blue);
+		AGE.TEEN:
+			$Teen.modulate = Color(red,green,blue);
+		AGE.YA:
+			$YA.modulate = Color(red,green,blue);
+		AGE.MATURE:
+			$Mature.modulate = Color(red,green,blue);
+		AGE.OLD:
+			$Old.modulate = Color(red,green,blue);
 	$Influence/Shape.modulate = Color(red,green,blue);
 	$Influence/Shape.modulate.a = 0.25
 
@@ -77,7 +96,77 @@ func influence_emotion(emotion,value):
 
 
 func set_age_state(age, colors):
-	pass
+	cur_age = age;
+	var scale;
+	match age:
+		AGE.INFANT: 
+			$Infant.modulate.a = 1.0;
+			$Child.modulate.a = 0.0;
+			$Teen.modulate.a = 0.0;
+			$YA.modulate.a = 0.0;
+			$Mature.modulate.a = 0.0;
+			$Old.modulate.a = 0.0;
+			scale = $Infant.get_rect().size.x/$Sprite.get_rect().size.x*Vector2(1,1);
+		AGE.CHILD: 
+			$Infant.modulate.a = 1.0;
+			$Infant.modulate = colors[0];
+			$Child.modulate.a = 1.0;
+			$Teen.modulate.a = 0.0;
+			$YA.modulate.a = 0.0;
+			$Mature.modulate.a = 0.0;
+			$Old.modulate.a = 0.0;
+			scale = $Child.get_rect().size.x/$Sprite.get_rect().size.x*Vector2(1,1);
+		AGE.TEEN: 
+			$Infant.modulate.a = 1.0;
+			$Infant.modulate = colors[0];
+			$Child.modulate.a = 1.0;
+			$Child.modulate = colors[1];
+			$Teen.modulate.a = 1.0;
+			$YA.modulate.a = 0.0;
+			$Mature.modulate.a = 0.0;
+			$Old.modulate.a = 0.0;
+			scale = $Teen.get_rect().size.x/$Sprite.get_rect().size.x*Vector2(1,1);
+		AGE.YA: 
+			$Infant.modulate.a = 1.0;
+			$Infant.modulate = colors[0];
+			$Child.modulate.a = 1.0;
+			$Child.modulate = colors[1];
+			$Teen.modulate.a = 1.0;
+			$Teen.modulate = colors[2];
+			$YA.modulate.a = 1.0;
+			$Mature.modulate.a = 0.0;
+			$Old.modulate.a = 0.0;
+			scale = $YA.get_rect().size.x/$Sprite.get_rect().size.x*Vector2(1,1);
+		AGE.MATURE: 
+			$Infant.modulate.a = 1.0;
+			$Infant.modulate = colors[0];
+			$Child.modulate.a = 1.0;
+			$Child.modulate = colors[1];
+			$Teen.modulate.a = 1.0;
+			$Teen.modulate = colors[2];
+			$YA.modulate.a = 1.0;
+			$YA.modulate = colors[3];
+			$Mature.modulate.a = 1.0;
+			$Old.modulate.a = 0.0;
+			scale = $Mature.get_rect().size.x/$Sprite.get_rect().size.x*Vector2(1,1);
+		AGE.OLD: 
+			$Infant.modulate.a = 1.0;
+			$Infant.modulate = colors[0];
+			$Child.modulate.a = 1.0;
+			$Child.modulate = colors[1];
+			$Teen.modulate.a = 1.0;
+			$Teen.modulate = colors[2];
+			$YA.modulate.a = 1.0;
+			$YA.modulate = colors[3];
+			$Mature.modulate.a = 1.0;
+			$Mature.modulate = colors[4];
+			$Old.modulate.a = 1.0;
+			scale = $Old.get_rect().size.x/$Sprite.get_rect().size.x*Vector2(1,1);	
+	$Sprite.scale = scale;
+	$GetInfluenced.scale = scale;
+	$CollisionShape2D.scale = scale;
+	aura_min_size = scale;
+	aura_max_size = 3*scale;
 	
 	
 func age():
