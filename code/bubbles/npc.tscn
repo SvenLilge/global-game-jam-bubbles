@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://dcnywppal0io3"]
+
+[ext_resource type="PackedScene" uid="uid://rbxebt8p0oep" path="res://code/bubbles/bubble.tscn" id="1_bw04a"]
+[ext_resource type="Script" path="res://code/bubbles/npc.gd" id="2_ckn7v"]
+
+[node name="NPC" instance=ExtResource("1_bw04a")]
+script = ExtResource("2_ckn7v")
+
+[node name="GetInfluenced" parent="." index="3"]
+collision_layer = 8
