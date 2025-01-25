@@ -14,6 +14,7 @@ var aura_min_size = Vector2(1,1);
 # Determines how much one can change emotions of others
 var influence_strength = 1;
 
+var aura_tween;
 
 # Add colors and color mixing (use a white bubble and then do some color modulation based on weights)
 var red_emotion =   [1.0, 1.0, 0.0, 1.0, 0.0];
@@ -25,6 +26,7 @@ var speed = 200
 
 # Emotions for each bubble
 var emotions = [0.0, 0.0, 0.0, 0.0, 0.0];
+var spreading_emotion;
 
 # Age
 var cur_age = AGE.INFANT;
@@ -34,6 +36,8 @@ func _ready() -> void:
 	$TweenDelayTimer.wait_time = randf_range(0,2);
 	$TweenDelayTimer.timeout.connect(start_tween);
 	$TweenDelayTimer.start();
+	
+	spreading_emotion = get_random_emotion();
 	
 	var colors = [];
 	colors.append(Color(1,0,0));
@@ -73,7 +77,7 @@ func _process(delta):
 			$Mature.modulate = Color(red,green,blue);
 		AGE.OLD:
 			$Old.modulate = Color(red,green,blue);
-	$Influence/Shape.modulate = Color(red,green,blue);
+	$Influence/Shape.modulate = Color(red_emotion[spreading_emotion],green_emotion[spreading_emotion],blue_emotion[spreading_emotion]);
 	$Influence/Shape.modulate.a = 0.25
 
 
@@ -82,14 +86,18 @@ func _physics_process(_delta):
 	var overlapping_areas = $Influence.get_overlapping_areas();
 	for area in overlapping_areas:
 		if area != $GetInfluenced:
-			area.get_parent().influence_emotion(get_random_emotion(),influence_strength);
+			area.get_parent().influence_emotion(spreading_emotion,influence_strength);
 			
 
 func start_tween():
-	var aura_tween = create_tween().set_loops();
+	aura_tween = create_tween().set_loops();
 	aura_tween.tween_property($Influence,"scale",aura_min_size,aura_inactive);
 	aura_tween.tween_property($Influence,"scale",aura_max_size,0.5*aura_active);
 	aura_tween.tween_property($Influence,"scale",aura_min_size,0.5*aura_active);
+	aura_tween.loop_finished.connect(tween_loop_finished);
+	
+func tween_loop_finished(loop_idx):
+	spreading_emotion = get_random_emotion();
 
 func influence_emotion(emotion,value):
 	emotions[emotion] = emotions[emotion] + value;
