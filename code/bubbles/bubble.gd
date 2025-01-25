@@ -3,6 +3,8 @@ class_name Bubble
 
 enum EMOTION {JOY, ANGER, SADNESS}
 
+enum BUB_CLASS {YOU, RELATIVE, DUDE, BOSS, FRIEND, DOG, BABY, RANDOM}
+
 enum AGE {INFANT, CHILD, TEEN, YA, MATURE, OLD}
 
 # Aura node
