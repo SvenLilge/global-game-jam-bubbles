@@ -3,6 +3,8 @@ class_name Bubble
 
 enum EMOTION {JOY, ANGER, SADNESS, FEAR, DISGUST}
 
+enum AGE {INFANT, CHILD, TEEN, YA, MATURE, OLD}
+
 # Aura node
 var aura_active = 1;
 var aura_inactive = 2;
@@ -25,10 +27,10 @@ var speed = 200
 var emotions = [0.0, 0.0, 0.0, 0.0, 0.0];
 
 func _ready() -> void:
-	var aura_tween = create_tween().set_loops();
-	aura_tween.tween_property($Influence,"scale",aura_min_size,aura_inactive);
-	aura_tween.tween_property($Influence,"scale",aura_max_size,0.5*aura_active);
-	aura_tween.tween_property($Influence,"scale",aura_min_size,0.5*aura_active);
+	$TweenDelayTimer.one_shot = true;
+	$TweenDelayTimer.wait_time = randf_range(0,2);
+	$TweenDelayTimer.timeout.connect(start_tween);
+	$TweenDelayTimer.start();
 	
 
 func _process(delta):
@@ -45,8 +47,13 @@ func _process(delta):
 	red = red/sum_all;
 	green = green/sum_all;
 	blue = blue/sum_all;
+	
+	if(sum_all == 0.0):
+		red = 1.0;
+		blue = 1.0;
+		green = 1.0;
 	print(Color(red,green,blue))
-	$Sprite.modulate = Color(red,green,blue);
+	$Emotion.modulate = Color(red,green,blue);
 	$Influence/Shape.modulate = Color(red,green,blue);
 	$Influence/Shape.modulate.a = 0.25
 
@@ -59,9 +66,26 @@ func _physics_process(_delta):
 			area.get_parent().influence_emotion(get_random_emotion(),influence_strength);
 			
 
+func start_tween():
+	var aura_tween = create_tween().set_loops();
+	aura_tween.tween_property($Influence,"scale",aura_min_size,aura_inactive);
+	aura_tween.tween_property($Influence,"scale",aura_max_size,0.5*aura_active);
+	aura_tween.tween_property($Influence,"scale",aura_min_size,0.5*aura_active);
+
 func influence_emotion(emotion,value):
 	emotions[emotion] = emotions[emotion] + value;
+
+
+func set_age_state(age, colors):
+	pass
 	
+	
+func age():
+	pass
+
+func die():
+	pass
+
 func get_random_emotion():
 	var sum_all = 0;
 	for i in range (0,5):

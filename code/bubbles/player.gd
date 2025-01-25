@@ -7,12 +7,11 @@ var move_dir = Vector2(0,0);
 
 func _ready():
 	speed = 400;
-	emotions[Bubble.EMOTION.FEAR] = 100;
+	emotions[Bubble.EMOTION.JOY] = 0;
 	influence_strength = 0;
 	super._ready();
 
 func _physics_process(delta):
-	print(emotions)
 	super._physics_process(delta)
 
 	
