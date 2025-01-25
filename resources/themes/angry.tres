@@ -1,0 +1,10 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://d1varvs7goiyi"]
+
+[ext_resource type="FontFile" uid="uid://qmje0jjtcay5" path="res://resources/themes/Chewy/Chewy-Regular.ttf" id="1_7u65t"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0y6qk"]
+
+[resource]
+Label/font_sizes/font_size = 24
+Label/fonts/font = ExtResource("1_7u65t")
+Label/styles/normal = SubResource("StyleBoxTexture_0y6qk")

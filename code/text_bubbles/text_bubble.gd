@@ -7,9 +7,14 @@ var emotions_lab = {
 }
 
 var class_lab = {
-	Bubble.EMOTION.ANGER: "Anger",
-	Bubble.EMOTION.SADNESS: "Sadness",
-	Bubble.EMOTION.JOY: "Joy",
+	Bubble.BUB_CLASS.YOU: "You_",
+	Bubble.BUB_CLASS.RELATIVE: "Relatives_",
+	Bubble.BUB_CLASS.DUDE: "Dude_",
+	Bubble.BUB_CLASS.BOSS: "Boss_",
+	Bubble.BUB_CLASS.FRIEND: "Friend_",
+	Bubble.BUB_CLASS.DOG: "Joy",
+	Bubble.BUB_CLASS.BABY: "Baby",
+	Bubble.BUB_CLASS.RANDOM: "Random",
 }
 
 var replics = {
@@ -42,16 +47,33 @@ var replics = {
 	"Joy_2_Anger": ["Love the energy!","Relax, it’s all good!","You crack me up!","That’s adorable!","Calm down, buddy!","Thanks for the laugh!",],
 	"Joy_2_Sadness": ["You’ll be fine!","Cheer up!","Life’s too short!","I believe in you!","I’m here for you!","Hang in there!",],
 	"Joy_2_Joy": ["Me too!","That’s awesome!","Love it!","High five!","Heck yeah!","Go us!",],
+	"Baby": ["Ah wah","Goo goo","Buh buh","Ah goo","La la","Hee hee",],
+	"Random": ["Gotcha!","Ok, thanks!","I agree!","If you say so!","Refreshing!","Noted!",],
 }
+
+@onready var lab = $Label
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	for emot in Bubble.EMOTION.size():
+		for bub_cl in Bubble.BUB_CLASS.size():
+			say_emotion(bub_cl, emot)
+			await get_tree().create_timer(1.0).timeout
+			
 
 
-func say_emotion(who, emotion):
-	pass
-	
+func say_emotion(who, emotion = null):
+	if who == Bubble.BUB_CLASS.DOG:
+		lab.text = replics["Dogs_woof"].pick_random()
+	else:
+		if (class_lab[who] + emotions_lab[emotion]) not in replics:
+			print("no reply for " + class_lab[who] + emotions_lab[emotion])
+			return
+			
+		var list_name = replics[class_lab[who] + emotions_lab[emotion]]
+		list_name += replics[emotions_lab[emotion]]
+		print(list_name)
+		lab.text = str(list_name.pick_random())
 
-func respond(to_emotion, with_emotion):
+func respond(with_emotion, to_emotion = null):
 	pass
