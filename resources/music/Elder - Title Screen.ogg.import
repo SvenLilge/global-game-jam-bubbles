@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://c6xfaf8713uxc"
+path="res://.godot/imported/Elder - Title Screen.ogg-710547fa2a81341b6f578c19b447dddc.oggvorbisstr"
+
+[deps]
+
+source_file="res://resources/music/Elder - Title Screen.ogg"
+dest_files=["res://.godot/imported/Elder - Title Screen.ogg-710547fa2a81341b6f578c19b447dddc.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -107,14 +107,14 @@ func set_energy(value):
 	if value > 0:
 		energy.show()
 		
-	energy.text = str(value) + "/10"
+	energy.text = str(value) + "/15"
 
 
 func set_entertainment(value):
 	if value > 0:
 		entertainment.show()
 		
-	entertainment.text = str(value) + "/10"
+	entertainment.text = str(value) + "/15"
 
 
 func set_education(value):

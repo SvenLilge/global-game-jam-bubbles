@@ -13,6 +13,8 @@ func _ready():
 	super._ready();
 	player.show();
 	hud.show()
+	player.new_stage_music(4)
+	
 	player.level_active = false;
 	player.aura_tween.kill();
 	player.influence.scale = Vector2(0,0);

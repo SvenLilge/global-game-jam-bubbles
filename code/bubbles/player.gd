@@ -14,11 +14,28 @@ var resources = [5,5,0,0,0]
 @onready var influence = $Influence;
 var hud
 
+
+@onready var baby_song = $Music/InfTrack
+@onready var child_song = $Music/ChildTrack
+@onready var teen_song = $Music/TeenTrack
+@onready var ya_song = $Music/YATrack
+@onready var mat_song = $Music/MatureTrack
+@onready var old_song = $Music/OldTrack
+
+@onready var joy_song = $Music/JoyPlayer
+@onready var anger_song = $Music/AngryTrack
+@onready var sad_song = $Music/SadnessPlayer
+@onready var emo_timer = $EmotionChecker
+
+var song_emotion = 0
+
+
 func _ready():
 	influence_strength = 0;
 	super._ready();
 	var colors = [];
 	set_age_state(AGE.INFANT,colors);
+	emo_timer.timeout.connect(set_emotion_song)
 
 
 func set_hud():
@@ -65,6 +82,59 @@ func _physics_process(delta):
 			
 		# Update Player position
 		move_and_slide();
+
+
+func new_stage_music(stage):
+	for track:AudioStreamPlayer in $Music.get_children():
+		track.stop()
+	
+	match stage:
+		0:
+			baby_song.play()
+		1:
+			child_song.play()
+		2:
+			teen_song.play()
+		3:
+			ya_song.play()
+		4:
+			mat_song.play()
+		5:
+			old_song.play()
+	
+	if stage != 5:
+		anger_song.play()
+		joy_song.play()
+		sad_song.play()
+		
+		anger_song.volume_db = -100
+		joy_song.volume_db = -100
+		sad_song.volume_db = -100
+		
+		emo_timer.start(4.0)
+		set_emotion_song()
+
+
+func set_emotion_song():
+	var max_emotion = emotions.max()
+	var dominant_emotion = emotions.find(max_emotion)
+	
+	if dominant_emotion != song_emotion:
+		var music_levels = [-100, -100, -100]
+		music_levels[dominant_emotion] = 0
+		
+		print(music_levels)
+		
+		var tween_joy = get_tree().create_tween()
+		tween_joy.tween_property(anger_song, "volume_db", music_levels[0], 1).set_trans(Tween.TRANS_SINE)
+		
+		var tween_anger = get_tree().create_tween()
+		tween_anger.tween_property(joy_song, "volume_db", music_levels[1], 1).set_trans(Tween.TRANS_SINE)
+		
+		var tween_sad = get_tree().create_tween()
+		tween_sad.tween_property(sad_song, "volume_db", music_levels[2], 1).set_trans(Tween.TRANS_SINE)
+
+
 
 func pickup_energy():
 	var amount = 0;
