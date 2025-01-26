@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bgatm4hq14yir"]
 
 [ext_resource type="Script" path="res://code/game_states/state_old.gd" id="1_njpuh"]
-[ext_resource type="Texture2D" uid="uid://cbyftbpvr7xk0" path="res://resources/level_placeholder_small.png" id="2_a80gj"]
+[ext_resource type="Texture2D" uid="uid://dngl22o0jtrnu" path="res://resources/levels/Old_Bedroom.png" id="2_ffipf"]
 
 [node name="StateOld" type="Node2D"]
 script = ExtResource("1_njpuh")
@@ -9,7 +9,8 @@ script = ExtResource("1_njpuh")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = -4
 position = Vector2(960, 540)
-texture = ExtResource("2_a80gj")
+scale = Vector2(0.24, 0.21)
+texture = ExtResource("2_ffipf")
 
 [node name="StageTimer" type="Timer" parent="."]
 

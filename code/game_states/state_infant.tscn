@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://xxmo2pkgrfpe"]
 
 [ext_resource type="Script" path="res://code/game_states/state_infant.gd" id="1_2apm4"]
-[ext_resource type="Texture2D" uid="uid://cbyftbpvr7xk0" path="res://resources/level_placeholder_small.png" id="2_vylas"]
+[ext_resource type="Texture2D" uid="uid://bt25vgbixiqig" path="res://resources/levels/BabyRoom.png" id="2_5f447"]
 
 [node name="StateInfant" type="Node2D"]
 script = ExtResource("1_2apm4")
@@ -9,7 +9,8 @@ script = ExtResource("1_2apm4")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = -4
 position = Vector2(960, 540)
-texture = ExtResource("2_vylas")
+scale = Vector2(0.48, 0.42)
+texture = ExtResource("2_5f447")
 
 [node name="StageTimer" type="Timer" parent="."]
 

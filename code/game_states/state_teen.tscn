@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://bgatm4hq14yir"]
 
 [ext_resource type="Script" path="res://code/game_states/state_teen.gd" id="1_jakm2"]
-[ext_resource type="Texture2D" uid="uid://cbyftbpvr7xk0" path="res://resources/level_placeholder_small.png" id="2_lq2av"]
+[ext_resource type="Texture2D" uid="uid://dxsd7k67prjuk" path="res://resources/levels/Overall_TeenMap.png" id="2_2o2e0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s7q87"]
 size = Vector2(5032, 537)
@@ -15,7 +15,8 @@ script = ExtResource("1_jakm2")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = -4
 position = Vector2(960, 540)
-texture = ExtResource("2_lq2av")
+scale = Vector2(0.24, 0.21)
+texture = ExtResource("2_2o2e0")
 
 [node name="StaticBody2D4" type="StaticBody2D" parent="."]
 

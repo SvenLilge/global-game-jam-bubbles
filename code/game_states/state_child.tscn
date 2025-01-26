@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://bgatm4hq14yir"]
 
 [ext_resource type="Script" path="res://code/game_states/state_child.gd" id="1_41wo4"]
-[ext_resource type="Texture2D" uid="uid://cbyftbpvr7xk0" path="res://resources/level_placeholder_small.png" id="2_411ik"]
+[ext_resource type="Texture2D" uid="uid://b23u5vx75l25u" path="res://resources/levels/Overall_ChildMap.png" id="2_qoe4h"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x4t43"]
 size = Vector2(5032, 537)
@@ -15,7 +15,8 @@ script = ExtResource("1_41wo4")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = -4
 position = Vector2(960, 540)
-texture = ExtResource("2_411ik")
+scale = Vector2(0.24, 0.21)
+texture = ExtResource("2_qoe4h")
 
 [node name="StaticBody2D4" type="StaticBody2D" parent="."]
 
