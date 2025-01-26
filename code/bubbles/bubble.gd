@@ -126,12 +126,14 @@ func influence_emotion(emotion, value):
 func call_say_bubble():
 	var say_bubble = text_bubble.instantiate()
 	add_child(say_bubble)
+	#say_bubble.position = position #usefull if attach to parent
 	say_bubble.say_emotion(bubble_class, spreading_emotion)
 
 
 func call_response_bubble(emotion):
 	var resp_bubble = text_bubble.instantiate()
 	add_child(resp_bubble)
+	#resp_bubble.position = position #usefull if attach to parent
 	if bubble_class == BUB_CLASS.RANDOM:
 		resp_bubble.respond(bubble_class)
 	elif bubble_class == BUB_CLASS.BABY:

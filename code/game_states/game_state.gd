@@ -8,6 +8,8 @@ signal sgn_transition_state(next_state);
 var StateDelayTimer = Timer.new();
 var state_delay_time = 0.5;
 
+@onready var hud = get_parent().hud;
+
 func _ready():
 	add_child(StateDelayTimer);
 	StateDelayTimer.wait_time = state_delay_time;

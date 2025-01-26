@@ -101,6 +101,7 @@ func test_tut():
 		play_tutorial(mes)
 		await message_finished
 
+
 func test_respond():
 	for emot1 in Bubble.EMOTION.size():
 		for emot2 in Bubble.EMOTION.size():
@@ -119,7 +120,6 @@ func test_say():
 		
 			say_emotion(bub_cl, emot)
 			await get_tree().create_timer(1.0).timeout
-			
 
 
 func play_tutorial(code):
@@ -132,6 +132,7 @@ func play_tutorial(code):
 		lab.text = mess_mass.pop_front()
 	else:
 		push_warning("no such code")
+
 
 func play_next_line():
 	delay_timer.start(0.15)

@@ -11,6 +11,7 @@ var resources = [0,0,0,0]
 
 
 @onready var influence = $Influence;
+@onready var hud = get_parent().hud
 
 func _ready():
 	speed = 400;
@@ -26,10 +27,10 @@ func _ready():
 
 func _physics_process(delta):
 	
-	#print("Emotions")
-	#print(emotions)
-	#print("Resources")
-	#print(resources)
+	print("Emotions")
+	print(emotions)
+	print("Resources")
+	print(resources)
 	
 	super._physics_process(delta)
 
@@ -82,6 +83,8 @@ func pickup_energy():
 	resources[RES.EN] = resources[RES.EN] + amount;
 	if resources[RES.EN] > 10:
 		resources[RES.EN] = 10;
+	
+	hud.set_energy(resources[RES.EN])
 
 func pickup_entertainment():
 	var amount = 0;
@@ -101,6 +104,8 @@ func pickup_entertainment():
 	resources[RES.ENT] = resources[RES.ENT] + amount;
 	if resources[RES.ENT] > 10:
 		resources[RES.ENT] = 10;
+	
+	hud.set_energy(resources[RES.ENT])
 		
 func pickup_education_money():
 	var amount = 0;
@@ -139,6 +144,8 @@ func pickup_personal():
 	resources[RES.P] = resources[RES.P] + amount;
 	if resources[RES.P] > 50:
 		resources[RES.P] = 50;
+		
+	hud.set_energy(resources[RES.P])
 
 func deplete_resources():
 	var amount = 0;

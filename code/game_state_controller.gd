@@ -9,6 +9,8 @@ var game_states: Array[PackedScene]
 @onready var music_player = $MusicPlayer;
 @onready var player = $Player;
 
+@onready var hud = $HUD
+
 #@onready var background_stream = load("res://resources/final_music/Music/Between stages v3.ogg");
 #@onready var title_stream = load("res://resources/final_music/Music/Title v2.ogg");
 
@@ -31,6 +33,7 @@ func _ready():
 	cur_game_state.sgn_transition_state.connect(transition_game_state.bind());
 	
 	$Player.hide();
+	hud.hide()
 	#music_player.stream = title_stream;
 	#music_player.play();
 

@@ -6,6 +6,7 @@ var res_scale;
 
 func _ready():
 	super._ready();
+	hud.show()
 	return;
 
 

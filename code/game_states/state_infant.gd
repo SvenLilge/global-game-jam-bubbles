@@ -5,4 +5,5 @@ extends "res://code/game_states/game_state.gd"
 func _ready():
 	super._ready();
 	player.show();
+	hud.show()
 	return;	
