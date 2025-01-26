@@ -100,10 +100,10 @@ func update_location_music(pos:Vector2):
 	var right_up_dist = (600 - max(50, min(600, pos.distance_to(Vector2(1520,190)))))/600.0
 	var right_down_dist = (600 - max(50, min(600, pos.distance_to(Vector2(1520,890)))))/600.0
 	
-	left_up_loc_song.volume_db = linear_to_db(left_up_dist)
-	left_down_loc_song.volume_db = linear_to_db(left_down_dist)
-	right_down_loc_song.volume_db = linear_to_db(right_up_dist)
-	right_down_loc_song.volume_db = linear_to_db(right_down_dist)
+	left_up_loc_song.volume_db = linear_to_db(left_up_dist) + 10
+	left_down_loc_song.volume_db = linear_to_db(left_down_dist) + 10
+	right_down_loc_song.volume_db = linear_to_db(right_up_dist) + 10
+	right_down_loc_song.volume_db = linear_to_db(right_down_dist) + 10
 
 
 func new_stage_music(stage):
