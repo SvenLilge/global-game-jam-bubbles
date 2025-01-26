@@ -27,6 +27,11 @@ var hud
 @onready var sad_song = $Music/SadnessPlayer
 @onready var emo_timer = $EmotionChecker
 
+var left_up_loc_song
+var left_down_loc_song
+var right_up_loc_song
+var right_down_loc_song
+
 var song_emotion = 0
 
 
@@ -82,25 +87,70 @@ func _physics_process(delta):
 			
 		# Update Player position
 		move_and_slide();
+		
+		update_location_music(position)
+
+
+func update_location_music(pos:Vector2):
+	if left_up_loc_song == null:
+		return
+	
+	var left_up_dist = pos.distance_to(Vector2(400,190))
+	var left_down_dist = pos.distance_to(Vector2(400,890))
+	var right_up_dist = pos.distance_to(Vector2(1520,190))
+	var right_down_dist = pos.distance_to(Vector2(1520,890))
 
 
 func new_stage_music(stage):
 	for track:AudioStreamPlayer in $Music.get_children():
 		track.stop()
+	for track:AudioStreamPlayer in $LocMusic.get_children():
+		track.stop()
 	
 	match stage:
 		0:
 			baby_song.play()
+			baby_song.volume_db = -100
 		1:
 			child_song.play()
+			child_song.volume_db = -100
+			left_up_loc_song = $LocMusic/Home
+			left_down_loc_song = $LocMusic/Mall
+			right_up_loc_song = $LocMusic/School
+			right_down_loc_song = $LocMusic/Friend
 		2:
 			teen_song.play()
+			teen_song.volume_db = -100
+			left_up_loc_song = $LocMusic/Home
+			left_down_loc_song = $LocMusic/Mall
+			right_up_loc_song = $LocMusic/School
+			right_down_loc_song = $LocMusic/Friend
 		3:
 			ya_song.play()
+			ya_song.volume_db = -100
+			left_up_loc_song = $LocMusic/Home
+			left_down_loc_song = $LocMusic/Mall
+			right_up_loc_song = $LocMusic/School
+			right_down_loc_song = $LocMusic/Friend
 		4:
 			mat_song.play()
+			mat_song.volume_db = -100
+			left_up_loc_song = $LocMusic/Home
+			left_down_loc_song = $LocMusic/Mall
+			right_up_loc_song = $LocMusic/School
+			right_down_loc_song = $LocMusic/Friend
 		5:
 			old_song.play()
+	
+	if stage in [1,2,3,4]:
+		left_up_loc_song.play()
+		left_down_loc_song.play()
+		right_up_loc_song.play()
+		right_down_loc_song.play()
+		left_up_loc_song.volume_db = -100
+		left_down_loc_song.volume_db = -100
+		right_up_loc_song.volume_db = -100
+		right_down_loc_song.volume_db = -100
 	
 	if stage != 5:
 		anger_song.play()
@@ -113,23 +163,24 @@ func new_stage_music(stage):
 		
 		emo_timer.start(4.0)
 		set_emotion_song()
-
+	
 
 func set_emotion_song():
 	var max_emotion = emotions.max()
 	var dominant_emotion = emotions.find(max_emotion)
+	print(emotions)
 	
 	if dominant_emotion != song_emotion:
 		var music_levels = [-100, -100, -100]
 		music_levels[dominant_emotion] = 0
 		
-		print(music_levels)
+		print("levels", music_levels)
 		
 		var tween_joy = get_tree().create_tween()
-		tween_joy.tween_property(anger_song, "volume_db", music_levels[0], 1).set_trans(Tween.TRANS_SINE)
+		tween_joy.tween_property(joy_song, "volume_db", music_levels[0], 1).set_trans(Tween.TRANS_SINE)
 		
 		var tween_anger = get_tree().create_tween()
-		tween_anger.tween_property(joy_song, "volume_db", music_levels[1], 1).set_trans(Tween.TRANS_SINE)
+		tween_anger.tween_property(anger_song, "volume_db", music_levels[1], 1).set_trans(Tween.TRANS_SINE)
 		
 		var tween_sad = get_tree().create_tween()
 		tween_sad.tween_property(sad_song, "volume_db", music_levels[2], 1).set_trans(Tween.TRANS_SINE)
