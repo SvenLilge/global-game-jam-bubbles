@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://bmb2k3c540uqx"]
+[gd_scene load_steps=9 format=3 uid="uid://bmb2k3c540uqx"]
 
 [ext_resource type="Theme" uid="uid://4csixlnkvcme" path="res://resources/themes/main_theme.tres" id="1_8y2re"]
 [ext_resource type="Script" path="res://code/hud.gd" id="1_nkpwq"]
 [ext_resource type="Texture2D" uid="uid://dcyueayqkc2rw" path="res://resources/hud/energy.png" id="2_djni7"]
 [ext_resource type="Texture2D" uid="uid://h6hsdq3avc5x" path="res://resources/hud/entertain.png" id="3_12po0"]
+[ext_resource type="Texture2D" uid="uid://bea0v5dw2pbku" path="res://resources/hud/shade.png" id="3_74ghf"]
 [ext_resource type="Texture2D" uid="uid://do0ohye0y665s" path="res://resources/hud/education.png" id="4_rxl5v"]
 [ext_resource type="Texture2D" uid="uid://dhpkjyc04bnrr" path="res://resources/hud/coin_icon.png" id="5_fxrkk"]
 [ext_resource type="Texture2D" uid="uid://cp6eqhw7ik7nw" path="res://resources/hud/personal.png" id="6_2fne5"]
@@ -21,15 +22,21 @@ theme = ExtResource("1_8y2re")
 [node name="Energy" type="Label" parent="Control"]
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 0
-offset_top = 100.0
-offset_right = 120.0
-offset_bottom = 150.0
+offset_left = 5.0
+offset_top = 120.0
+offset_right = 125.0
+offset_bottom = 170.0
 text = "10/10"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Sprite2D2" type="Sprite2D" parent="Control/Energy"]
+position = Vector2(60, -55)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("3_74ghf")
+
 [node name="Sprite2D" type="Sprite2D" parent="Control/Energy"]
-position = Vector2(60, -50)
+position = Vector2(60, -55)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_djni7")
 
@@ -39,15 +46,21 @@ layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -41.0
-offset_right = 120.0
+offset_left = 5.0
+offset_top = -50.0
+offset_right = 125.0
 grow_vertical = 0
 text = "0/10"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Sprite2D2" type="Sprite2D" parent="Control/Entertainment"]
+position = Vector2(60, -55)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("3_74ghf")
+
 [node name="Sprite2D" type="Sprite2D" parent="Control/Entertainment"]
-position = Vector2(60, -50)
+position = Vector2(60, -60)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("3_12po0")
 
@@ -56,16 +69,22 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -120.0
-offset_top = 100.0
-offset_bottom = 150.0
+offset_left = -125.0
+offset_top = 120.0
+offset_right = -5.0
+offset_bottom = 170.0
 grow_horizontal = 0
 text = "270"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Sprite2D2" type="Sprite2D" parent="Control/Education"]
+position = Vector2(60, -55)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("3_74ghf")
+
 [node name="Sprite2D" type="Sprite2D" parent="Control/Education"]
-position = Vector2(60, -50)
+position = Vector2(60, -55)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("4_rxl5v")
 
@@ -76,16 +95,21 @@ anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -270.0
-offset_top = 100.0
+offset_top = 120.0
 offset_right = -150.0
-offset_bottom = 150.0
+offset_bottom = 170.0
 grow_horizontal = 0
 text = "1999"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Sprite2D2" type="Sprite2D" parent="Control/Money"]
+position = Vector2(60, -55)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("3_74ghf")
+
 [node name="Sprite2D" type="Sprite2D" parent="Control/Money"]
-position = Vector2(60, -50)
+position = Vector2(60, -55)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("5_fxrkk")
 
@@ -97,16 +121,22 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -40.0
-offset_top = -23.0
+offset_left = -125.0
+offset_top = -50.0
+offset_right = -5.0
 grow_horizontal = 0
 grow_vertical = 0
 text = "340"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Sprite2D2" type="Sprite2D" parent="Control/Personal"]
+position = Vector2(60, -55)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("3_74ghf")
+
 [node name="Sprite2D" type="Sprite2D" parent="Control/Personal"]
-position = Vector2(60, -50)
+position = Vector2(60, -55)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("6_2fne5")
 

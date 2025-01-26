@@ -45,13 +45,13 @@ func _physics_process(delta):
 		else:
 			var left = 0;
 			var up = 0;
-			if(Input.is_key_pressed(KEY_W)):
+			if(Input.is_key_pressed(KEY_W)) or (Input.is_key_pressed(KEY_UP)):
 				up = 1;
-			if(Input.is_key_pressed(KEY_S)):
+			if(Input.is_key_pressed(KEY_S)) or (Input.is_key_pressed(KEY_DOWN)):
 				up = -1;
-			if(Input.is_key_pressed(KEY_A)):
+			if(Input.is_key_pressed(KEY_A)) or (Input.is_key_pressed(KEY_LEFT)):
 				left = 1;
-			if(Input.is_key_pressed(KEY_D)):
+			if(Input.is_key_pressed(KEY_D)) or (Input.is_key_pressed(KEY_RIGHT)):
 				left = -1;
 			move_input = Vector2(-1*left,-1*up);
 			
