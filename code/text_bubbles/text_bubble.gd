@@ -60,18 +60,18 @@ var replics = {
 }
 
 var tutorial = {
-	0_0: [Bubble.EMOTION.JOY, ["You are a bubble.", "The Bubble.", "You appeared in this word as a pure bubble.", "Blank state. Tabula Rasa.", "Use arrows/WASD to move"]],
+	0_0: [Bubble.EMOTION.JOY, ["You are a bubble.", "The Bubble.", "You appeared in this world as a pure bubble.", "Blank state. Tabula Rasa.", "Use arrows/WASD to move"]],
 	0_1: [Bubble.EMOTION.JOY, ["The world has other bubbles. They affect you.", "Some of them bring joy, like this one."]],
 	0_2: [Bubble.EMOTION.ANGER, ["Some of them spread anger.", "They also move differently."]],
-	0_3: [Bubble.EMOTION.SADNESS, ["And some - spread sadness.", "Choose your company wisely."]],
+	0_3: [Bubble.EMOTION.SADNESS, ["And some spread sadness.", "Choose your company wisely."]],
 	1_0: [Bubble.EMOTION.JOY, [
 		"Your bubble grew up a bit.\nIt remembers all past encounters.", "But it also is open to the new ones.\nMoreover - now you have things to do.",
 		"You need to rest to survive.\nYou rest at home.", "You need to have some fun to keep spirits up.", 
-		"You need to study, for you future.\nAt school.", "And make meaningful connections.\nSpend time with a close friend.",
-		"Moreover, now you also affect others.\nJust a little bit.",
+		"You need to study, for your future.\nAt school.", "And make meaningful connections.\nSpend time with a close friend.",
+		"Additionally, now you also affect others.\nJust a little bit.",
 	]],
 	2_0: [Bubble.EMOTION.ANGER, ["You grow. Things get messy.", "You need to endure to persist."]],
-	3_0: [Bubble.EMOTION.JOY, ["Who's a big bubble now?", "You are!", "Now you earn thingy called money.", "Did you study well?"]],
+	3_0: [Bubble.EMOTION.JOY, ["Who's a big bubble now?", "You are!", "Now you earn a thing called money.", "Did you study well?"]],
 	4_0: [Bubble.EMOTION.JOY, ["Your bubble had its time.", "You persist. But what for?", "Time to spread yourself to other bubbles...", "Or better not?"]],
 	5_0: [Bubble.EMOTION.SADNESS, ["Your time is over.", "Time to pop your bubble", "Time to look what's inside.", "Will you like it?"]],
 }
