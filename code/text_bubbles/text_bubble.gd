@@ -78,7 +78,7 @@ var tutorial = {
 
 
 var final_bubble = {
-	0: {
+	0: { #dominant emotion
 		"Joy": [Bubble.EMOTION.JOY, "You barely remember your first months.\nBut you recall they were full of joy."],
 		"Anger": [Bubble.EMOTION.ANGER, "You barely remember your first months.\nBut you recall they were full of anger."],
 		"Sad": [Bubble.EMOTION.SADNESS, "You barely remember your first months.\nBut you recall they were full of sadness."],
@@ -88,57 +88,57 @@ var final_bubble = {
 	1_1: { #first educ/money, second personal.
 		"Low_Low": [Bubble.EMOTION.ANGER, "You had hard times in your childhood.\nBoth with studies and with forming connections."],
 		"Low_High": [Bubble.EMOTION.JOY, "Who cares about studying as a child?\nNot you! You cared about making friends!"],
-		"High_Low": [Bubble.EMOTION.SADNESS, "You studied reall hard as a child.\nBut did you make friends?"],
+		"High_Low": [Bubble.EMOTION.SADNESS, "You studied really hard as a child.\nBut did you make friends?"],
 		"High_High": [Bubble.EMOTION.JOY, "You did really well in your childhood.\nSome call it talent. You call it effort."],
 	},
-	1_2: {
+	1_2: { #dominant emotion
 		"Joy": [Bubble.EMOTION.JOY, "But it was a happy time.\nMaybe the easiest in your life."],
 		"Anger": [Bubble.EMOTION.ANGER, "Your bubble got the first\nangry seeds at that time."],
 		"Sad": [Bubble.EMOTION.SADNESS, "Your childhood memories are mostly\nblue."],
 		"Depressed": [Bubble.EMOTION.SADNESS, "Some people had happy childhood...\nClearly not you."],
-		"Bittersweet": [Bubble.EMOTION.JOY, "You've had some moments of joy,\nand some of sadnes or even anger."],
+		"Bittersweet": [Bubble.EMOTION.JOY, "You've had some moments of joy,\nand some of sadness or even anger."],
 		
 	},
 	2_1: { #first educ/money, second personal.
 		"Low_Low": [Bubble.EMOTION.SADNESS, "They say teenage years are the hardest.\nThey clearly were hard for you."],
 		"Low_High": [Bubble.EMOTION.JOY, "Studies weren't your strong side as a teen.\nBut it is human connection that matters!"],
-		"High_Low": [Bubble.EMOTION.ANGER, "You studied reall hard as a child.\nFriends? You'll deal with that later, right?"],
+		"High_Low": [Bubble.EMOTION.ANGER, "You've made books your second home.\nFriends? You'll deal with that later, right?"],
 		"High_High": [Bubble.EMOTION.JOY, "Your teenage years marked the path for\nyour future success. Did it work out?"],
 	},
-	2_2: {
+	2_2: { #dominant emotion
 		"Joy": [Bubble.EMOTION.JOY, "And what matters most\n - it was a happy time"],
 		"Anger": [Bubble.EMOTION.ANGER, "It was too hard to avoid\nall the hatred around."],
-		"Sad": [Bubble.EMOTION.SADNESS, "Who showed you that sad music album?\nIt became your teen's soundtrack."],
-		"Depressed": [Bubble.EMOTION.SADNESS, "Surival - that was your motto.\nTeenage year hit you real hard."],
+		"Sad": [Bubble.EMOTION.SADNESS, "Who showed you that sad song?\nIt became your teen's soundtrack."],
+		"Depressed": [Bubble.EMOTION.SADNESS, "Survival - that was your motto.\nTeenage years hit you real hard."],
 		"Bittersweet": [Bubble.EMOTION.JOY, "Those times were rich,\nyou've had it all - joy, anger, sadness."],
 		
 	},
 	3_1: { #first educ/money, second personal.
-		"Low_Low": [Bubble.EMOTION.SADNESS, "How are you even supposed to succeed\nin theese unfair times, anyway?"],
+		"Low_Low": [Bubble.EMOTION.SADNESS, "How are you even supposed to succeed\nin these unfair times, anyway?"],
 		"Low_High": [Bubble.EMOTION.JOY, "You didn't go for that rat race.\nWho cares about money? People matter."],
-		"High_Low": [Bubble.EMOTION.ANGER, "You got a brilliant carreer.\nPeople? They are just envy."],
+		"High_Low": [Bubble.EMOTION.ANGER, "You got a brilliant career.\nPeople? They are just envious."],
 		"High_High": [Bubble.EMOTION.JOY, "Who said you can't have it all?\nYou clearly had it."],
 	},
-	3_2: {
+	3_2: { #dominant emotion
 		"Joy": [Bubble.EMOTION.JOY, "The world is full of joy.\nYou just need to seek properly."],
 		"Anger": [Bubble.EMOTION.ANGER, "In this world of assholes...\nHow can you avoid becoming one?"],
-		"Sad": [Bubble.EMOTION.SADNESS, "You feel this world is screewed.\nIt's sad. What else could it be?"],
+		"Sad": [Bubble.EMOTION.SADNESS, "You feel this world is screwed.\nIt's sad. What else could it be?"],
 		"Depressed": [Bubble.EMOTION.SADNESS, "Life is harsh. Screw it.\nWas it even worth it?"],
-		"Bittersweet": [Bubble.EMOTION.JOY, "You've embraced the world\nin all its compexity."],
+		"Bittersweet": [Bubble.EMOTION.JOY, "You've embraced the world\nin all its complexity."],
 		
 	},
 	4_1: { #first educ/money, second personal.
-		"Low_Low": [Bubble.EMOTION.SADNESS, "How are you even supposed to succeed\nin theese unfair times, anyway?"],
-		"Low_High": [Bubble.EMOTION.JOY, "You didn't go for that rat race.\nWho cares about money? People matter."],
-		"High_Low": [Bubble.EMOTION.ANGER, "You got a brilliant carreer.\nPeople? They are just envy."],
-		"High_High": [Bubble.EMOTION.JOY, "Who said you can't have it all?\nYou clearly had it."],
+		"Low_Low": [Bubble.EMOTION.SADNESS, "You wanted to share what you had.\nBut did you have enough to share?"],
+		"Low_High": [Bubble.EMOTION.JOY, "It was the time to spread the love.\nYou tried your best."],
+		"High_Low": [Bubble.EMOTION.ANGER, "You've learned and achieved a lot.\nPeople? They should learn from you."],
+		"High_High": [Bubble.EMOTION.JOY, "You aced both career and personal\nYou've even managed to spread some."],
 	},
-	4_2: {
-		"Joy": [Bubble.EMOTION.JOY, "The world is full of joy.\nYou just need to seek properly."],
-		"Anger": [Bubble.EMOTION.ANGER, "In this world of assholes...\nHow can you avoid becoming one?"],
-		"Sad": [Bubble.EMOTION.SADNESS, "You feel this world is screewed.\nIt's sad. What else could it be?"],
-		"Depressed": [Bubble.EMOTION.SADNESS, "Life is harsh. Screw it.\nWas it even worth it?"],
-		"Bittersweet": [Bubble.EMOTION.JOY, "You've embraced the world\nin all its compexity."],
+	4_2: { #dominant emotion
+		"Joy": [Bubble.EMOTION.JOY, "This was the time to spread joy.\nAnd you had the joy to spread."],
+		"Anger": [Bubble.EMOTION.ANGER, "They called you angry?\nYou called it bringing truth."],
+		"Sad": [Bubble.EMOTION.SADNESS, "They need to know it. To feel it.\nThe pain of the world."],
+		"Depressed": [Bubble.EMOTION.SADNESS, "Spreading the hatred?\nThis world deserved it."],
+		"Bittersweet": [Bubble.EMOTION.JOY, "Live is complex. Yours was.\nThey need to learn about it"],
 		
 	},
 }
