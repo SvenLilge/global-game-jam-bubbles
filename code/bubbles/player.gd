@@ -95,10 +95,15 @@ func update_location_music(pos:Vector2):
 	if left_up_loc_song == null:
 		return
 	
-	var left_up_dist = pos.distance_to(Vector2(400,190))
-	var left_down_dist = pos.distance_to(Vector2(400,890))
-	var right_up_dist = pos.distance_to(Vector2(1520,190))
-	var right_down_dist = pos.distance_to(Vector2(1520,890))
+	var left_up_dist = (600 - max(50, min(600, pos.distance_to(Vector2(400,190)))))/600.0
+	var left_down_dist = (600 - max(50, min(600, pos.distance_to(Vector2(400,890)))))/600.0
+	var right_up_dist = (600 - max(50, min(600, pos.distance_to(Vector2(1520,190)))))/600.0
+	var right_down_dist = (600 - max(50, min(600, pos.distance_to(Vector2(1520,890)))))/600.0
+	
+	left_up_loc_song.volume_db = linear_to_db(left_up_dist)
+	left_down_loc_song.volume_db = linear_to_db(left_down_dist)
+	right_down_loc_song.volume_db = linear_to_db(right_up_dist)
+	right_down_loc_song.volume_db = linear_to_db(right_down_dist)
 
 
 func new_stage_music(stage):
@@ -110,31 +115,26 @@ func new_stage_music(stage):
 	match stage:
 		0:
 			baby_song.play()
-			baby_song.volume_db = -100
 		1:
 			child_song.play()
-			child_song.volume_db = -100
 			left_up_loc_song = $LocMusic/Home
 			left_down_loc_song = $LocMusic/Mall
 			right_up_loc_song = $LocMusic/School
 			right_down_loc_song = $LocMusic/Friend
 		2:
 			teen_song.play()
-			teen_song.volume_db = -100
 			left_up_loc_song = $LocMusic/Home
 			left_down_loc_song = $LocMusic/Mall
 			right_up_loc_song = $LocMusic/School
 			right_down_loc_song = $LocMusic/Friend
 		3:
 			ya_song.play()
-			ya_song.volume_db = -100
 			left_up_loc_song = $LocMusic/Home
 			left_down_loc_song = $LocMusic/Mall
 			right_up_loc_song = $LocMusic/School
 			right_down_loc_song = $LocMusic/Friend
 		4:
 			mat_song.play()
-			mat_song.volume_db = -100
 			left_up_loc_song = $LocMusic/Home
 			left_down_loc_song = $LocMusic/Mall
 			right_up_loc_song = $LocMusic/School
@@ -168,22 +168,20 @@ func new_stage_music(stage):
 func set_emotion_song():
 	var max_emotion = emotions.max()
 	var dominant_emotion = emotions.find(max_emotion)
-	print(emotions)
 	
-	if dominant_emotion != song_emotion:
-		var music_levels = [-100, -100, -100]
-		music_levels[dominant_emotion] = 0
-		
-		print("levels", music_levels)
-		
-		var tween_joy = get_tree().create_tween()
-		tween_joy.tween_property(joy_song, "volume_db", music_levels[0], 1).set_trans(Tween.TRANS_SINE)
-		
-		var tween_anger = get_tree().create_tween()
-		tween_anger.tween_property(anger_song, "volume_db", music_levels[1], 1).set_trans(Tween.TRANS_SINE)
-		
-		var tween_sad = get_tree().create_tween()
-		tween_sad.tween_property(sad_song, "volume_db", music_levels[2], 1).set_trans(Tween.TRANS_SINE)
+	var music_levels = [-100, -100, -100]
+	music_levels[dominant_emotion] = 0
+	
+	print(music_levels)
+	
+	var tween_joy = get_tree().create_tween()
+	tween_joy.tween_property(joy_song, "volume_db", music_levels[0], 1).set_trans(Tween.TRANS_SINE)
+	
+	var tween_anger = get_tree().create_tween()
+	tween_anger.tween_property(anger_song, "volume_db", music_levels[1], 1).set_trans(Tween.TRANS_SINE)
+	
+	var tween_sad = get_tree().create_tween()
+	tween_sad.tween_property(sad_song, "volume_db", music_levels[2], 1).set_trans(Tween.TRANS_SINE)
 
 
 

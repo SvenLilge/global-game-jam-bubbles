@@ -218,13 +218,14 @@ func say_emotion(who, emotion = null):
 		list_name += replics[emotions_lab[emotion]]
 		theme = themes[emotion]
 		lab.text = list_name.pick_random()
-		decay()
+	decay()
 
 
 func respond(with_emotion, to_emotion = null):
 	if with_emotion == Bubble.BUB_CLASS.BABY:
 		lab.text = replics["Baby"].pick_random()
 		theme = themes[to_emotion]
+		
 	elif with_emotion == Bubble.BUB_CLASS.RANDOM:
 		lab.text = replics["Random"].pick_random()
 		theme = themes[to_emotion]
@@ -236,7 +237,7 @@ func respond(with_emotion, to_emotion = null):
 		var list_name = replics[emotions_lab[with_emotion] + "_2_" + emotions_lab[to_emotion]]
 		theme = themes[with_emotion]
 		lab.text = str(list_name.pick_random())
-		decay()
+	decay()
 		
 		
 
