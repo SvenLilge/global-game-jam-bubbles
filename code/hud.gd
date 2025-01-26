@@ -83,7 +83,7 @@ func on_timeout():
 func set_age(value):
 	if value > 0:
 		var tween_modul = get_tree().create_tween()
-		tween_modul.tween_property(age, "modulate", Color(0,0,0,1), 0.4).set_trans(Tween.TRANS_SINE)
+		tween_modul.tween_property(age, "modulate", Color(1,0,0,1), 0.4).set_trans(Tween.TRANS_SINE)
 		await tween_modul.finished
 	
 	match cur_stage:

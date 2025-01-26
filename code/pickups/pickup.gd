@@ -15,6 +15,8 @@ func _ready() -> void:
 	$DurationTimer.one_shot = true;
 	$DurationTimer.start();
 	$DurationTimer.timeout.connect(vanish);
+	vobble()
+
 
 func _process(delta: float) -> void:
 	if($Area.overlaps_body(player)):
@@ -22,18 +24,29 @@ func _process(delta: float) -> void:
 			provide_resource();
 		vanish();
 
+
+func vobble():
+	await get_tree().create_timer(0.4).timeout
+	var pos_from = $Sprite.position
+	var pos_to = pos_from + Vector2(0, -20)
+	var tween_move = get_tree().create_tween()
+	tween_move.tween_property($Sprite, "position", pos_to, 0.6).set_trans(Tween.TRANS_SINE)
+	tween_move.tween_property($Sprite, "position", pos_from, 0.6).set_trans(Tween.TRANS_SINE)
+	tween_move.tween_callback(vobble)
+
+
 func set_type(type):
 	cur_type = type;
 	if cur_type == TYPE.ENERGY:
-		$Sprite.modulate = Color(1,1,0);
+		$Sprite.frame = 0
 	if cur_type == TYPE.ENTERTAINMENT:
-		$Sprite.modulate = Color(1,0,0);
+		$Sprite.frame = 1
 	if cur_type == TYPE.EDUCATION:
-		$Sprite.modulate = Color(0,1,0);
+		$Sprite.frame = 2
 	if cur_type == TYPE.MONEY:
-		$Sprite.modulate = Color(0,1,0);
+		$Sprite.frame = 3
 	if cur_type == TYPE.PERSONAL:
-		$Sprite.modulate = Color(0,0,1);
+		$Sprite.frame = 4
 	
 
 func vanish():
