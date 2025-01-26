@@ -138,9 +138,11 @@ func call_response_bubble(emotion):
 	add_child(resp_bubble)
 	#resp_bubble.position = position #usefull if attach to parent
 	if bubble_class == BUB_CLASS.RANDOM:
-		resp_bubble.respond(bubble_class)
+		resp_bubble.respond(bubble_class, emotion)
 	elif bubble_class == BUB_CLASS.BABY:
-		resp_bubble.respond(bubble_class)
+		resp_bubble.respond(bubble_class, emotion)
+	elif bubble_class == BUB_CLASS.DOG:
+		resp_bubble.respond(bubble_class, emotion)
 	else:
 		var max_emotion = emotions.max()
 		var dominant_emotion = emotions.find(max_emotion)

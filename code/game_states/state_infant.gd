@@ -2,7 +2,7 @@ extends "res://code/game_states/game_state.gd"
 
 @onready var player = get_parent().player;
 
-var level_length = 45;
+var level_length = 10;
 
 func _ready():
 	super._ready();

@@ -85,18 +85,60 @@ var final_bubble = {
 		"Bittersweet": [Bubble.EMOTION.JOY, "You barely remember your first months.\nBut you recall they were full of everything."],
 		"Depressed": [Bubble.EMOTION.SADNESS, "You barely remember your first months.\nBut you recall they were full of suffering."],
 	},
-	1_1: {
-		"Low_Low": [Bubble.EMOTION.SADNESS, "As a child, you've start.\nBut you recall they were full of joy."],
-		"Low_High": [Bubble.EMOTION.JOY, "You barely remember your first months.\nBut you recall they were full of anger."],
-		"High_Low": [Bubble.EMOTION.ANGER, "You barely remember your first months.\nBut you recall they were full of sadness."],
-		"High_High": [Bubble.EMOTION.JOY, "You barely remember your first months.\nBut you recall they were full of everything."],
+	1_1: { #first educ/money, second personal.
+		"Low_Low": [Bubble.EMOTION.ANGER, "You had hard times in your childhood.\nBoth with studies and with forming connections."],
+		"Low_High": [Bubble.EMOTION.JOY, "Who cares about studying as a child?\nNot you! You cared about making friends!"],
+		"High_Low": [Bubble.EMOTION.SADNESS, "You studied reall hard as a child.\nBut did you make friends?"],
+		"High_High": [Bubble.EMOTION.JOY, "You did really well in your childhood.\nSome call it talent. You call it effort."],
 	},
 	1_2: {
 		"Joy": [Bubble.EMOTION.JOY, "But it was a happy time.\nMaybe the easiest in your life."],
 		"Anger": [Bubble.EMOTION.ANGER, "Your bubble got the first\nangry seeds at that time."],
-		"Sad": [Bubble.EMOTION.SADNESS, "Your childhood memories are mostly blue."],
-		"Depressed": [Bubble.EMOTION.SADNESS, "You have hard time hearing other\ntalking about happy childhood.\nYours clearly wasn't."],
-		"Bittersweet": [Bubble.EMOTION.JOY, "You've had some moments of joy,\nand some of sadnes.\nAnd maybe even some angry moments."],
+		"Sad": [Bubble.EMOTION.SADNESS, "Your childhood memories are mostly\nblue."],
+		"Depressed": [Bubble.EMOTION.SADNESS, "Some people had happy childhood...\nClearly not you."],
+		"Bittersweet": [Bubble.EMOTION.JOY, "You've had some moments of joy,\nand some of sadnes or even anger."],
+		
+	},
+	2_1: { #first educ/money, second personal.
+		"Low_Low": [Bubble.EMOTION.SADNESS, "They say teenage years are the hardest.\nThey clearly were hard for you."],
+		"Low_High": [Bubble.EMOTION.JOY, "Studies weren't your strong side as a teen.\nBut it is human connection that matters!"],
+		"High_Low": [Bubble.EMOTION.ANGER, "You studied reall hard as a child.\nFriends? You'll deal with that later, right?"],
+		"High_High": [Bubble.EMOTION.JOY, "Your teenage years marked the path for\nyour future success. Did it work out?"],
+	},
+	2_2: {
+		"Joy": [Bubble.EMOTION.JOY, "And what matters most\n - it was a happy time"],
+		"Anger": [Bubble.EMOTION.ANGER, "It was too hard to avoid\nall the hatred around."],
+		"Sad": [Bubble.EMOTION.SADNESS, "Who showed you that sad music album?\nIt became your teen's soundtrack."],
+		"Depressed": [Bubble.EMOTION.SADNESS, "Surival - that was your motto.\nTeenage year hit you real hard."],
+		"Bittersweet": [Bubble.EMOTION.JOY, "Those times were rich,\nyou've had it all - joy, anger, sadness."],
+		
+	},
+	3_1: { #first educ/money, second personal.
+		"Low_Low": [Bubble.EMOTION.SADNESS, "How are you even supposed to succeed\nin theese unfair times, anyway?"],
+		"Low_High": [Bubble.EMOTION.JOY, "You didn't go for that rat race.\nWho cares about money? People matter."],
+		"High_Low": [Bubble.EMOTION.ANGER, "You got a brilliant carreer.\nPeople? They are just envy."],
+		"High_High": [Bubble.EMOTION.JOY, "Who said you can't have it all?\nYou clearly had it."],
+	},
+	3_2: {
+		"Joy": [Bubble.EMOTION.JOY, "The world is full of joy.\nYou just need to seek properly."],
+		"Anger": [Bubble.EMOTION.ANGER, "In this world of assholes...\nHow can you avoid becoming one?"],
+		"Sad": [Bubble.EMOTION.SADNESS, "You feel this world is screewed.\nIt's sad. What else could it be?"],
+		"Depressed": [Bubble.EMOTION.SADNESS, "Life is harsh. Screw it.\nWas it even worth it?"],
+		"Bittersweet": [Bubble.EMOTION.JOY, "You've embraced the world\nin all its compexity."],
+		
+	},
+	4_1: { #first educ/money, second personal.
+		"Low_Low": [Bubble.EMOTION.SADNESS, "How are you even supposed to succeed\nin theese unfair times, anyway?"],
+		"Low_High": [Bubble.EMOTION.JOY, "You didn't go for that rat race.\nWho cares about money? People matter."],
+		"High_Low": [Bubble.EMOTION.ANGER, "You got a brilliant carreer.\nPeople? They are just envy."],
+		"High_High": [Bubble.EMOTION.JOY, "Who said you can't have it all?\nYou clearly had it."],
+	},
+	4_2: {
+		"Joy": [Bubble.EMOTION.JOY, "The world is full of joy.\nYou just need to seek properly."],
+		"Anger": [Bubble.EMOTION.ANGER, "In this world of assholes...\nHow can you avoid becoming one?"],
+		"Sad": [Bubble.EMOTION.SADNESS, "You feel this world is screewed.\nIt's sad. What else could it be?"],
+		"Depressed": [Bubble.EMOTION.SADNESS, "Life is harsh. Screw it.\nWas it even worth it?"],
+		"Bittersweet": [Bubble.EMOTION.JOY, "You've embraced the world\nin all its compexity."],
 		
 	},
 }
@@ -105,7 +147,7 @@ var final_bubble = {
 var tutorial_playing = false
 var mess_mass = ""
 
-@onready var lab = $Label
+@onready var lab:Label = $Label
 @onready var delay_timer = $Timer
 
 # Called when the node enters the scene tree for the first time.
@@ -139,10 +181,11 @@ func test_say():
 			await get_tree().create_timer(1.0).timeout
 
 
-func play_last(code):
-	var emotion = final_bubble[code][0]
+func play_last(code, result):
+	lab.custom_minimum_size = Vector2(360, 100)
+	var emotion = final_bubble[code][result][0]
 	theme = themes[emotion]
-	lab.text = final_bubble[code][1]
+	lab.text = final_bubble[code][result][1]
 	
 
 func play_tutorial(code):
@@ -181,10 +224,13 @@ func say_emotion(who, emotion = null):
 func respond(with_emotion, to_emotion = null):
 	if with_emotion == Bubble.BUB_CLASS.BABY:
 		lab.text = replics["Baby"].pick_random()
-		theme = themes[Bubble.EMOTION.JOY]
+		theme = themes[to_emotion]
 	elif with_emotion == Bubble.BUB_CLASS.RANDOM:
 		lab.text = replics["Random"].pick_random()
-		theme = themes[Bubble.EMOTION.JOY]
+		theme = themes[to_emotion]
+	elif with_emotion == Bubble.BUB_CLASS.RANDOM:
+		lab.text = replics["Dogs_woof"].pick_random()
+		theme = themes[to_emotion]
 	
 	else:
 		var list_name = replics[emotions_lab[with_emotion] + "_2_" + emotions_lab[to_emotion]]

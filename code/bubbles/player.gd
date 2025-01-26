@@ -12,19 +12,23 @@ var resources = [0,0,0,0,0]
 
 
 @onready var influence = $Influence;
-@onready var hud = get_parent().hud
+var hud
 
 func _ready():
 	influence_strength = 0;
 	super._ready();
 	var colors = [];
 	set_age_state(AGE.INFANT,colors);
-	
+
+
+func set_hud():
+	hud = get_parent().hud
 	
 	$ResourceDepletionTimer.one_shot = false;
 	$ResourceDepletionTimer.wait_time = 1;
 	$ResourceDepletionTimer.timeout.connect(deplete_resources);
 	$ResourceDepletionTimer.start();
+
 
 func _physics_process(delta):
 	

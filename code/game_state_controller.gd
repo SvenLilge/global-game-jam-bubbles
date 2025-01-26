@@ -34,6 +34,8 @@ func _ready():
 	
 	$Player.hide();
 	hud.hide()
+	
+	$Player.set_hud()
 	#music_player.stream = title_stream;
 	#music_player.play();
 
