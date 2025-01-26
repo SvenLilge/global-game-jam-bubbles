@@ -20,6 +20,7 @@ theme = ExtResource("1_8y2re")
 
 [node name="Energy" type="Label" parent="Control"]
 custom_minimum_size = Vector2(120, 0)
+layout_mode = 0
 offset_top = 100.0
 offset_right = 120.0
 offset_bottom = 150.0
@@ -108,3 +109,21 @@ vertical_alignment = 1
 position = Vector2(60, -50)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("6_2fne5")
+
+[node name="Age" type="Label" parent="Control"]
+custom_minimum_size = Vector2(600, 100)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 41.0
+grow_horizontal = 2
+theme = ExtResource("1_8y2re")
+theme_override_font_sizes/font_size = 48
+text = "4 Years 3 Months"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AgeCounter" type="Timer" parent="."]

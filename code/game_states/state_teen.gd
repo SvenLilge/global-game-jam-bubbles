@@ -10,12 +10,14 @@ var pickup_spawn_time = 2;
 func _ready():
 	super._ready();
 	player.show();
+	hud.show()
 	player.level_active = true;
 	
 	$StageTimer.one_shot = true;
 	$StageTimer.wait_time = level_length;
 	$StageTimer.timeout.connect(finish_stage);
 	$StageTimer.start();
+	hud.start_age_counter(2)
 	
 	$Area1Timer.wait_time = randf_range(pickup_spawn_time-0.5,pickup_spawn_time+0.5);
 	$Area1Timer.one_shot = true;

@@ -7,12 +7,14 @@ var level_length = 45;
 func _ready():
 	super._ready();
 	player.show();
+	hud.show()
 	player.level_active = false;
 	
 	$StageTimer.one_shot = true;
 	$StageTimer.wait_time = level_length;
 	$StageTimer.timeout.connect(finish_stage);
 	$StageTimer.start();
+	hud.start_age_counter(0)
 	
 func finish_stage():
 	player.level_active = false;

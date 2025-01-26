@@ -176,7 +176,7 @@ func decay():
 	delay_timer.start(1.0)
 	await delay_timer.timeout
 	var tween_modul = get_tree().create_tween()
-	tween_modul.tween_property(self, "modulate", Color(1,1,1,0), 1.0).set_trans(Tween.TRANS_SINE)
+	tween_modul.tween_property(self, "modulate", Color(1,1,1,0), 0.6).set_trans(Tween.TRANS_SINE)
 	tween_modul.tween_callback(queue_free)
 	
 

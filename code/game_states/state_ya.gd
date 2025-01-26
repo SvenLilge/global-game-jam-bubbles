@@ -16,6 +16,7 @@ func _ready():
 	$StageTimer.wait_time = level_length;
 	$StageTimer.timeout.connect(finish_stage);
 	$StageTimer.start();
+	hud.start_age_counter(3)
 	
 	$Area1Timer.wait_time = randf_range(pickup_spawn_time-0.5,pickup_spawn_time+0.5);
 	$Area1Timer.one_shot = true;
