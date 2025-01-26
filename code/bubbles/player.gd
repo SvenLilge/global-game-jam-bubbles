@@ -106,7 +106,7 @@ func pickup_entertainment():
 	if resources[RES.ENT] > 10:
 		resources[RES.ENT] = 10;
 	
-	hud.set_energy(resources[RES.ENT])
+	hud.set_entertainment(resources[RES.ENT])
 		
 func pickup_education():
 	var amount = 0;
@@ -124,6 +124,7 @@ func pickup_education():
 		AGE.OLD:
 			pass
 	resources[RES.ED] = resources[RES.ED] + amount;
+	hud.set_education(resources[RES.ED])
 		
 func pickup_money():
 	var amount = 0;
@@ -147,6 +148,7 @@ func pickup_money():
 		AGE.OLD:
 			pass
 	resources[RES.MON] = resources[RES.MON] + amount;
+	hud.set_money(resources[RES.MON])
 		
 func pickup_personal():
 	var amount = 0;
@@ -170,6 +172,7 @@ func pickup_personal():
 		AGE.OLD:
 			pass
 	resources[RES.P] = resources[RES.P] + amount;
+	hud.set_personal(resources[RES.P])
 
 func deplete_resources():
 	if level_active:
@@ -227,4 +230,7 @@ func deplete_resources():
 					emotions[Bubble.EMOTION.SADNESS] = emotions[Bubble.EMOTION.SADNESS] + 1.0/3.0;
 				AGE.OLD:
 					pass
+		
+		hud.set_energy(resources[RES.EN])
+		hud.set_entertainment(resources[RES.ENT])
 	
