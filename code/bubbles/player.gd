@@ -8,7 +8,7 @@ var move_dir = Vector2(0,0);
 var level_active = false;
 
 # [energy, fun, educatation, mone, personal]
-var resources = [0,0,0,0,0]
+var resources = [5,5,0,0,0]
 
 
 @onready var influence = $Influence;
@@ -82,8 +82,8 @@ func pickup_energy():
 		AGE.OLD:
 			pass
 	resources[RES.EN] = resources[RES.EN] + amount;
-	if resources[RES.EN] > 10:
-		resources[RES.EN] = 10;
+	if resources[RES.EN] > 15:
+		resources[RES.EN] = 15;
 	
 	hud.set_energy(resources[RES.EN])
 
@@ -103,8 +103,8 @@ func pickup_entertainment():
 		AGE.OLD:
 			pass
 	resources[RES.ENT] = resources[RES.ENT] + amount;
-	if resources[RES.ENT] > 10:
-		resources[RES.ENT] = 10;
+	if resources[RES.ENT] > 15:
+		resources[RES.ENT] = 15;
 	
 	hud.set_entertainment(resources[RES.ENT])
 		

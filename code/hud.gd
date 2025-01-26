@@ -2,11 +2,11 @@ extends CanvasLayer
 
 
 var stage_timers = {
-	0: 3,
+	0: 2,
 	1: 2.5,
-	2: 9,
-	3: 7.5,
-	4: 8
+	2: 6,
+	3: 5,
+	4: 5
 }
 
 

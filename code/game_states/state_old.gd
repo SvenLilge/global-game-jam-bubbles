@@ -154,9 +154,9 @@ func play_ya_results(results):
 	var results_array = results[1]
 	var first_res = "Low_"
 	var second_res = "Low"
-	if results_array[1] > 250:
+	if results_array[1] > 200:
 		first_res = "High_"
-	if results_array[2] > 150:
+	if results_array[2] > 120:
 		second_res = "High"
 	last_bubble.play_last(3, first_res + second_res)
 	
@@ -190,9 +190,9 @@ func play_mature_results(results):
 	var results_array = results[1]
 	var first_res = "Low_"
 	var second_res = "Low"
-	if results_array[1] > 800:
+	if results_array[1] > 600:
 		first_res = "High_"
-	if results_array[2] > 400:
+	if results_array[2] > 300:
 		second_res = "High"
 	last_bubble.play_last(4, first_res + second_res)
 	

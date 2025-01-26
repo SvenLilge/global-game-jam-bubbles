@@ -5,7 +5,7 @@ extends "res://code/game_states/game_state.gd"
 var npc = preload("res://code/bubbles/npc.tscn")
 
 
-var level_length = 210;
+var level_length = 150;
 var pickup = preload("res://code/pickups/pickup.tscn")
 
 var pickup_spawn_time = 2.5;
