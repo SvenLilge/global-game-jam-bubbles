@@ -11,6 +11,8 @@ func _ready():
 	super._ready();
 	player.show();
 	hud.show()
+	await show_tutorial(4_0)
+	
 	player.level_active = true;
 	
 	$StageTimer.one_shot = true;

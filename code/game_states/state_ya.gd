@@ -10,6 +10,9 @@ var pickup_spawn_time = 2.5;
 func _ready():
 	super._ready();
 	player.show();
+	hud.show()
+	await show_tutorial(3_0)
+	
 	player.level_active = true;
 	
 	$StageTimer.one_shot = true;

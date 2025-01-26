@@ -8,6 +8,8 @@ func _ready():
 	super._ready();
 	player.show();
 	hud.show()
+	await show_tutorial(0_0)
+	
 	player.level_active = false;
 	
 	$StageTimer.one_shot = true;
@@ -15,7 +17,13 @@ func _ready():
 	$StageTimer.timeout.connect(finish_stage);
 	$StageTimer.start();
 	hud.start_age_counter(0)
-	
+
+# add these to when the 1st, 2nd and 3rd enemies are spawned:
+#StageTimer.paused = true # and any other timers if relevant
+#await show_tutorial(0_1) #number is for enemy number)
+#StageTimer.paused = false
+
+
 func finish_stage():
 	player.level_active = false;
 	player.hide();

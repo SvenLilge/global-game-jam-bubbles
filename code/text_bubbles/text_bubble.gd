@@ -60,10 +60,10 @@ var replics = {
 }
 
 var tutorial = {
-	0_1: [Bubble.EMOTION.JOY, ["You are a bubble.", "The Bubble.", "You appeared in this word as a pure bubble.", "Blank state. Tabula Rasa.", "Use arrows/WASD to move"]],
-	0_2: [Bubble.EMOTION.JOY, ["The world has other bubbles. They affect you.", "Some of them bring joy, like this one."]],
-	0_3: [Bubble.EMOTION.ANGER, ["Some of them spread anger.", "They also move differently."]],
-	0_4: [Bubble.EMOTION.SADNESS, ["And some - spread sadness.", "Choose your company wisely."]],
+	0_0: [Bubble.EMOTION.JOY, ["You are a bubble.", "The Bubble.", "You appeared in this word as a pure bubble.", "Blank state. Tabula Rasa.", "Use arrows/WASD to move"]],
+	0_1: [Bubble.EMOTION.JOY, ["The world has other bubbles. They affect you.", "Some of them bring joy, like this one."]],
+	0_2: [Bubble.EMOTION.ANGER, ["Some of them spread anger.", "They also move differently."]],
+	0_3: [Bubble.EMOTION.SADNESS, ["And some - spread sadness.", "Choose your company wisely."]],
 	1_0: [Bubble.EMOTION.JOY, [
 		"Your bubble grew up a bit.\nIt remembers all past encounters.", "But it also is open to the new ones.\nMoreover - now you have things to do.",
 		"You need to rest to survive.\nYou rest at home.", "You need to have some fun to keep spirits up.", 
@@ -78,10 +78,27 @@ var tutorial = {
 
 
 var final_bubble = {
-	"joy": [Bubble.EMOTION.JOY, ["You are a bubble.", "The Bubble.", "You appeared in this word as a pure bubble.", "Blank state. Tabula Rasa.", "Use arrows/WASD to move"]],
-	0_2: [Bubble.EMOTION.JOY, ["The world has other bubbles. They affect you.", "Some of them bring joy, like this one."]],
-	0_3: [Bubble.EMOTION.ANGER, ["Some of them spread anger.", "They also move differently."]],
-	0_4: [Bubble.EMOTION.SADNESS, ["And some - spread sadness.", "Choose your company wisely."]],
+	0: {
+		"Joy": [Bubble.EMOTION.JOY, "You barely remember your first months.\nBut you recall they were full of joy."],
+		"Anger": [Bubble.EMOTION.ANGER, "You barely remember your first months.\nBut you recall they were full of anger."],
+		"Sad": [Bubble.EMOTION.SADNESS, "You barely remember your first months.\nBut you recall they were full of sadness."],
+		"Bittersweet": [Bubble.EMOTION.JOY, "You barely remember your first months.\nBut you recall they were full of everything."],
+		"Depressed": [Bubble.EMOTION.SADNESS, "You barely remember your first months.\nBut you recall they were full of suffering."],
+	},
+	1_1: {
+		"Low_Low": [Bubble.EMOTION.SADNESS, "As a child, you've start.\nBut you recall they were full of joy."],
+		"Low_High": [Bubble.EMOTION.JOY, "You barely remember your first months.\nBut you recall they were full of anger."],
+		"High_Low": [Bubble.EMOTION.ANGER, "You barely remember your first months.\nBut you recall they were full of sadness."],
+		"High_High": [Bubble.EMOTION.JOY, "You barely remember your first months.\nBut you recall they were full of everything."],
+	},
+	1_2: {
+		"Joy": [Bubble.EMOTION.JOY, "But it was a happy time.\nMaybe the easiest in your life."],
+		"Anger": [Bubble.EMOTION.ANGER, "Your bubble got the first\nangry seeds at that time."],
+		"Sad": [Bubble.EMOTION.SADNESS, "Your childhood memories are mostly blue."],
+		"Depressed": [Bubble.EMOTION.SADNESS, "You have hard time hearing other\ntalking about happy childhood.\nYours clearly wasn't."],
+		"Bittersweet": [Bubble.EMOTION.JOY, "You've had some moments of joy,\nand some of sadnes.\nAnd maybe even some angry moments."],
+		
+	},
 }
 
 
@@ -121,6 +138,12 @@ func test_say():
 			say_emotion(bub_cl, emot)
 			await get_tree().create_timer(1.0).timeout
 
+
+func play_last(code):
+	var emotion = final_bubble[code][0]
+	theme = themes[emotion]
+	lab.text = final_bubble[code][1]
+	
 
 func play_tutorial(code):
 	tutorial_playing = true
@@ -171,12 +194,12 @@ func respond(with_emotion, to_emotion = null):
 		
 		
 
-func decay():
+func decay(time = 1.0):
 	message_finished.emit()
-	delay_timer.start(1.0)
+	delay_timer.start(time)
 	await delay_timer.timeout
 	var tween_modul = get_tree().create_tween()
-	tween_modul.tween_property(self, "modulate", Color(1,1,1,0), 0.6).set_trans(Tween.TRANS_SINE)
+	tween_modul.tween_property(self, "modulate", Color(1,1,1,0), 0.6 * time).set_trans(Tween.TRANS_SINE)
 	tween_modul.tween_callback(queue_free)
 	
 
@@ -189,7 +212,7 @@ func _input(event: InputEvent) -> void:
 				play_next_line()
 			else:
 				tutorial_playing = false
-				decay()
+				decay(0.5)
 				
 func _unhandled_input(_event: InputEvent) -> void:
 	if tutorial_playing:
