@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://c7e4ws4lcebou"]
+[gd_scene load_steps=10 format=3 uid="uid://c7e4ws4lcebou"]
 
 [ext_resource type="Script" path="res://code/pickups/pickup.gd" id="1_fy882"]
 [ext_resource type="Texture2D" uid="uid://dcyueayqkc2rw" path="res://resources/hud/energy.png" id="2_h2kxu"]
@@ -7,7 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://dhpkjyc04bnrr" path="res://resources/hud/coin_icon.png" id="5_8f7di"]
 [ext_resource type="Texture2D" uid="uid://cp6eqhw7ik7nw" path="res://resources/hud/personal.png" id="6_8l0gx"]
 [ext_resource type="Texture2D" uid="uid://bea0v5dw2pbku" path="res://resources/hud/shade.png" id="7_iko5a"]
-[ext_resource type="AudioStream" uid="uid://bf5oocl03idr5" path="res://resources/sfx/Collect.wav" id="8_05nd7"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_3ehc0"]
 animations = [{
@@ -55,6 +54,3 @@ sprite_frames = SubResource("SpriteFrames_3ehc0")
 shape = SubResource("CircleShape2D_3m32m")
 
 [node name="DurationTimer" type="Timer" parent="."]
-
-[node name="PickupStream" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("8_05nd7")

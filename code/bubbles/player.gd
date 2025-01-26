@@ -190,6 +190,7 @@ func set_emotion_song():
 
 
 func pickup_energy():
+	$PickupStream.play();
 	var amount = 0;
 	match cur_age:
 		AGE.INFANT:
@@ -211,6 +212,7 @@ func pickup_energy():
 	hud.set_energy(resources[RES.EN])
 
 func pickup_entertainment():
+	$PickupStream.play();
 	var amount = 0;
 	match cur_age:
 		AGE.INFANT:
@@ -232,6 +234,7 @@ func pickup_entertainment():
 	hud.set_entertainment(resources[RES.ENT])
 		
 func pickup_education():
+	$PickupStream.play();
 	var amount = 0;
 	match cur_age:
 		AGE.INFANT:
@@ -250,6 +253,7 @@ func pickup_education():
 	hud.set_education(resources[RES.ED])
 		
 func pickup_money():
+	$PickupStream.play();
 	var amount = 0;
 	match cur_age:
 		AGE.INFANT:
@@ -274,6 +278,7 @@ func pickup_money():
 	hud.set_money(resources[RES.MON])
 		
 func pickup_personal():
+	$PickupStream.play();
 	var amount = 0;
 	match cur_age:
 		AGE.INFANT:
@@ -348,7 +353,16 @@ func deplete_resources():
 		
 		hud.set_energy(resources[RES.EN])
 		hud.set_entertainment(resources[RES.ENT])
-	
+
+func call_say_bubble():
+	super.call_say_bubble();
+	if spreading_emotion == Bubble.EMOTION.JOY:
+		$JoySound.play();
+	if spreading_emotion == Bubble.EMOTION.SADNESS:
+		$SadSound.play();
+	if spreading_emotion == Bubble.EMOTION.ANGER:
+		$AngerSound.play();
+
 func age():
 	if cur_age == AGE.INFANT:
 		resources = [5,5,0,0,0];
