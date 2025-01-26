@@ -2,7 +2,7 @@ extends "res://code/game_states/game_state.gd"
 
 @onready var player = get_parent().player;
 
-var level_length = 600;
+var level_length = 60;
 
 # results is: {stage: [stage_results]}
 # [stage_results] is: [color] for the 1st age, [color, resources] for 2-3, [color, resources, spread_color] for 4
@@ -14,9 +14,12 @@ func _ready():
 	super._ready();
 	player.show();
 	hud.show()
+	player.level_active = false;
+	player.aura_tween.kill();
+	player.influence.scale = Vector2(0,0);
 	await show_tutorial(5_0)
 	
-	player.level_active = false;
+	
 	
 	$StageTimer.one_shot = true;
 	$StageTimer.wait_time = level_length;

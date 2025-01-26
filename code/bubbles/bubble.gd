@@ -15,7 +15,7 @@ var aura_min_size = Vector2(1,1);
 
 # Determines how much one can change emotions of others
 var influence_strength = 1;
-var influence_base = 1;
+var influence_base = 0.01;
 
 var aura_tween;
 
@@ -251,6 +251,13 @@ func age():
 			colors.append($Mature.modulate);
 		colors.append(cur_color);
 		set_age_state(cur_age+1,colors);
+		
+	var sum_all = 0.1;
+	for i in range (0,3):
+		sum_all = sum_all + emotions[i];
+	for i in range (0,3):
+		emotions[i] = emotions[i]/sum_all*10;
+		
 
 func die():
 	pass

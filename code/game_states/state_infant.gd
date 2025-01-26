@@ -14,9 +14,13 @@ func _ready():
 	super._ready();
 	player.show();
 	hud.show()
-	await show_tutorial(0_0)
-	
 	player.level_active = false;
+	player.aura_tween.kill();
+	player.influence.scale = Vector2(0,0);
+	await show_tutorial(0_0)
+	player.start_tween();
+	player.level_active = true;
+	
 	
 	$StageTimer.one_shot = true;
 	$StageTimer.wait_time = level_length;
