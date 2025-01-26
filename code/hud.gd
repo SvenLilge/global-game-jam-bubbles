@@ -106,14 +106,16 @@ func set_age(value):
 func set_energy(value):
 	if value > 0:
 		energy.show()
-		
+	
+	value = round(value*10)/10.0
 	energy.text = str(value) + "/15"
 
 
 func set_entertainment(value):
 	if value > 0:
 		entertainment.show()
-		
+	
+	value = round(value*10)/10.0
 	entertainment.text = str(value) + "/15"
 
 
@@ -121,19 +123,23 @@ func set_education(value):
 	if value > 0:
 		education.show()
 		
+	value = round(value*10)/10.0
 	education.text = str(value)
 
 
 func set_money(value):
 	if value > 0:
 		money.show()
-		
+	
+	value = round(value*10)/10.0
 	money.text = str(value)
 
 
 func set_personal(value):
 	if value > 0:
 		personal.show()
+	
+	value = round(value*10)/10.0
 	personal.text = str(value)
 	
 	
