@@ -118,7 +118,7 @@ func new_stage_music(stage):
 		1:
 			child_song.play()
 			left_up_loc_song = $LocMusic/Home
-			left_down_loc_song = $LocMusic/Mall
+			left_down_loc_song = $LocMusic/Back
 			right_up_loc_song = $LocMusic/School
 			right_down_loc_song = $LocMusic/Friend
 		2:
@@ -131,14 +131,14 @@ func new_stage_music(stage):
 			ya_song.play()
 			left_up_loc_song = $LocMusic/Home
 			left_down_loc_song = $LocMusic/Mall
-			right_up_loc_song = $LocMusic/School
-			right_down_loc_song = $LocMusic/Friend
+			right_up_loc_song = $LocMusic/Work
+			right_down_loc_song = $LocMusic/Lover
 		4:
 			mat_song.play()
 			left_up_loc_song = $LocMusic/Home
 			left_down_loc_song = $LocMusic/Mall
-			right_up_loc_song = $LocMusic/School
-			right_down_loc_song = $LocMusic/Friend
+			right_up_loc_song = $LocMusic/Work
+			right_down_loc_song = $LocMusic/Outside
 		5:
 			old_song.play()
 	
