@@ -131,10 +131,11 @@ func influence_emotion(emotion, value):
 
 
 func call_say_bubble():
-	var say_bubble = text_bubble.instantiate()
-	add_child(say_bubble)
-	#say_bubble.position = position #usefull if attach to parent
-	say_bubble.say_emotion(bubble_class, spreading_emotion)
+	if cur_age != AGE.INFANT:
+		var say_bubble = text_bubble.instantiate()
+		add_child(say_bubble)
+		#say_bubble.position = position #usefull if attach to parent
+		say_bubble.say_emotion(bubble_class, spreading_emotion)
 
 
 func call_response_bubble(emotion):
@@ -165,7 +166,7 @@ func set_age_state(age, colors):
 			$Mature.modulate.a = 0.0;
 			$Old.modulate.a = 0.0;
 			new_scale = $Infant.scale.x/$Mature.scale.x*Vector2(1,1);
-			speed=0.4*base_speed;
+			speed=0.6*base_speed;
 			influence_strength = 0*influence_base;
 		AGE.CHILD: 
 			$Infant.modulate.a = 1.0;
@@ -238,6 +239,8 @@ func set_age_state(age, colors):
 	$BG.scale = new_scale;
 	aura_min_size = new_scale;
 	aura_max_size = 3*new_scale;
+	if cur_age == AGE.INFANT:
+		aura_max_size = aura_min_size;
 	start_tween();
 	
 	

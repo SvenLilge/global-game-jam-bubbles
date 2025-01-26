@@ -21,6 +21,7 @@ func _ready():
 	player.position = Vector2(1920.0/2,1080.0/2)
 	await show_tutorial(1_0)
 	player.start_tween();
+	player.tween_timer.start();
 	player.level_active = true;
 	
 	spawn_bubbles();
