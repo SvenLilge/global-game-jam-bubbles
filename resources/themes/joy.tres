@@ -1,0 +1,20 @@
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://cbjo2f8q0s42q"]
+
+[ext_resource type="FontFile" uid="uid://68ms6lpoqxhp" path="res://resources/themes/Chewy/Chewy-Regular.ttf" id="1_nbki0"]
+[ext_resource type="Texture2D" uid="uid://c31ab1b06v47l" path="res://resources/themes/Button.png" id="2_yv04j"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3j673"]
+atlas = ExtResource("2_yv04j")
+region = Rect2(96, 0, 96, 48)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_sm5in"]
+texture = SubResource("AtlasTexture_3j673")
+texture_margin_left = 20.0
+texture_margin_top = 4.0
+texture_margin_right = 20.0
+texture_margin_bottom = 20.0
+
+[resource]
+Label/font_sizes/font_size = 24
+Label/fonts/font = ExtResource("1_nbki0")
+Label/styles/normal = SubResource("StyleBoxTexture_sm5in")

@@ -1,0 +1,20 @@
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://dyu10nf1lrhyk"]
+
+[ext_resource type="FontFile" uid="uid://wwcfh36wrxxt" path="res://resources/themes/Gloria_Hallelujah/GloriaHallelujah-Regular.ttf" id="1_hpess"]
+[ext_resource type="Texture2D" uid="uid://c31ab1b06v47l" path="res://resources/themes/Button.png" id="2_eawur"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v2i8y"]
+atlas = ExtResource("2_eawur")
+region = Rect2(192, 0, 96, 48)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8jkxj"]
+texture = SubResource("AtlasTexture_v2i8y")
+texture_margin_left = 20.0
+texture_margin_top = 4.0
+texture_margin_right = 20.0
+texture_margin_bottom = 20.0
+
+[resource]
+Label/font_sizes/font_size = 16
+Label/fonts/font = ExtResource("1_hpess")
+Label/styles/normal = SubResource("StyleBoxTexture_8jkxj")

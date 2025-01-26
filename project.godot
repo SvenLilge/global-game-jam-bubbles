@@ -20,9 +20,16 @@ config/icon="res://resources/bubble_placeholder_blank.png"
 window/size/viewport_width=1920
 window/size/viewport_height=1080
 window/size/mode=3
-window/stretch/mode="viewport"
+window/stretch/mode="canvas_items"
+
+[importer_defaults]
+
+font_data_bmfont={
+"scaling_mode": 1
+}
 
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+anti_aliasing/quality/msaa_2d=1

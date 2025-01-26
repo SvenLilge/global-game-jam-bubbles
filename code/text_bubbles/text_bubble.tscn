@@ -1,19 +1,20 @@
 [gd_scene load_steps=3 format=3 uid="uid://64fk01g5srsq"]
 
 [ext_resource type="Script" path="res://code/text_bubbles/text_bubble.gd" id="1_6i8sv"]
-[ext_resource type="Theme" uid="uid://d1varvs7goiyi" path="res://resources/themes/angry.tres" id="2_ak8br"]
+[ext_resource type="Theme" uid="uid://cbjo2f8q0s42q" path="res://resources/themes/joy.tres" id="1_eqsng"]
 
-[node name="TextBubble" type="Node2D"]
+[node name="TextBubble" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+theme = ExtResource("1_eqsng")
 script = ExtResource("1_6i8sv")
 
 [node name="Label" type="Label" parent="."]
 offset_left = 143.0
 offset_top = 123.0
-offset_right = 232.0
-offset_bottom = 146.0
-theme = ExtResource("2_ak8br")
-text = "Hello world"
+offset_right = 187.0
+offset_bottom = 179.0
+text = "."
 
-[node name="TextureRect" type="TextureRect" parent="."]
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="Timer" type="Timer" parent="."]
+one_shot = true

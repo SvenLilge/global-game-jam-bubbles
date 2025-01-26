@@ -1,4 +1,6 @@
-extends Node2D
+extends Control
+
+signal message_finished
 
 var emotions_lab = {
 	Bubble.EMOTION.ANGER: "Anger",
@@ -15,6 +17,12 @@ var class_lab = {
 	Bubble.BUB_CLASS.DOG: "Joy",
 	Bubble.BUB_CLASS.BABY: "Baby",
 	Bubble.BUB_CLASS.RANDOM: "Random",
+}
+
+var themes = {
+	Bubble.EMOTION.JOY: preload("res://resources/themes/joy.tres"),
+	Bubble.EMOTION.ANGER: preload("res://resources/themes/angry.tres"),
+	Bubble.EMOTION.SADNESS: preload("res://resources/themes/sad.tres"),
 }
 
 var replics = {
@@ -51,29 +59,138 @@ var replics = {
 	"Random": ["Gotcha!","Ok, thanks!","I agree!","If you say so!","Refreshing!","Noted!",],
 }
 
+var tutorial = {
+	0_1: [Bubble.EMOTION.JOY, ["You are a bubble.", "The Bubble.", "You appeared in this word as a pure bubble.", "Blank state. Tabula Rasa.", "Use arrows/WASD to move"]],
+	0_2: [Bubble.EMOTION.JOY, ["The world has other bubbles. They affect you.", "Some of them bring joy, like this one."]],
+	0_3: [Bubble.EMOTION.ANGER, ["Some of them spread anger.", "They also move differently."]],
+	0_4: [Bubble.EMOTION.SADNESS, ["And some - spread sadness.", "Choose your company wisely."]],
+	1_0: [Bubble.EMOTION.JOY, [
+		"Your bubble grew up a bit.\nIt remembers all past encounters.", "But it also is open to the new ones.\nMoreover - now you have things to do.",
+		"You need to rest to survive.\nYou rest at home.", "You need to have some fun to keep spirits up.", 
+		"You need to study, for you future.\nAt school.", "And make meaningful connections.\nSpend time with a close friend.",
+		"Moreover, now you also affect others.\nJust a little bit.",
+	]],
+	2_0: [Bubble.EMOTION.ANGER, ["You grow. Things get messy.", "You need to endure to persist."]],
+	3_0: [Bubble.EMOTION.JOY, ["Who's a big bubble now?", "You are!", "Now you earn thingy called money.", "Did you study well?"]],
+	4_0: [Bubble.EMOTION.JOY, ["Your bubble had its time.", "You persist. But what for?", "Time to spread yourself to other bubbles...", "Or better not?"]],
+	5_0: [Bubble.EMOTION.SADNESS, ["Your time is over.", "Time to pop your bubble", "Time to look what's inside.", "Will you like it?"]],
+}
+
+
+var final_bubble = {
+	"joy": [Bubble.EMOTION.JOY, ["You are a bubble.", "The Bubble.", "You appeared in this word as a pure bubble.", "Blank state. Tabula Rasa.", "Use arrows/WASD to move"]],
+	0_2: [Bubble.EMOTION.JOY, ["The world has other bubbles. They affect you.", "Some of them bring joy, like this one."]],
+	0_3: [Bubble.EMOTION.ANGER, ["Some of them spread anger.", "They also move differently."]],
+	0_4: [Bubble.EMOTION.SADNESS, ["And some - spread sadness.", "Choose your company wisely."]],
+}
+
+
+var tutorial_playing = false
+var mess_mass = ""
+
 @onready var lab = $Label
+@onready var delay_timer = $Timer
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	for emot in Bubble.EMOTION.size():
-		for bub_cl in Bubble.BUB_CLASS.size():
+	test_tut()
+
+
+func test_tut():
+	for mes in tutorial:
+		play_tutorial(mes)
+		await message_finished
+
+func test_respond():
+	for emot1 in Bubble.EMOTION.size():
+		for emot2 in Bubble.EMOTION.size():
+		
+			respond(emot1, emot2)
+			await get_tree().create_timer(1.0).timeout
+	
+	respond(Bubble.BUB_CLASS.BABY)
+	await get_tree().create_timer(1.0).timeout
+	respond(Bubble.BUB_CLASS.RANDOM)
+
+
+func test_say():
+	for bub_cl in Bubble.BUB_CLASS.size():
+		for emot in Bubble.EMOTION.size():
+		
 			say_emotion(bub_cl, emot)
 			await get_tree().create_timer(1.0).timeout
 			
 
 
+func play_tutorial(code):
+	tutorial_playing = true
+	if code in tutorial:
+		delay_timer.start(0.15)
+		var emotion = tutorial[code][0]
+		mess_mass = tutorial[code][1]
+		theme = themes[emotion]
+		lab.text = mess_mass.pop_front()
+	else:
+		push_warning("no such code")
+
+func play_next_line():
+	delay_timer.start(0.15)
+	lab.text = mess_mass.pop_front()
+
+
 func say_emotion(who, emotion = null):
 	if who == Bubble.BUB_CLASS.DOG:
 		lab.text = replics["Dogs_woof"].pick_random()
+		theme = themes[Bubble.EMOTION.JOY]
 	else:
 		if (class_lab[who] + emotions_lab[emotion]) not in replics:
-			print("no reply for " + class_lab[who] + emotions_lab[emotion])
+			push_warning("no reply for " + class_lab[who] + emotions_lab[emotion])
 			return
-			
+		
+		
 		var list_name = replics[class_lab[who] + emotions_lab[emotion]]
 		list_name += replics[emotions_lab[emotion]]
-		print(list_name)
+		theme = themes[emotion]
 		lab.text = str(list_name.pick_random())
+		decay()
+
 
 func respond(with_emotion, to_emotion = null):
-	pass
+	if with_emotion == Bubble.BUB_CLASS.BABY:
+		lab.text = replics["Baby"].pick_random()
+		theme = themes[Bubble.EMOTION.JOY]
+	elif with_emotion == Bubble.BUB_CLASS.RANDOM:
+		lab.text = replics["Random"].pick_random()
+		theme = themes[Bubble.EMOTION.JOY]
+	
+	else:
+		var list_name = replics[emotions_lab[with_emotion] + "_2_" + emotions_lab[to_emotion]]
+		theme = themes[with_emotion]
+		lab.text = str(list_name.pick_random())
+		decay()
+		
+		
+
+func decay():
+	message_finished.emit()
+	delay_timer.start(1.0)
+	await delay_timer.timeout
+	var tween_modul = get_tree().create_tween()
+	tween_modul.tween_property(self, "modulate", Color(1,1,1,0), 1.0).set_trans(Tween.TRANS_SINE)
+	tween_modul.tween_callback(queue_free)
+	
+
+
+func _input(event: InputEvent) -> void:
+	if visible and delay_timer.time_left == 0 and tutorial_playing:
+		if ((event is InputEventMouseButton) or (event is InputEventKey) or (event is InputEventJoypadButton)) and event.is_released():
+			if mess_mass.size() > 0:
+				delay_timer.start(0.15)
+				play_next_line()
+			else:
+				tutorial_playing = false
+				decay()
+				
+func _unhandled_input(_event: InputEvent) -> void:
+	if tutorial_playing:
+		get_viewport().set_input_as_handled()
