@@ -32,39 +32,39 @@ func set_hud():
 
 func _physics_process(delta):
 	
-	
-	super._physics_process(delta)
+	if level_active:
+		super._physics_process(delta)
 
-	if(get_tree().paused == true):
-		return;
-	
-	#Handle Inputs for Motion
-	var move_input = Vector2(0,0);
-	if(Input.get_connected_joypads().size() > 0):
-		move_input = Vector2(Input.get_joy_axis(0,JOY_AXIS_LEFT_X),Input.get_joy_axis(0,JOY_AXIS_LEFT_Y));
-	else:
-		var left = 0;
-		var up = 0;
-		if(Input.is_key_pressed(KEY_W)):
-			up = 1;
-		if(Input.is_key_pressed(KEY_S)):
-			up = -1;
-		if(Input.is_key_pressed(KEY_A)):
-			left = 1;
-		if(Input.is_key_pressed(KEY_D)):
-			left = -1;
-		move_input = Vector2(-1*left,-1*up);
+		if(get_tree().paused == true):
+			return;
 		
-	if(move_input.length() > deadzone_threshold_trans):
-		move_dir = move_input;
-	else:
-		move_dir = Vector2(0,0);
+		#Handle Inputs for Motion
+		var move_input = Vector2(0,0);
+		if(Input.get_connected_joypads().size() > 0):
+			move_input = Vector2(Input.get_joy_axis(0,JOY_AXIS_LEFT_X),Input.get_joy_axis(0,JOY_AXIS_LEFT_Y));
+		else:
+			var left = 0;
+			var up = 0;
+			if(Input.is_key_pressed(KEY_W)):
+				up = 1;
+			if(Input.is_key_pressed(KEY_S)):
+				up = -1;
+			if(Input.is_key_pressed(KEY_A)):
+				left = 1;
+			if(Input.is_key_pressed(KEY_D)):
+				left = -1;
+			move_input = Vector2(-1*left,-1*up);
+			
+		if(move_input.length() > deadzone_threshold_trans):
+			move_dir = move_input;
+		else:
+			move_dir = Vector2(0,0);
 
-	# Compute player velocity
-	velocity = move_dir.normalized() * speed;
-		
-	# Update Player position
-	move_and_slide();
+		# Compute player velocity
+		velocity = move_dir.normalized() * speed;
+			
+		# Update Player position
+		move_and_slide();
 
 func pickup_energy():
 	var amount = 0;
