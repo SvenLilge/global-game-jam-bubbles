@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://c7e4ws4lcebou"]
+
+[ext_resource type="Script" path="res://code/pickups/pickup.gd" id="1_fy882"]
+[ext_resource type="Texture2D" uid="uid://3eu3q43obekp" path="res://resources/bubble_aura.png" id="1_jx0x4"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3m32m"]
+radius = 16.0
+
+[node name="Pickup" type="Node2D"]
+script = ExtResource("1_fy882")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 0, 1)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("1_jx0x4")
+
+[node name="Area" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area"]
+shape = SubResource("CircleShape2D_3m32m")
+
+[node name="DurationTimer" type="Timer" parent="."]

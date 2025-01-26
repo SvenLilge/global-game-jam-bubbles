@@ -1,20 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://xxmo2pkgrfpe"]
+[gd_scene load_steps=6 format=3 uid="uid://xxmo2pkgrfpe"]
 
-[ext_resource type="Script" path="res://code/game_states/state_tutorial.gd" id="1_m24mn"]
-[ext_resource type="Texture2D" uid="uid://bu6xiccus0vp8" path="res://resources/level_placeholder.png" id="2_00fv4"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_wii86"]
-size = Vector2(1464, 540.5)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_dcl2y"]
-size = Vector2(600, 300)
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bphu4"]
-radius = 420.0
-height = 1936.0
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_utpak"]
-size = Vector2(961, 809)
+[ext_resource type="Script" path="res://code/game_states/state_infant.gd" id="1_2apm4"]
+[ext_resource type="Texture2D" uid="uid://cbyftbpvr7xk0" path="res://resources/level_placeholder_small.png" id="2_vylas"]
+[ext_resource type="PackedScene" uid="uid://c7e4ws4lcebou" path="res://code/pickups/pickup.tscn" id="3_ltoj3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a7w6e"]
 size = Vector2(5032, 537)
@@ -23,104 +11,40 @@ size = Vector2(5032, 537)
 size = Vector2(301, 3409)
 
 [node name="StateInfant" type="Node2D"]
-script = ExtResource("1_m24mn")
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(960, 540)
-rotation = 0.523599
+script = ExtResource("1_2apm4")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = -4
 position = Vector2(960, 540)
-texture = ExtResource("2_00fv4")
-
-[node name="StaticBody2D3" type="StaticBody2D" parent="Sprite2D"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/StaticBody2D3"]
-position = Vector2(1692, -2.25)
-shape = SubResource("RectangleShape2D_wii86")
-debug_color = Color(0.942752, 8.7598e-06, 0.604727, 0.42)
-
-[node name="Area1" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area1"]
-position = Vector2(24, -16)
-rotation = -0.523599
-shape = SubResource("RectangleShape2D_dcl2y")
-
-[node name="Area2" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2"]
-position = Vector2(1856, 1096)
-rotation = -0.523599
-shape = SubResource("RectangleShape2D_dcl2y")
-
-[node name="Area3" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area3"]
-position = Vector2(72, 1136)
-rotation = 0.523599
-shape = SubResource("RectangleShape2D_dcl2y")
-
-[node name="Area4" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area4"]
-position = Vector2(1848, -23.9999)
-rotation = 0.523599
-shape = SubResource("RectangleShape2D_dcl2y")
-
-[node name="CommonArea" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CommonArea"]
-position = Vector2(960, 540)
-rotation = 1.5708
-shape = SubResource("CapsuleShape2D_bphu4")
-
-[node name="StaticBody2D2" type="StaticBody2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
-position = Vector2(960, 1488)
-shape = SubResource("RectangleShape2D_utpak")
-debug_color = Color(0.971651, 0, 0.446493, 0.42)
-
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(959.5, -404.5)
-shape = SubResource("RectangleShape2D_utpak")
-debug_color = Color(0.971651, 0, 0.446493, 0.42)
-
-[node name="StaticBody2D3" type="StaticBody2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
-position = Vector2(-722.5, 539.5)
-shape = SubResource("RectangleShape2D_wii86")
-debug_color = Color(0.942752, 8.7598e-06, 0.604727, 0.42)
+texture = ExtResource("2_vylas")
 
 [node name="StaticBody2D4" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4"]
-position = Vector2(1012, -1080)
+position = Vector2(1016, -272)
 shape = SubResource("RectangleShape2D_a7w6e")
 debug_color = Color(0.953243, 0, 0.554559, 0.42)
 
 [node name="StaticBody2D5" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D5"]
-position = Vector2(-1590.5, 527.5)
+position = Vector2(-152, 512)
 shape = SubResource("RectangleShape2D_258wm")
 debug_color = Color(0.963149, 0, 0.500419, 0.42)
 
 [node name="StaticBody2D6" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D6"]
-position = Vector2(3528, 608)
+position = Vector2(2071, 472)
 shape = SubResource("RectangleShape2D_258wm")
 debug_color = Color(0.963149, 0, 0.500419, 0.42)
 
 [node name="StaticBody2D7" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D7"]
-position = Vector2(1000, 2160)
+position = Vector2(1032, 1352)
 shape = SubResource("RectangleShape2D_a7w6e")
 debug_color = Color(0.953243, 0, 0.554559, 0.42)
+
+[node name="Pickup" parent="." instance=ExtResource("3_ltoj3")]
+position = Vector2(856, 520)
