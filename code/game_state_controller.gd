@@ -28,12 +28,12 @@ func _ready():
 		var filename = "res://code/game_states/state_" + GameState.State.keys()[n].to_lower() + ".tscn"
 		game_states.append(load(filename))
 	# Load Splash Screen as the current scene
-	cur_game_state = game_states[0].instantiate();
+	cur_game_state = game_states[3].instantiate();
 	add_child(cur_game_state); # add to scene
 	cur_game_state.sgn_transition_state.connect(transition_game_state.bind());
 	
-	$Player.hide();
-	hud.hide()
+	#$Player.hide();
+	#hud.hide()
 	
 	$Player.set_hud()
 	#music_player.stream = title_stream;

@@ -19,6 +19,7 @@ func _ready():
 	player.level_active = false;
 	player.aura_tween.kill();
 	player.influence.scale = Vector2(0,0);
+	player.position = Vector2(1920.0/2,1080.0/2)
 	await show_tutorial(0_0)
 	player.start_tween();
 	player.level_active = true;
@@ -51,6 +52,7 @@ func _process(delta: float) -> void:
 				anger_bubble.emotions[Bubble.EMOTION.ANGER] = 10;
 				anger_bubble.position.x = 1920.0/2 - 200;
 				anger_bubble.position.y = 1080.0/2 - 200;
+				anger_bubble.bubble_class = Bubble.BUB_CLASS.RELATIVE;
 				add_child(anger_bubble);
 		if current_time >= 10:
 			if anger_bubble != null:
@@ -69,6 +71,7 @@ func _process(delta: float) -> void:
 				sad_bubble.emotions[Bubble.EMOTION.SADNESS] = 10;
 				sad_bubble.position.x = 1920.0/2 + 200;
 				sad_bubble.position.y = 1080.0/2 - 200;
+				sad_bubble.bubble_class = Bubble.BUB_CLASS.RELATIVE;
 				add_child(sad_bubble);
 		if current_time >= 20:
 			if sad_bubble != null:
@@ -87,6 +90,7 @@ func _process(delta: float) -> void:
 				joy_bubble.emotions[Bubble.EMOTION.JOY] = 10;
 				joy_bubble.position.x = 1920.0/2;
 				joy_bubble.position.y = 1080.0/2 + 300;
+				joy_bubble.bubble_class = Bubble.BUB_CLASS.RELATIVE;
 				add_child(joy_bubble);
 		if current_time >= 29.5:
 			if joy_bubble != null:
