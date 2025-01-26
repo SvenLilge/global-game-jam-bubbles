@@ -9,7 +9,6 @@ func _ready():
 
 func _physics_process(_delta):
 	super._physics_process(_delta)
-			
 	# Detect Player pos and move towards it
 	move_dir = (get_parent().player.global_position - global_position).normalized();
 	velocity = move_dir * speed

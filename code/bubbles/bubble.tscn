@@ -71,7 +71,6 @@ scale = Vector2(0.25, 0.25)
 texture = ExtResource("3_2m0rx")
 
 [node name="Sprite" type="Sprite2D" parent="."]
-scale = Vector2(0.11, 0.11)
 texture = ExtResource("3_qw7v7")
 
 [node name="TweenDelayTimer" type="Timer" parent="."]

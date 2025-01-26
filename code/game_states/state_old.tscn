@@ -1,17 +1,30 @@
-[gd_scene load_steps=4 format=3 uid="uid://bgatm4hq14yir"]
+[gd_scene load_steps=3 format=3 uid="uid://bgatm4hq14yir"]
 
-[ext_resource type="Script" path="res://code/game_states/state_tutorial.gd" id="1_m24mn"]
-[ext_resource type="PackedScene" uid="uid://bka7q4jgbunek" path="res://code/bubbles/player.tscn" id="2_rqo62"]
-[ext_resource type="PackedScene" uid="uid://dcnywppal0io3" path="res://code/bubbles/npc.tscn" id="3_begbp"]
+[ext_resource type="Script" path="res://code/game_states/state_old.gd" id="1_njpuh"]
+[ext_resource type="Texture2D" uid="uid://cbyftbpvr7xk0" path="res://resources/level_placeholder_small.png" id="2_a80gj"]
 
-[node name="StateTutorial" type="Node2D"]
-script = ExtResource("1_m24mn")
+[node name="StateOld" type="Node2D"]
+script = ExtResource("1_njpuh")
 
-[node name="Player" parent="." instance=ExtResource("2_rqo62")]
-position = Vector2(235, 520)
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = -4
+position = Vector2(960, 540)
+texture = ExtResource("2_a80gj")
 
-[node name="NPC" parent="." instance=ExtResource("3_begbp")]
-position = Vector2(960, 213)
+[node name="StageTimer" type="Timer" parent="."]
 
-[node name="NPC1" parent="." instance=ExtResource("3_begbp")]
-position = Vector2(1129, 726)
+[node name="PlaceholderLabel3" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 791.0
+offset_top = 40.0
+offset_right = 1134.0
+offset_bottom = 253.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 50
+text = "Old"
+horizontal_alignment = 1

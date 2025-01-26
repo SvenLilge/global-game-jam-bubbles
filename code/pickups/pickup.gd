@@ -1,10 +1,12 @@
 extends Node2D
+class_name Pickup
+
 
 var resource_given = false
 
 @onready var player = get_parent().get_parent().player;
 
-enum TYPE {ENERGY, ENTERTAINMENT, EDUCATION, PERSONAL}
+enum TYPE {ENERGY, ENTERTAINMENT, EDUCATION, MONEY, PERSONAL}
 
 var cur_type = TYPE.ENERGY;
 
@@ -28,6 +30,8 @@ func set_type(type):
 		$Sprite.modulate = Color(1,0,0);
 	if cur_type == TYPE.EDUCATION:
 		$Sprite.modulate = Color(0,1,0);
+	if cur_type == TYPE.MONEY:
+		$Sprite.modulate = Color(0,1,0);
 	if cur_type == TYPE.PERSONAL:
 		$Sprite.modulate = Color(0,0,1);
 	
@@ -41,7 +45,9 @@ func provide_resource():
 	if cur_type == TYPE.ENTERTAINMENT:
 		player.pickup_entertainment();
 	if cur_type == TYPE.EDUCATION:
-		player.pickup_education_money();
+		player.pickup_education();
+	if cur_type == TYPE.MONEY:
+		player.pickup_money();
 	if cur_type == TYPE.PERSONAL:
 		player.pickup_personal();
 	pass
