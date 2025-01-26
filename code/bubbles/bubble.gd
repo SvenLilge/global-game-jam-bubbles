@@ -131,7 +131,7 @@ func influence_emotion(emotion, value):
 
 
 func call_say_bubble():
-	if cur_age != AGE.INFANT:
+	if cur_age != AGE.INFANT and bubble_class != BUB_CLASS.RANDOM:
 		var say_bubble = text_bubble.instantiate()
 		add_child(say_bubble)
 		#say_bubble.position = position #usefull if attach to parent
@@ -239,7 +239,7 @@ func set_age_state(age, colors):
 	$BG.scale = new_scale;
 	aura_min_size = new_scale;
 	aura_max_size = 3*new_scale;
-	if cur_age == AGE.INFANT:
+	if cur_age == AGE.INFANT or bubble_class == BUB_CLASS.RANDOM:
 		aura_max_size = aura_min_size;
 	start_tween();
 	
