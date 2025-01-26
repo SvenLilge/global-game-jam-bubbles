@@ -1,17 +1,160 @@
-[gd_scene load_steps=4 format=3 uid="uid://bgatm4hq14yir"]
+[gd_scene load_steps=5 format=3 uid="uid://bgatm4hq14yir"]
 
-[ext_resource type="Script" path="res://code/game_states/state_tutorial.gd" id="1_m24mn"]
-[ext_resource type="PackedScene" uid="uid://bka7q4jgbunek" path="res://code/bubbles/player.tscn" id="2_rqo62"]
-[ext_resource type="PackedScene" uid="uid://dcnywppal0io3" path="res://code/bubbles/npc.tscn" id="3_begbp"]
+[ext_resource type="Script" path="res://code/game_states/state_teen.gd" id="1_jakm2"]
+[ext_resource type="Texture2D" uid="uid://cbyftbpvr7xk0" path="res://resources/level_placeholder_small.png" id="2_lq2av"]
 
-[node name="StateTutorial" type="Node2D"]
-script = ExtResource("1_m24mn")
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s7q87"]
+size = Vector2(5032, 537)
 
-[node name="Player" parent="." instance=ExtResource("2_rqo62")]
-position = Vector2(235, 520)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_igp48"]
+size = Vector2(301, 3409)
 
-[node name="NPC" parent="." instance=ExtResource("3_begbp")]
-position = Vector2(960, 213)
+[node name="StateTeen" type="Node2D"]
+script = ExtResource("1_jakm2")
 
-[node name="NPC1" parent="." instance=ExtResource("3_begbp")]
-position = Vector2(1129, 726)
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = -4
+position = Vector2(960, 540)
+texture = ExtResource("2_lq2av")
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4"]
+position = Vector2(1016, -272)
+shape = SubResource("RectangleShape2D_s7q87")
+debug_color = Color(0.953243, 0, 0.554559, 0.42)
+
+[node name="StaticBody2D5" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D5"]
+position = Vector2(-152, 512)
+shape = SubResource("RectangleShape2D_igp48")
+debug_color = Color(0.963149, 0, 0.500419, 0.42)
+
+[node name="StaticBody2D6" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D6"]
+position = Vector2(2071, 472)
+shape = SubResource("RectangleShape2D_igp48")
+debug_color = Color(0.963149, 0, 0.500419, 0.42)
+
+[node name="StaticBody2D7" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D7"]
+position = Vector2(1032, 1352)
+shape = SubResource("RectangleShape2D_s7q87")
+debug_color = Color(0.953243, 0, 0.554559, 0.42)
+
+[node name="Area1Timer" type="Timer" parent="."]
+
+[node name="Area2Timer" type="Timer" parent="."]
+
+[node name="Area3Timer" type="Timer" parent="."]
+
+[node name="Area4Timer" type="Timer" parent="."]
+
+[node name="Area1Min" type="Node2D" parent="."]
+position = Vector2(24, 16)
+
+[node name="Area1Max" type="Node2D" parent="."]
+position = Vector2(736, 416)
+
+[node name="Area2Min" type="Node2D" parent="."]
+position = Vector2(1184, 32)
+
+[node name="Area2Max" type="Node2D" parent="."]
+position = Vector2(1896, 416)
+
+[node name="Area3Min" type="Node2D" parent="."]
+position = Vector2(24, 680)
+
+[node name="Area3Max" type="Node2D" parent="."]
+position = Vector2(768, 1064)
+
+[node name="Area4Min" type="Node2D" parent="."]
+position = Vector2(1160, 648)
+
+[node name="Area4Max" type="Node2D" parent="."]
+position = Vector2(1920, 1080)
+
+[node name="PlaceholderLabel" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 256.0
+offset_top = 176.0
+offset_right = 529.0
+offset_bottom = 245.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 50
+text = "Home"
+horizontal_alignment = 1
+
+[node name="PlaceholderLabel2" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 1392.0
+offset_top = 776.0
+offset_right = 1735.0
+offset_bottom = 989.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 50
+text = "Friend's Home"
+horizontal_alignment = 1
+
+[node name="PlaceholderLabel3" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 1368.0
+offset_top = 128.0
+offset_right = 1711.0
+offset_bottom = 341.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 50
+text = "Cinema/Mall"
+horizontal_alignment = 1
+
+[node name="PlaceholderLabel4" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 208.0
+offset_top = 776.0
+offset_right = 551.0
+offset_bottom = 989.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 50
+text = "School"
+horizontal_alignment = 1
+
+[node name="StageTimer" type="Timer" parent="."]
+
+[node name="PlaceholderLabel5" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 791.0
+offset_top = 40.0
+offset_right = 1134.0
+offset_bottom = 253.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 50
+text = "Teen"
+horizontal_alignment = 1

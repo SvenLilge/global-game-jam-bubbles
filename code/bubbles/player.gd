@@ -5,18 +5,19 @@ enum RES {EN, ENT, ED, MON, P}
 var deadzone_threshold_trans = 0.3;
 var deadzone_threshold_rot = 0.6;
 var move_dir = Vector2(0,0);
+var level_active = false;
 
 # [energy, fun, educatation, mone, personal]
-var resources = [0,0,0,0]
+var resources = [0,0,0,0,0]
 
 
 @onready var influence = $Influence;
 
 func _ready():
-	speed = 400;
-	emotions[Bubble.EMOTION.JOY] = 100.0;
 	influence_strength = 0;
 	super._ready();
+	var colors = [];
+	set_age_state(AGE.INFANT,colors);
 	
 	
 	$ResourceDepletionTimer.one_shot = false;
@@ -102,24 +103,45 @@ func pickup_entertainment():
 	if resources[RES.ENT] > 10:
 		resources[RES.ENT] = 10;
 		
-func pickup_education_money():
+func pickup_education():
 	var amount = 0;
 	match cur_age:
 		AGE.INFANT:
 			pass
 		AGE.CHILD:
-			amount = 8;
-		AGE.TEEN:
-			amount = 5;
-		AGE.YA:
-			amount = 3;
-		AGE.MATURE:
 			amount = 2;
+		AGE.TEEN:
+			amount = 1;
+		AGE.YA:
+			pass
+		AGE.MATURE:
+			pass
 		AGE.OLD:
 			pass
 	resources[RES.ED] = resources[RES.ED] + amount;
-	if resources[RES.ED] > 50:
-		resources[RES.ED] = 50;
+		
+func pickup_money():
+	var amount = 0;
+	match cur_age:
+		AGE.INFANT:
+			pass
+		AGE.CHILD:
+			pass
+		AGE.TEEN:
+			pass
+		AGE.YA:
+			var tmp = (int(2*resources[RES.ED] + resources[RES.MON]))%100;
+			amount = 1 + tmp;
+			if amount > 5:
+				amount = 5;
+		AGE.MATURE:
+			var tmp = (int(resources[RES.ED] + 1*resources[RES.MON]))%300;
+			amount = 2 + 2*tmp;
+			if amount > 20:
+				amount = 20;
+		AGE.OLD:
+			pass
+	resources[RES.MON] = resources[RES.MON] + amount;
 		
 func pickup_personal():
 	var amount = 0;
@@ -127,42 +149,77 @@ func pickup_personal():
 		AGE.INFANT:
 			pass
 		AGE.CHILD:
-			amount = 8;
-		AGE.TEEN:
-			amount = 5;
-		AGE.YA:
-			amount = 3;
-		AGE.MATURE:
 			amount = 2;
+		AGE.TEEN:
+			amount = 1;
+		AGE.YA:
+			var tmp = (int(resources[RES.P]))%100;
+			amount = 1 + tmp;
+			if amount > 3:
+				amount = 3;
+		AGE.MATURE:
+			var tmp = (int(resources[RES.P] + 2*resources[RES.ED] + 0.2*resources[RES.MON]))%400;
+			amount = 2 + 2*tmp;
+			if amount > 10:
+				amount = 10;
 		AGE.OLD:
 			pass
 	resources[RES.P] = resources[RES.P] + amount;
-	if resources[RES.P] > 50:
-		resources[RES.P] = 50;
 
 func deplete_resources():
-	var amount = 0;
-	match cur_age:
-		AGE.INFANT:
-			pass
-		AGE.CHILD:
-			amount = 0.5;
-		AGE.TEEN:
-			amount = 0.5;
-		AGE.YA:
-			amount = 0.3;
-		AGE.MATURE:
-			amount = 0.2;
-		AGE.OLD:
-			pass
-	resources[RES.EN] = resources[RES.EN] - amount;
-	resources[RES.ENT] = resources[RES.ENT] - amount;
-	if resources[RES.EN] <= 0:
-		resources[RES.EN] = 0;
-		emotions[Bubble.EMOTION.ANGER] = emotions[Bubble.EMOTION.ANGER] + 1;
-		emotions[Bubble.EMOTION.SADNESS] = emotions[Bubble.EMOTION.SADNESS] + 1;
-	if resources[RES.ENT] <= 0:
-		resources[RES.ENT] = 0;
-		emotions[Bubble.EMOTION.ANGER] = emotions[Bubble.EMOTION.ANGER] + 1;
-		emotions[Bubble.EMOTION.SADNESS] = emotions[Bubble.EMOTION.SADNESS] + 1;
+	if level_active:
+		var amount = 0;
+		match cur_age:
+			AGE.INFANT:
+				pass
+			AGE.CHILD:
+				amount = 0.5;
+			AGE.TEEN:
+				amount = 0.5;
+			AGE.YA:
+				amount = 0.3;
+			AGE.MATURE:
+				amount = 0.2;
+			AGE.OLD:
+				pass
+		resources[RES.EN] = resources[RES.EN] - amount;
+		resources[RES.ENT] = resources[RES.ENT] - amount;
+		if resources[RES.EN] <= 0:
+			resources[RES.EN] = 0;
+			match cur_age:
+				AGE.INFANT:
+					pass
+				AGE.CHILD:
+					emotions[Bubble.EMOTION.ANGER] = emotions[Bubble.EMOTION.ANGER] + 1.0/3.0;
+					emotions[Bubble.EMOTION.SADNESS] = emotions[Bubble.EMOTION.SADNESS] + 1.0/3.0;
+				AGE.TEEN:
+					emotions[Bubble.EMOTION.ANGER] = emotions[Bubble.EMOTION.ANGER] + 1;
+					emotions[Bubble.EMOTION.SADNESS] = emotions[Bubble.EMOTION.SADNESS] + 1;
+				AGE.YA:
+					emotions[Bubble.EMOTION.ANGER] = emotions[Bubble.EMOTION.ANGER] + 1.0/2.0;
+					emotions[Bubble.EMOTION.SADNESS] = emotions[Bubble.EMOTION.SADNESS] + 1.0/2.0;
+				AGE.MATURE:
+					emotions[Bubble.EMOTION.ANGER] = emotions[Bubble.EMOTION.ANGER] + 1.0/3.0;
+					emotions[Bubble.EMOTION.SADNESS] = emotions[Bubble.EMOTION.SADNESS] + 1.0/3.0;
+				AGE.OLD:
+					pass
+		if resources[RES.ENT] <= 0:
+			resources[RES.ENT] = 0;
+			match cur_age:
+				AGE.INFANT:
+					pass
+				AGE.CHILD:
+					emotions[Bubble.EMOTION.ANGER] = emotions[Bubble.EMOTION.ANGER] + 1.0/3.0;
+					emotions[Bubble.EMOTION.SADNESS] = emotions[Bubble.EMOTION.SADNESS] + 1.0/3.0;
+				AGE.TEEN:
+					emotions[Bubble.EMOTION.ANGER] = emotions[Bubble.EMOTION.ANGER] + 1;
+					emotions[Bubble.EMOTION.SADNESS] = emotions[Bubble.EMOTION.SADNESS] + 1;
+				AGE.YA:
+					emotions[Bubble.EMOTION.ANGER] = emotions[Bubble.EMOTION.ANGER] + 1.0/2.0;
+					emotions[Bubble.EMOTION.SADNESS] = emotions[Bubble.EMOTION.SADNESS] + 1.0/2.0;
+				AGE.MATURE:
+					emotions[Bubble.EMOTION.ANGER] = emotions[Bubble.EMOTION.ANGER] + 1.0/3.0;
+					emotions[Bubble.EMOTION.SADNESS] = emotions[Bubble.EMOTION.SADNESS] + 1.0/3.0;
+				AGE.OLD:
+					pass
 	
