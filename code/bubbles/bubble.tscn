@@ -74,3 +74,5 @@ texture = ExtResource("3_2m0rx")
 texture = ExtResource("3_qw7v7")
 
 [node name="TweenDelayTimer" type="Timer" parent="."]
+
+[node name="ChatTimer" type="Timer" parent="."]

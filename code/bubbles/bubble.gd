@@ -47,13 +47,10 @@ func _ready() -> void:
 	$TweenDelayTimer.timeout.connect(start_tween);
 	$TweenDelayTimer.start();
 	
-	spreading_emotion = get_random_emotion();
+	$ChatTimer.one_shot = true;
+	$ChatTimer.wait_time = aura_active;
 	
-	var colors = [];
-	colors.append(Color(1,0,0));
-	colors.append(Color(0,1,0));
-	colors.append(Color(0,0,1));
-	set_age_state(AGE.YA,colors);
+	spreading_emotion = get_random_emotion();
 	
 	$Sprite.modulate.a = 1;
 
@@ -122,7 +119,9 @@ func tween_loop_finished(loop_idx):
 	spreading_emotion = get_random_emotion();
 
 func influence_emotion(emotion, value):
-	call_response_bubble(emotion)
+	if $ChatTimer.is_stopped():
+		$ChatTimer.start();
+		call_response_bubble(emotion)
 	emotions[emotion] = emotions[emotion] + value;
 
 
@@ -263,5 +262,5 @@ func get_random_emotion():
 	for i in range (0,3):
 		if random <= cur_limit:
 			return i;
-		if i < 4:
+		if i < 2:
 			cur_limit = cur_limit + emotions[i+1]

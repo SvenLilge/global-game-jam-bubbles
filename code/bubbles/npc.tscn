@@ -8,3 +8,5 @@ script = ExtResource("2_ckn7v")
 
 [node name="GetInfluenced" parent="." index="2"]
 collision_layer = 8
+
+[node name="RandomMoveTimer" type="Timer" parent="." index="13"]

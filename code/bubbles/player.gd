@@ -28,10 +28,6 @@ func _ready():
 
 func _physics_process(delta):
 	
-	print("Emotions")
-	print(emotions)
-	print("Resources")
-	print(resources)
 	
 	super._physics_process(delta)
 
@@ -198,16 +194,12 @@ func deplete_resources():
 				AGE.INFANT:
 					pass
 				AGE.CHILD:
-					emotions[Bubble.EMOTION.ANGER] = emotions[Bubble.EMOTION.ANGER] + 1.0/3.0;
 					emotions[Bubble.EMOTION.SADNESS] = emotions[Bubble.EMOTION.SADNESS] + 1.0/3.0;
 				AGE.TEEN:
-					emotions[Bubble.EMOTION.ANGER] = emotions[Bubble.EMOTION.ANGER] + 1;
 					emotions[Bubble.EMOTION.SADNESS] = emotions[Bubble.EMOTION.SADNESS] + 1;
 				AGE.YA:
-					emotions[Bubble.EMOTION.ANGER] = emotions[Bubble.EMOTION.ANGER] + 1.0/2.0;
 					emotions[Bubble.EMOTION.SADNESS] = emotions[Bubble.EMOTION.SADNESS] + 1.0/2.0;
 				AGE.MATURE:
-					emotions[Bubble.EMOTION.ANGER] = emotions[Bubble.EMOTION.ANGER] + 1.0/3.0;
 					emotions[Bubble.EMOTION.SADNESS] = emotions[Bubble.EMOTION.SADNESS] + 1.0/3.0;
 				AGE.OLD:
 					pass
@@ -218,16 +210,12 @@ func deplete_resources():
 					pass
 				AGE.CHILD:
 					emotions[Bubble.EMOTION.ANGER] = emotions[Bubble.EMOTION.ANGER] + 1.0/3.0;
-					emotions[Bubble.EMOTION.SADNESS] = emotions[Bubble.EMOTION.SADNESS] + 1.0/3.0;
 				AGE.TEEN:
 					emotions[Bubble.EMOTION.ANGER] = emotions[Bubble.EMOTION.ANGER] + 1;
-					emotions[Bubble.EMOTION.SADNESS] = emotions[Bubble.EMOTION.SADNESS] + 1;
 				AGE.YA:
 					emotions[Bubble.EMOTION.ANGER] = emotions[Bubble.EMOTION.ANGER] + 1.0/2.0;
-					emotions[Bubble.EMOTION.SADNESS] = emotions[Bubble.EMOTION.SADNESS] + 1.0/2.0;
 				AGE.MATURE:
 					emotions[Bubble.EMOTION.ANGER] = emotions[Bubble.EMOTION.ANGER] + 1.0/3.0;
-					emotions[Bubble.EMOTION.SADNESS] = emotions[Bubble.EMOTION.SADNESS] + 1.0/3.0;
 				AGE.OLD:
 					pass
 		
