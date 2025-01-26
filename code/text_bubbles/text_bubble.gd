@@ -93,7 +93,7 @@ var mess_mass = ""
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	test_tut()
+	pass
 
 
 func test_tut():
@@ -147,11 +147,10 @@ func say_emotion(who, emotion = null):
 			push_warning("no reply for " + class_lab[who] + emotions_lab[emotion])
 			return
 		
-		
 		var list_name = replics[class_lab[who] + emotions_lab[emotion]]
 		list_name += replics[emotions_lab[emotion]]
 		theme = themes[emotion]
-		lab.text = str(list_name.pick_random())
+		lab.text = list_name.pick_random()
 		decay()
 
 

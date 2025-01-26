@@ -8,9 +8,9 @@ enum BUB_CLASS {YOU, RELATIVE, DUDE, BOSS, FRIEND, DOG, BABY, RANDOM}
 enum AGE {INFANT, CHILD, TEEN, YA, MATURE, OLD}
 
 # Aura node
-var aura_active = 1;
-var aura_inactive = 2;
-var aura_max_size = Vector2(3,3);
+var aura_active = 1.5;
+var aura_inactive = 2.7;
+var aura_max_size = Vector2(5,5);
 var aura_min_size = Vector2(1,1);
 
 # Determines how much one can change emotions of others
@@ -30,9 +30,14 @@ var speed = 200
 var emotions = [0.0, 0.0, 0.0];
 var spreading_emotion;
 
+# class of the bubble
+@export var bubble_class: BUB_CLASS
+
 # Age and Color
 var cur_age = AGE.INFANT;
 var cur_color;
+
+@onready var text_bubble = load("res://code/text_bubbles/text_bubble.tscn")
 
 func _ready() -> void:
 	$TweenDelayTimer.one_shot = true;
@@ -98,19 +103,43 @@ func _physics_process(_delta):
 			
 
 func start_tween():
+	var wait_time = (randi() % 61)/100.0 + aura_inactive
+	
 	aura_tween = create_tween().set_loops();
 	aura_tween.tween_property($Influence/Shape,"modulate:a",0,0);
-	aura_tween.tween_property($Influence,"scale",aura_min_size,aura_inactive);
+	aura_tween.tween_property($Influence,"scale",aura_min_size,wait_time);
+	aura_tween.tween_callback(call_say_bubble)
 	aura_tween.tween_property($Influence/Shape,"modulate:a",1,0);
-	aura_tween.tween_property($Influence,"scale",aura_max_size,0.5*aura_active);
-	aura_tween.tween_property($Influence,"scale",aura_min_size,0.5*aura_active);
+	aura_tween.tween_property($Influence,"scale",aura_max_size,0.7*aura_active).set_trans(Tween.TRANS_QUAD);
+	aura_tween.tween_property($Influence/Shape,"modulate:a",0,0.3*aura_active)
+	aura_tween.tween_callback($Influence.set_scale.bind(aura_min_size));
 	aura_tween.loop_finished.connect(tween_loop_finished);
 	
 func tween_loop_finished(loop_idx):
 	spreading_emotion = get_random_emotion();
 
-func influence_emotion(emotion,value):
+func influence_emotion(emotion, value):
+	call_response_bubble(emotion)
 	emotions[emotion] = emotions[emotion] + value;
+
+
+func call_say_bubble():
+	var say_bubble = text_bubble.instantiate()
+	add_child(say_bubble)
+	say_bubble.say_emotion(bubble_class, spreading_emotion)
+
+
+func call_response_bubble(emotion):
+	var resp_bubble = text_bubble.instantiate()
+	add_child(resp_bubble)
+	if bubble_class == BUB_CLASS.RANDOM:
+		resp_bubble.respond(bubble_class)
+	elif bubble_class == BUB_CLASS.BABY:
+		resp_bubble.respond(bubble_class)
+	else:
+		var max_emotion = emotions.max()
+		var dominant_emotion = emotions.find(max_emotion)
+		resp_bubble.respond(dominant_emotion, emotion)
 
 
 func set_age_state(age, colors):

@@ -1,12 +1,12 @@
 extends Bubble
 
-enum RES {EN, ENT, ED, P}
+enum RES {EN, ENT, ED, MON, P}
 
 var deadzone_threshold_trans = 0.3;
 var deadzone_threshold_rot = 0.6;
 var move_dir = Vector2(0,0);
 
-
+# [energy, fun, educatation, mone, personal]
 var resources = [0,0,0,0]
 
 
@@ -26,10 +26,10 @@ func _ready():
 
 func _physics_process(delta):
 	
-	print("Emotions")
-	print(emotions)
-	print("Resources")
-	print(resources)
+	#print("Emotions")
+	#print(emotions)
+	#print("Resources")
+	#print(resources)
 	
 	super._physics_process(delta)
 
