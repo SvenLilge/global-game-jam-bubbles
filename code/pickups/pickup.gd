@@ -22,6 +22,7 @@ func _process(delta: float) -> void:
 	if($Area.overlaps_body(player)):
 		if not resource_given:
 			provide_resource();
+			$PickupStream.play();
 		vanish();
 
 

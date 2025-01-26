@@ -8,10 +8,13 @@ var move_dir = Vector2(0,0);
 var level_active = false;
 
 # [energy, fun, educatation, mone, personal]
-var resources = [5,5,0,0,0]
+var resources = [0,0,0,0,0]
+
+var age_colors = [];
+var age_resources = [];
 
 
-@onready var influence = $Influence;
+
 var hud
 
 
@@ -36,6 +39,7 @@ var song_emotion = 0
 
 
 func _ready():
+	bubble_class = BUB_CLASS.BABY;
 	influence_strength = 0;
 	super._ready();
 	var colors = [];
@@ -317,13 +321,13 @@ func deplete_resources():
 				AGE.INFANT:
 					pass
 				AGE.CHILD:
-					emotions[Bubble.EMOTION.SADNESS] = emotions[Bubble.EMOTION.SADNESS] + 1.0/3.0;
+					emotions[Bubble.EMOTION.SADNESS] = emotions[Bubble.EMOTION.SADNESS] + 0.3;
 				AGE.TEEN:
 					emotions[Bubble.EMOTION.SADNESS] = emotions[Bubble.EMOTION.SADNESS] + 1;
 				AGE.YA:
-					emotions[Bubble.EMOTION.SADNESS] = emotions[Bubble.EMOTION.SADNESS] + 1.0/2.0;
+					emotions[Bubble.EMOTION.SADNESS] = emotions[Bubble.EMOTION.SADNESS] + 0.5;
 				AGE.MATURE:
-					emotions[Bubble.EMOTION.SADNESS] = emotions[Bubble.EMOTION.SADNESS] + 1.0/3.0;
+					emotions[Bubble.EMOTION.SADNESS] = emotions[Bubble.EMOTION.SADNESS] + 0.4;
 				AGE.OLD:
 					pass
 		if resources[RES.ENT] <= 0:
@@ -332,16 +336,28 @@ func deplete_resources():
 				AGE.INFANT:
 					pass
 				AGE.CHILD:
-					emotions[Bubble.EMOTION.ANGER] = emotions[Bubble.EMOTION.ANGER] + 1.0/3.0;
+					emotions[Bubble.EMOTION.ANGER] = emotions[Bubble.EMOTION.ANGER] + 0.3;
 				AGE.TEEN:
 					emotions[Bubble.EMOTION.ANGER] = emotions[Bubble.EMOTION.ANGER] + 1;
 				AGE.YA:
-					emotions[Bubble.EMOTION.ANGER] = emotions[Bubble.EMOTION.ANGER] + 1.0/2.0;
+					emotions[Bubble.EMOTION.ANGER] = emotions[Bubble.EMOTION.ANGER] + 0.5;
 				AGE.MATURE:
-					emotions[Bubble.EMOTION.ANGER] = emotions[Bubble.EMOTION.ANGER] + 1.0/3.0;
+					emotions[Bubble.EMOTION.ANGER] = emotions[Bubble.EMOTION.ANGER] + 0.3;
 				AGE.OLD:
 					pass
 		
 		hud.set_energy(resources[RES.EN])
 		hud.set_entertainment(resources[RES.ENT])
+	
+func age():
+	if cur_age == AGE.INFANT:
+		resources = [5,5,0,0,0];
+	bubble_class = BUB_CLASS.YOU;
+	if(is_nan(cur_color[0]) and is_nan(cur_color[1]) and is_nan(cur_color[2])):
+		cur_color[0] = 1.0;
+		cur_color[1] = 1.0;
+		cur_color[2] = 1.0;
+	age_colors.append([cur_color[0],cur_color[1],cur_color[2]]);
+	age_resources.append([resources[RES.ED],resources[RES.MON],resources[RES.P]]);
+	super.age();
 	

@@ -229,7 +229,7 @@ func respond(with_emotion, to_emotion = null):
 	elif with_emotion == Bubble.BUB_CLASS.RANDOM:
 		lab.text = replics["Random"].pick_random()
 		theme = themes[to_emotion]
-	elif with_emotion == Bubble.BUB_CLASS.RANDOM:
+	elif with_emotion == Bubble.BUB_CLASS.DOG:
 		lab.text = replics["Dogs_woof"].pick_random()
 		theme = themes[to_emotion]
 	

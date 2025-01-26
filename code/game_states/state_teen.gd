@@ -19,6 +19,7 @@ func _ready():
 	player.level_active = false;
 	player.aura_tween.kill();
 	player.influence.scale = Vector2(0,0);
+	player.position = Vector2(1920.0/2,1080.0/2)
 	await show_tutorial(2_0)
 	player.start_tween();
 	player.level_active = true;
@@ -120,6 +121,7 @@ func spawn_bubbles():
 	joy_rel.position.y = randi_range($Area1Min.position.y,$Area1Max.position.y);
 	joy_rel.min_pos = $Area1Min.position;
 	joy_rel.max_pos = $Area1Max.position;
+	joy_rel.bubble_class = Bubble.BUB_CLASS.RELATIVE;
 	add_child(joy_rel);
 	
 	var angry_rel = npc.instantiate();
@@ -136,6 +138,7 @@ func spawn_bubbles():
 	angry_rel.position.y = randi_range($Area1Min.position.y,$Area1Max.position.y);
 	angry_rel.min_pos = $Area1Min.position;
 	angry_rel.max_pos = $Area1Max.position;
+	angry_rel.bubble_class = Bubble.BUB_CLASS.RELATIVE;
 	add_child(angry_rel);
 	
 	var sad_rel = npc.instantiate();
@@ -152,6 +155,7 @@ func spawn_bubbles():
 	sad_rel.position.y = randi_range($Area1Min.position.y,$Area1Max.position.y);
 	sad_rel.min_pos = $Area1Min.position;
 	sad_rel.max_pos = $Area1Max.position;
+	sad_rel.bubble_class = Bubble.BUB_CLASS.RELATIVE;
 	add_child(sad_rel);
 	
 	
@@ -170,6 +174,7 @@ func spawn_bubbles():
 	angry_work.position.y = randi_range($Area2Min.position.y,$Area2Max.position.y);
 	angry_work.min_pos = $Area2Min.position;
 	angry_work.max_pos = $Area2Max.position;
+	angry_work.bubble_class = Bubble.BUB_CLASS.BOSS;
 	add_child(angry_work);
 	
 	var joy_work = npc.instantiate();
@@ -186,6 +191,7 @@ func spawn_bubbles():
 	joy_work.position.y = randi_range($Area2Min.position.y,$Area2Max.position.y);
 	joy_work.min_pos = $Area2Min.position;
 	joy_work.max_pos = $Area2Max.position;
+	joy_work.bubble_class = Bubble.BUB_CLASS.BOSS;
 	add_child(joy_work);
 	
 	var sad_work = npc.instantiate();
@@ -202,6 +208,7 @@ func spawn_bubbles():
 	sad_work.position.y = randi_range($Area2Min.position.y,$Area2Max.position.y);
 	sad_work.min_pos = $Area2Min.position;
 	sad_work.max_pos = $Area2Max.position;
+	sad_work.bubble_class = Bubble.BUB_CLASS.BOSS;
 	add_child(sad_work);
 	
 	# AREA 3 Backyard
@@ -219,6 +226,7 @@ func spawn_bubbles():
 	fun_dude.position.y = randi_range($Area3Min.position.y,$Area3Max.position.y);
 	fun_dude.min_pos = $Area3Min.position;
 	fun_dude.max_pos = $Area3Max.position;
+	fun_dude.bubble_class = Bubble.BUB_CLASS.DUDE;
 	add_child(fun_dude);
 	
 	var sad_dude = npc.instantiate();
@@ -235,6 +243,7 @@ func spawn_bubbles():
 	sad_dude.position.y = randi_range($Area3Min.position.y,$Area3Max.position.y);
 	sad_dude.min_pos = $Area3Min.position;
 	sad_dude.max_pos = $Area3Max.position;
+	sad_dude.bubble_class = Bubble.BUB_CLASS.DUDE;
 	add_child(sad_dude);
 	
 	var angry_dude = npc.instantiate();
@@ -251,6 +260,7 @@ func spawn_bubbles():
 	angry_dude.position.y = randi_range($Area3Min.position.y,$Area3Max.position.y);
 	angry_dude.min_pos = $Area3Min.position;
 	angry_dude.max_pos = $Area3Max.position;
+	angry_dude.bubble_class = Bubble.BUB_CLASS.DUDE;
 	add_child(angry_dude);
 	
 	
@@ -270,6 +280,7 @@ func spawn_bubbles():
 	friend.position.y = randi_range($Area4Min.position.y,$Area4Max.position.y);
 	friend.min_pos = $Area4Min.position;
 	friend.max_pos = $Area4Max.position;
+	friend.bubble_class = Bubble.BUB_CLASS.FRIEND;
 	add_child(friend);
 	
 	var angry_rel_2 = npc.instantiate();
@@ -286,6 +297,7 @@ func spawn_bubbles():
 	angry_rel_2.position.y = randi_range($Area4Min.position.y,$Area4Max.position.y);
 	angry_rel_2.min_pos = $Area4Min.position;
 	angry_rel_2.max_pos = $Area4Max.position;
+	angry_rel_2.bubble_class = Bubble.BUB_CLASS.RELATIVE;
 	add_child(angry_rel_2);
 	
 	var sad_dude_2 = npc.instantiate();
@@ -302,4 +314,5 @@ func spawn_bubbles():
 	sad_dude_2.position.y = randi_range($Area4Min.position.y,$Area4Max.position.y);
 	sad_dude_2.min_pos = $Area4Min.position;
 	sad_dude_2.max_pos = $Area4Max.position;
+	sad_dude_2.bubble_class = Bubble.BUB_CLASS.DUDE;
 	add_child(sad_dude_2);
