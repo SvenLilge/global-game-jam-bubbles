@@ -18,6 +18,7 @@ var route = "user://config.dat"
 
 func _ready() -> void:
 	load_config()
+	set_all_setting()
 
 
 func save_config():
