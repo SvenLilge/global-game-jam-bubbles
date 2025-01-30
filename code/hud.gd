@@ -61,7 +61,13 @@ func start_age_counter(stage_num):
 			cur_age = 80
 	
 	if cur_stage < 5:
+		age_timer.paused = false
 		age_timer.start(stage_timers[cur_stage])
+		set_age(cur_age)
+
+
+func pause_age_counter(to_pause = true):
+	age_timer.paused = to_pause
 
 
 func on_timeout():
@@ -83,8 +89,10 @@ func on_timeout():
 func set_age(value):
 	if value > 0:
 		var tween_modul = get_tree().create_tween()
-		tween_modul.tween_property(age, "modulate", Color(1,0,0,1), 0.4).set_trans(Tween.TRANS_SINE)
-		await tween_modul.finished
+		tween_modul.tween_method(change_age_font_color, Color(0,0,0,1), Color(0,0.3,0,1), 0.4).set_trans(Tween.TRANS_SINE)
+		await get_tree().create_timer(0.2).timeout
+	else:
+		hide()
 	
 	match cur_stage:
 		0:
@@ -97,11 +105,15 @@ func set_age(value):
 			age.text = str(value) + " Years"
 	
 	if value > 0:
+		await get_tree().create_timer(0.2).timeout
 		var tween_modul = get_tree().create_tween()
-		tween_modul.tween_property(age, "modulate", Color(1,1,1,1), 0.8).set_trans(Tween.TRANS_SINE)
+		tween_modul.tween_method(change_age_font_color, Color(0,0.3,0,1), Color(0,0,0,1), 0.8).set_trans(Tween.TRANS_SINE)
 		await tween_modul.finished
 		
 
+
+func change_age_font_color(col):
+	age.add_theme_color_override("font_color", col)
 
 func set_energy(value):
 	if value > 0:
@@ -109,6 +121,16 @@ func set_energy(value):
 	
 	value = round(value*10)/10.0
 	energy.text = str(value) + "/15"
+	
+	if value < 2:
+		var tween_modul = get_tree().create_tween()
+		tween_modul.tween_property(energy, "modulate", Color(1,0.4,0.4,1), 0.4).set_trans(Tween.TRANS_SINE)
+	elif value < 5:
+		var tween_modul = get_tree().create_tween()
+		tween_modul.tween_property(energy, "modulate", Color(1,0.6,0.6,1), 0.4).set_trans(Tween.TRANS_SINE)
+	else:
+		var tween_modul = get_tree().create_tween()
+		tween_modul.tween_property(energy, "modulate", Color(1,1,1,1), 0.4).set_trans(Tween.TRANS_SINE)
 
 
 func set_entertainment(value):
@@ -117,6 +139,17 @@ func set_entertainment(value):
 	
 	value = round(value*10)/10.0
 	entertainment.text = str(value) + "/15"
+	
+	if value < 2:
+		var tween_modul = get_tree().create_tween()
+		tween_modul.tween_property(entertainment, "modulate", Color(1,0.2,0.2,1), 0.4).set_trans(Tween.TRANS_SINE)
+	elif value < 5:
+		var tween_modul = get_tree().create_tween()
+		tween_modul.tween_property(entertainment, "modulate", Color(1,0.5,0.5,1), 0.4).set_trans(Tween.TRANS_SINE)
+	else:
+		var tween_modul = get_tree().create_tween()
+		tween_modul.tween_property(entertainment, "modulate", Color(1,1,1,1), 0.4).set_trans(Tween.TRANS_SINE)
+
 
 
 func set_education(value):
@@ -142,4 +175,8 @@ func set_personal(value):
 	value = round(value*10)/10.0
 	personal.text = str(value)
 	
-	
+
+func _on_button_pressed() -> void:
+	var opt_screen = load("res://code/options.tscn").instantiate()
+	add_child(opt_screen)
+	opt_screen.called_screen = self

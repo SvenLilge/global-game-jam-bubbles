@@ -18,9 +18,9 @@ func _ready():
 	StateDelayTimer.start();
 
 
-func show_tutorial(code):
+func show_tutorial(code, show_pos = Vector2(960, 540)):
 	var tut_bubble = text_bubble.instantiate()
 	add_child(tut_bubble)
-	tut_bubble.position = Vector2(960, 540)
+	tut_bubble.position = show_pos
 	tut_bubble.play_tutorial(code)
 	await tut_bubble.message_finished

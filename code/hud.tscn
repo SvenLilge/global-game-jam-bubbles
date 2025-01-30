@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bmb2k3c540uqx"]
+[gd_scene load_steps=11 format=3 uid="uid://bmb2k3c540uqx"]
 
 [ext_resource type="Theme" uid="uid://4csixlnkvcme" path="res://resources/themes/main_theme.tres" id="1_8y2re"]
 [ext_resource type="Script" path="res://code/hud.gd" id="1_nkpwq"]
@@ -8,6 +8,9 @@
 [ext_resource type="Texture2D" uid="uid://do0ohye0y665s" path="res://resources/hud/education.png" id="4_rxl5v"]
 [ext_resource type="Texture2D" uid="uid://dhpkjyc04bnrr" path="res://resources/hud/coin_icon.png" id="5_fxrkk"]
 [ext_resource type="Texture2D" uid="uid://cp6eqhw7ik7nw" path="res://resources/hud/personal.png" id="6_2fne5"]
+[ext_resource type="Theme" uid="uid://c6llbdy6r04d0" path="res://resources/themes/menus.tres" id="9_wiejr"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_00qqg"]
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_nkpwq")
@@ -31,12 +34,12 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Sprite2D2" type="Sprite2D" parent="Control/Energy"]
-position = Vector2(60, -55)
+position = Vector2(60, -60)
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("3_74ghf")
 
 [node name="Sprite2D" type="Sprite2D" parent="Control/Energy"]
-position = Vector2(60, -55)
+position = Vector2(60, -60)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_djni7")
 
@@ -55,12 +58,12 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Sprite2D2" type="Sprite2D" parent="Control/Entertainment"]
-position = Vector2(60, -55)
+position = Vector2(60, -60)
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("3_74ghf")
 
 [node name="Sprite2D" type="Sprite2D" parent="Control/Entertainment"]
-position = Vector2(60, -60)
+position = Vector2(60, -65)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("3_12po0")
 
@@ -79,12 +82,12 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Sprite2D2" type="Sprite2D" parent="Control/Education"]
-position = Vector2(60, -55)
+position = Vector2(60, -60)
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("3_74ghf")
 
 [node name="Sprite2D" type="Sprite2D" parent="Control/Education"]
-position = Vector2(60, -55)
+position = Vector2(60, -60)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("4_rxl5v")
 
@@ -104,12 +107,12 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Sprite2D2" type="Sprite2D" parent="Control/Money"]
-position = Vector2(60, -55)
+position = Vector2(60, -60)
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("3_74ghf")
 
 [node name="Sprite2D" type="Sprite2D" parent="Control/Money"]
-position = Vector2(60, -55)
+position = Vector2(60, -60)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("5_fxrkk")
 
@@ -131,12 +134,12 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Sprite2D2" type="Sprite2D" parent="Control/Personal"]
-position = Vector2(60, -55)
+position = Vector2(60, -60)
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("3_74ghf")
 
 [node name="Sprite2D" type="Sprite2D" parent="Control/Personal"]
-position = Vector2(60, -55)
+position = Vector2(60, -60)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("6_2fne5")
 
@@ -152,8 +155,23 @@ offset_bottom = 41.0
 grow_horizontal = 2
 theme = ExtResource("1_8y2re")
 theme_override_font_sizes/font_size = 48
+theme_override_styles/normal = SubResource("StyleBoxEmpty_00qqg")
 text = "4 Years 3 Months"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Button" type="Button" parent="Control"]
+layout_mode = 1
+offset_left = 143.0
+offset_right = 276.0
+offset_bottom = 49.0
+theme = ExtResource("9_wiejr")
+theme_type_variation = &"FlatButton"
+theme_override_font_sizes/font_size = 32
+text = "Options
+"
+flat = true
+
 [node name="AgeCounter" type="Timer" parent="."]
+
+[connection signal="pressed" from="Control/Button" to="." method="_on_button_pressed"]

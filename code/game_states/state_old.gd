@@ -16,19 +16,23 @@ var teen
 var ya
 var mature
 
+var ready_to_pop = false
+
 func _ready():
 	super._ready();
 	player.hide();
-	hud.show()
+	hud.hide()
+	hud.pause_age_counter()
 	player.new_stage_music(5)
 	
 	player.level_active = false;
 	player.aura_tween.kill();
 	player.influence.scale = Vector2(0,0);
 	hud.start_age_counter(5)
+	hud.show()
 
 	var colors;
-
+	
 	# Spawn five bubbles
 	#INFANT
 	infant = bubble.instantiate();
@@ -37,8 +41,11 @@ func _ready():
 	infant.emotions[Bubble.EMOTION.ANGER] = player.age_colors[0][0];
 	infant.emotions[Bubble.EMOTION.SADNESS] = player.age_colors[0][2];
 	infant.emotions[Bubble.EMOTION.JOY] = player.age_colors[0][1];
-	infant.position.x = 100;
-	infant.position.y = 800;
+	if infant.emotions == [1.0, 1.0, 1.0]:
+		infant.emotions = [0,0,0]
+	infant.position = Vector2(960, 540)
+	infant.can_talk = false
+	infant.last_stage = true
 	add_child(infant);
 	infant.aura_tween.kill();
 	infant.influence.scale = Vector2(0,0);
@@ -52,8 +59,9 @@ func _ready():
 	child.emotions[Bubble.EMOTION.ANGER] = player.age_colors[1][0];
 	child.emotions[Bubble.EMOTION.SADNESS] = player.age_colors[1][2];
 	child.emotions[Bubble.EMOTION.JOY] = player.age_colors[1][1];
-	child.position.x = 430;
-	child.position.y = 400;
+	child.position = Vector2(960, 540)
+	child.can_talk = false
+	child.last_stage = true
 	add_child(child);
 	child.aura_tween.kill();
 	child.influence.scale = Vector2(0,0);
@@ -68,8 +76,9 @@ func _ready():
 	teen.emotions[Bubble.EMOTION.ANGER] = player.age_colors[2][0];
 	teen.emotions[Bubble.EMOTION.SADNESS] = player.age_colors[2][2];
 	teen.emotions[Bubble.EMOTION.JOY] = player.age_colors[2][1];
-	teen.position.x = 760;
-	teen.position.y = 800;
+	teen.position = Vector2(960, 540)
+	teen.can_talk = false
+	teen.last_stage = true
 	add_child(teen);
 	teen.aura_tween.kill();
 	teen.influence.scale = Vector2(0,0);
@@ -85,8 +94,9 @@ func _ready():
 	ya.emotions[Bubble.EMOTION.ANGER] = player.age_colors[3][0];
 	ya.emotions[Bubble.EMOTION.SADNESS] = player.age_colors[3][2];
 	ya.emotions[Bubble.EMOTION.JOY] = player.age_colors[3][1];
-	ya.position.x = 1090;
-	ya.position.y = 400;
+	ya.position = Vector2(960, 540)
+	ya.can_talk = false
+	ya.last_stage = true
 	add_child(ya);
 	ya.aura_tween.kill();
 	ya.influence.scale = Vector2(0,0);
@@ -103,47 +113,69 @@ func _ready():
 	mature.emotions[Bubble.EMOTION.ANGER] = player.age_colors[4][0];
 	mature.emotions[Bubble.EMOTION.SADNESS] = player.age_colors[4][2];
 	mature.emotions[Bubble.EMOTION.JOY] = player.age_colors[4][1];
-	mature.position.x = 1420;
-	mature.position.y = 800;
+	mature.position = Vector2(960, 540)
+	mature.can_talk = false
+	mature.last_stage = true
 	add_child(mature);
 	mature.aura_tween.kill();
 	mature.influence.scale = Vector2(0,0);
 	mature.tween_timer.stop();
+	
+	await get_parent().transition_finished
 	await show_tutorial(5_0)
 	
+	var tween_move = get_tree().create_tween()
+	tween_move.tween_property(mature, "position", Vector2(1420, 800), 1).set_trans(Tween.TRANS_SINE)
+	tween_move.tween_property(mature, "position", Vector2(1420, 800), 0.5).set_trans(Tween.TRANS_SINE)
+	tween_move.tween_property(ya, "position", Vector2(1090, 400), 1).set_trans(Tween.TRANS_SINE)
+	tween_move.tween_property(ya, "position", Vector2(1090, 400), 0.5).set_trans(Tween.TRANS_SINE)
+	tween_move.tween_property(teen, "position", Vector2(760, 800), 1).set_trans(Tween.TRANS_SINE)
+	tween_move.tween_property(teen, "position", Vector2(760, 800), 0.5).set_trans(Tween.TRANS_SINE)
+	tween_move.tween_property(child, "position", Vector2(430, 400), 1).set_trans(Tween.TRANS_SINE)
+	tween_move.tween_property(child, "position", Vector2(430, 400), 0.5).set_trans(Tween.TRANS_SINE)
+	tween_move.tween_property(infant, "position", Vector2(100, 800), 1).set_trans(Tween.TRANS_SINE)
+	tween_move.tween_property(infant, "position", Vector2(100, 800), 0.5).set_trans(Tween.TRANS_SINE)
+
+	await tween_move.finished
+	ready_to_pop = true
+	
+
 func pop_infant_bubble():
 	var results = [];
 	results.append(player.age_colors[0]);
 	results.append(player.age_resources[0]);
-	print(results)
 	play_last_stage(0,results);
+
+
 func pop_child_bubble():
 	var results = [];
 	results.append(player.age_colors[1]);
 	results.append(player.age_resources[1]);
-	print(results)
 	play_last_stage(1,results);
+
+
 func pop_teen_bubble():
 	var results = [];
 	results.append(player.age_colors[2]);
 	results.append(player.age_resources[2]);
-	print(results)
 	play_last_stage(2,results);
+
+
 func pop_ya_bubble():
 	var results = [];
 	results.append(player.age_colors[3]);
 	results.append(player.age_resources[3]);
-	print(results)
 	play_last_stage(3,results);
+
+
 func pop_mature_bubble():
 	var results = [];
 	results.append(player.age_colors[4]);
 	results.append(player.age_resources[4]);
-	print(results)
 	play_last_stage(4,results);
 
 func _input(event):
-	if event is InputEventMouseButton and StateDelayTimer.time_left == 0:
+	if event is InputEventMouseButton and StateDelayTimer.time_left == 0 and ready_to_pop:
 		if event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 			if infant.sprite.get_rect().has_point(infant.sprite.to_local(get_global_mouse_position())):
 				pop_infant_bubble();
@@ -179,7 +211,7 @@ func play_last_stage(num, results):
 func play_inf_results(results):
 	var last_bubble = text_bubble.instantiate()
 	add_child(last_bubble)
-	last_bubble.position = Vector2(100, 800) #add position for the infant bubble
+	last_bubble.position = Vector2(100, 835) #add position for the infant bubble
 	last_bubble.modulate.a = 0
 	
 	# decifer which message to play
@@ -197,7 +229,7 @@ func play_inf_results(results):
 func play_child_results(results):
 	var last_bubble = text_bubble.instantiate()
 	add_child(last_bubble)
-	last_bubble.position = Vector2(430, 400) #add position for the infant bubble
+	last_bubble.position = Vector2(430, 430) #add position for the infant bubble
 	last_bubble.modulate.a = 0
 	
 	# decifer which stats message to show
@@ -211,16 +243,17 @@ func play_child_results(results):
 	last_bubble.play_last(1_1, first_res + second_res)
 	
 	# float the message
-	var move_to_pos = last_bubble.position + Vector2(0, -200)
+	var move_to_pos = last_bubble.position + Vector2(0, -133)
 	var tween_modul = get_tree().create_tween()
 	tween_modul.tween_property(last_bubble, "modulate:a", 1, 0.6).set_trans(Tween.TRANS_SINE)
 	tween_modul.parallel().tween_property(last_bubble, "position", move_to_pos, 0.6).set_trans(Tween.TRANS_SINE)
 	await tween_modul.finished
+	await get_tree().create_timer(0.6).timeout
 	
 	# decifer which color message to play
 	var new_bubble = text_bubble.instantiate()
 	add_child(new_bubble)
-	new_bubble.position = Vector2(430, 400) #add position for the infant bubble
+	new_bubble.position = Vector2(430, 430) #add position for the infant bubble
 	new_bubble.modulate.a = 0
 	var col_array = results[0]
 	var result_emotion = get_emotion_from_array(col_array)
@@ -236,7 +269,7 @@ func play_child_results(results):
 func play_teen_results(results):
 	var last_bubble = text_bubble.instantiate()
 	add_child(last_bubble)
-	last_bubble.position = Vector2(760, 800) #add position for the infant bubble
+	last_bubble.position = Vector2(760, 825) #add position for the infant bubble
 	last_bubble.modulate.a = 0
 	
 	# decifer which stats message to show
@@ -250,7 +283,7 @@ func play_teen_results(results):
 	last_bubble.play_last(2_1, first_res + second_res)
 	
 	# float the message
-	var move_to_pos = last_bubble.position + Vector2(0, -200)
+	var move_to_pos = last_bubble.position + Vector2(0, -133)
 	var tween_modul = get_tree().create_tween()
 	tween_modul.tween_property(last_bubble, "modulate:a", 1, 0.6).set_trans(Tween.TRANS_SINE)
 	tween_modul.parallel().tween_property(last_bubble, "position", move_to_pos, 0.6).set_trans(Tween.TRANS_SINE)
@@ -260,7 +293,7 @@ func play_teen_results(results):
 	# decifer which color message to play
 	var new_bubble = text_bubble.instantiate()
 	add_child(new_bubble)
-	new_bubble.position = Vector2(760, 800) #add position for the infant bubble
+	new_bubble.position = Vector2(760, 825) #add position for the infant bubble
 	new_bubble.modulate.a = 0
 	var col_array = results[0]
 	var result_emotion = get_emotion_from_array(col_array)
@@ -276,7 +309,7 @@ func play_teen_results(results):
 func play_ya_results(results):
 	var last_bubble = text_bubble.instantiate()
 	add_child(last_bubble)
-	last_bubble.position = Vector2(1090, 400) #add position for the infant bubble
+	last_bubble.position = Vector2(1090, 420) #add position for the infant bubble
 	last_bubble.modulate.a = 0
 	
 	# decifer which stats message to show
@@ -290,7 +323,7 @@ func play_ya_results(results):
 	last_bubble.play_last(3_1, first_res + second_res)
 	
 	# float the message
-	var move_to_pos = last_bubble.position + Vector2(0, -200)
+	var move_to_pos = last_bubble.position + Vector2(0, -133)
 	var tween_modul = get_tree().create_tween()
 	tween_modul.tween_property(last_bubble, "modulate:a", 1, 0.6).set_trans(Tween.TRANS_SINE)
 	tween_modul.parallel().tween_property(last_bubble, "position", move_to_pos, 0.6).set_trans(Tween.TRANS_SINE)
@@ -300,7 +333,7 @@ func play_ya_results(results):
 	# decifer which color message to play
 	var new_bubble = text_bubble.instantiate()
 	add_child(new_bubble)
-	new_bubble.position = Vector2(1090, 400) #add position for the infant bubble
+	new_bubble.position = Vector2(1090, 420) #add position for the infant bubble
 	new_bubble.modulate.a = 0
 	var col_array = results[0]
 	var result_emotion = get_emotion_from_array(col_array)
@@ -316,21 +349,21 @@ func play_ya_results(results):
 func play_mature_results(results):
 	var last_bubble = text_bubble.instantiate()
 	add_child(last_bubble)
-	last_bubble.position = Vector2(1420, 800) #add position for the infant bubble
+	last_bubble.position = Vector2(1420, 815) #add position for the infant bubble
 	last_bubble.modulate.a = 0
 	
 	# decifer which stats message to show
 	var results_array = results[1]
 	var first_res = "Low_"
 	var second_res = "Low"
-	if results_array[1] > 600:
+	if results_array[1] > 500:
 		first_res = "High_"
 	if results_array[2] > 300:
 		second_res = "High"
 	last_bubble.play_last(4_1, first_res + second_res)
 	
 	# float the message
-	var move_to_pos = last_bubble.position + Vector2(0, -200)
+	var move_to_pos = last_bubble.position + Vector2(0, -133)
 	var tween_modul = get_tree().create_tween()
 	tween_modul.tween_property(last_bubble, "modulate:a", 1, 0.6).set_trans(Tween.TRANS_SINE)
 	tween_modul.parallel().tween_property(last_bubble, "position", move_to_pos, 0.6).set_trans(Tween.TRANS_SINE)
@@ -340,7 +373,7 @@ func play_mature_results(results):
 	# decifer which color message to play
 	var new_bubble = text_bubble.instantiate()
 	add_child(new_bubble)
-	new_bubble.position = Vector2(1420, 800) #add position for the infant bubble
+	new_bubble.position = Vector2(1420, 815) #add position for the infant bubble
 	new_bubble.modulate.a = 0
 	var col_array = results[0]
 	var result_emotion = get_emotion_from_array(col_array)
@@ -357,11 +390,11 @@ func get_emotion_from_array(col_array):
 	var color_sum = col_array[0] + col_array[1] + col_array[2] 
 	if (col_array[0] + col_array[2]) >= 0.85 * color_sum:
 		return "Depressed"
-	elif col_array[0] >= 0.6 * color_sum:
+	elif col_array[0] > 0.5 * color_sum:
 		return "Anger"
-	elif col_array[1] >= 0.6 * color_sum:
+	elif col_array[1] > 0.5 * color_sum:
 		return "Joy"
-	elif col_array[2] >= 0.6 * color_sum:
+	elif col_array[2] > 0.5 * color_sum:
 		return "Sad"
 	else:
 		return "Bittersweet"

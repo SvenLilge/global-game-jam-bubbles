@@ -61,18 +61,18 @@ var replics = {
 
 var tutorial = {
 	0_0: [Bubble.EMOTION.JOY, ["You are a bubble.", "The Bubble.", "You appeared in this world as a pure bubble.", "Blank state. Tabula Rasa.", "Use arrows/WASD to move"]],
-	0_1: [Bubble.EMOTION.JOY, ["The world has other bubbles. They affect you.", "Some of them bring joy, like this one."]],
+	0_1: [Bubble.EMOTION.JOY, ["The world has other bubbles.\nThey have power to affect you.", "Some of them bring joy, like this one."]],
 	0_2: [Bubble.EMOTION.ANGER, ["Some of them spread anger.", "They also move differently."]],
-	0_3: [Bubble.EMOTION.SADNESS, ["And some spread sadness.", "Choose your company wisely."]],
-	1_0: [Bubble.EMOTION.JOY, [
-		"Your bubble grew up a bit.\nIt remembers all past encounters.", "But it also is open to the new ones.\nMoreover - now you have things to do.",
-		"You need to rest to survive.\nYou rest at home.", "You need to have some fun to keep spirits up.", 
-		"You need to study, for your future.\nAt school.", "And make meaningful connections.\nSpend time with a close friend.",
-		"Additionally, now you also affect others.\nJust a little bit.",
-	]],
-	2_0: [Bubble.EMOTION.ANGER, ["You grow. Things get messy.", "You need to endure to persist."]],
-	3_0: [Bubble.EMOTION.JOY, ["Who's a big bubble now?", "You are!", "Now you earn a thing called money.", "Did you study well?"]],
-	4_0: [Bubble.EMOTION.JOY, ["Your bubble had its time.", "You persist. But what for?", "Time to spread yourself to other bubbles...", "Or better not?"]],
+	0_3: [Bubble.EMOTION.SADNESS, ["And some spread sadness.", "You are the product of powers that affect you.", "So choose your company wisely.", "Or don't."]],
+	1_0: [Bubble.EMOTION.JOY, ["Your bubble grew up a bit.\nIt remembers all past encounters.", "But it also is open to the new ones.", "Moreover - now you have things to do."]],
+	1_1: [Bubble.EMOTION.JOY, ["You need to rest at home to survive.", "Otherwise you get angry."]],
+	1_2: [Bubble.EMOTION.SADNESS, ["You need to have some fun to keep spirits up.", "Or you'll get sad."]],
+	1_3: [Bubble.EMOTION.ANGER, ["You need to study, at school.", "For your future. Do you want to suceed?"]],
+	1_4: [Bubble.EMOTION.JOY, ["And try to make meaningful connections.", "Spend time with a close friend?"]],
+	1_5: [Bubble.EMOTION.ANGER, ["Additionally, now you also have power.", "Power to affect others.", "Just a little bit, for now."]],
+	2_0: [Bubble.EMOTION.ANGER, ["You grow into a teenage bubble.", "Your power grows, and things get messy.", "You need to endure to persist."]],
+	3_0: [Bubble.EMOTION.JOY, ["Who's a big bubble now?", "You are!", "Young and powerful.", "Now you earn a thing called money.", "Did you study well?"]],
+	4_0: [Bubble.EMOTION.JOY, ["Your bubble had its time.\nYou persist.", "You accumulated power.\nBut for what?", "Time to exert your power\nover the other bubbles...", "Or better not?"]],
 	5_0: [Bubble.EMOTION.SADNESS, ["Your time is over.", "Time to pop your bubble", "Time to look what's inside.", "Will you like it?"]],
 }
 
@@ -191,7 +191,7 @@ func play_last(code, result):
 func play_tutorial(code):
 	tutorial_playing = true
 	if code in tutorial:
-		delay_timer.start(0.15)
+		delay_timer.start(0.5)
 		var emotion = tutorial[code][0]
 		mess_mass = tutorial[code][1]
 		theme = themes[emotion]
@@ -201,7 +201,7 @@ func play_tutorial(code):
 
 
 func play_next_line():
-	delay_timer.start(0.15)
+	delay_timer.start(0.25)
 	lab.text = mess_mass.pop_front()
 
 
@@ -253,9 +253,8 @@ func decay(time = 1.0):
 
 func _input(event: InputEvent) -> void:
 	if visible and delay_timer.time_left == 0 and tutorial_playing:
-		if ((event is InputEventMouseButton) or (event is InputEventKey) or (event is InputEventJoypadButton)) and event.is_released():
+		if ((event is InputEventMouseButton) or (event.is_action("Next"))) and event.is_released():
 			if mess_mass.size() > 0:
-				delay_timer.start(0.15)
 				play_next_line()
 			else:
 				tutorial_playing = false

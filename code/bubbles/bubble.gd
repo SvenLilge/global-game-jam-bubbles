@@ -41,6 +41,8 @@ var spreading_emotion;
 # Age and Color
 var cur_age = AGE.INFANT;
 var cur_color;
+var can_talk = true
+var last_stage = false
 
 @onready var text_bubble = load("res://code/text_bubbles/text_bubble.tscn")
 
@@ -74,7 +76,14 @@ func _process(delta):
 	green = green/sum_all;
 	blue = blue/sum_all;
 	
-	cur_color = Color(red,green,blue);
+	# middle collor hets **1.5, max color gets **0.75, min color gets ** 2.25
+	var colors_list = [red ** 1.5, green ** 1.5, blue ** 1.5]
+	var max_color = colors_list.find(colors_list.max())
+	var min_color = colors_list.find(colors_list.min())
+	colors_list[max_color] = colors_list[max_color] ** 0.5
+	colors_list[min_color] = colors_list[min_color] ** 1.5
+	
+	cur_color = Color(colors_list[0], colors_list[1], colors_list[2]);
 	
 	if(sum_all == 0.0):
 		red = 1.0;
@@ -112,8 +121,10 @@ func start_tween():
 	var wait_time = (randi() % 61)/100.0 + aura_inactive
 	aura_tween = create_tween().set_loops();
 	aura_tween.tween_property($Influence/Shape,"modulate:a",0,0);
+	aura_tween.tween_property($Influence,"scale",aura_min_size,0);
 	aura_tween.tween_property($Influence,"scale",aura_min_size,wait_time);
-	aura_tween.tween_callback(call_say_bubble)
+	if can_talk:
+		aura_tween.tween_callback(call_say_bubble)
 	aura_tween.tween_property($Influence/Shape,"modulate:a",1,0);
 	aura_tween.tween_property($Influence,"scale",aura_max_size,0.7*aura_active).set_trans(Tween.TRANS_QUAD);
 	aura_tween.tween_property($Influence/Shape,"modulate:a",0,0.3*aura_active)
@@ -124,13 +135,20 @@ func tween_loop_finished(loop_idx):
 	spreading_emotion = get_random_emotion();
 
 func influence_emotion(emotion, value):
+	if last_stage:
+		return
+		
 	if $ChatTimer.is_stopped():
 		$ChatTimer.start();
 		call_response_bubble(emotion)
-	emotions[emotion] = emotions[emotion] + value;
+	emotions[emotion] = emotions[emotion] + value*2;
+	
 
 
 func call_say_bubble():
+	if not can_talk:
+		return
+		
 	if cur_age != AGE.INFANT and bubble_class != BUB_CLASS.RANDOM:
 		var say_bubble = text_bubble.instantiate()
 		add_child(say_bubble)
@@ -139,6 +157,9 @@ func call_say_bubble():
 
 
 func call_response_bubble(emotion):
+	#if not can_talk:
+		#return
+		
 	var resp_bubble = text_bubble.instantiate()
 	add_child(resp_bubble)
 	#resp_bubble.position = position #usefull if attach to parent
@@ -239,8 +260,8 @@ func set_age_state(age, colors):
 	$BG.scale = new_scale;
 	aura_min_size = new_scale;
 	aura_max_size = 3*new_scale;
-	if cur_age == AGE.INFANT or bubble_class == BUB_CLASS.RANDOM:
-		aura_max_size = aura_min_size;
+	if (cur_age == AGE.INFANT) or (bubble_class == BUB_CLASS.RANDOM):
+		aura_max_size = aura_min_size * 0.5;
 	start_tween();
 	
 	
@@ -259,12 +280,12 @@ func age():
 			colors.append($Mature.modulate);
 		colors.append(cur_color);
 		set_age_state(cur_age+1,colors);
-		
+	
 	var sum_all = 0.1;
 	for i in range (0,3):
 		sum_all = sum_all + emotions[i];
 	for i in range (0,3):
-		emotions[i] = emotions[i]/sum_all*10;
+		emotions[i] = emotions[i]/sum_all*5;
 		
 
 func die():

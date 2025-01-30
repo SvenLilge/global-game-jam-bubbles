@@ -1,5 +1,7 @@
 extends Node2D
 
+signal transition_finished
+
 # This node handles the transition between all possible (high-level) game states
 var cur_game_state; 
 
@@ -28,7 +30,7 @@ func _ready():
 		var filename = "res://code/game_states/state_" + GameState.State.keys()[n].to_lower() + ".tscn"
 		game_states.append(load(filename))
 	# Load Splash Screen as the current scene
-	cur_game_state = game_states[3].instantiate();
+	cur_game_state = game_states[GameState.State.MAIN_MENU].instantiate();
 	add_child(cur_game_state); # add to scene
 	cur_game_state.sgn_transition_state.connect(transition_game_state.bind());
 	
@@ -53,11 +55,19 @@ func transition_game_state(next_state):
 	if next_state == GameState.State.QUIT_GAME:
 		get_tree().quit();
 	else:
+		var tween_modul = get_tree().create_tween()
+		tween_modul.tween_property(self, "modulate", Color(1,1,1,0), 1.5).set_trans(Tween.TRANS_SINE)
+		await tween_modul.finished
 		cur_game_state.queue_free() # Delete old scene
+		await get_tree().create_timer(2.0).timeout
+		
 		# Reset the music player
 		# Load in new scene1
 		cur_game_state = game_states[next_state].instantiate();
 		# Probably need some other mechanic to carry over data as well (will figure out along the way)
 		add_child(cur_game_state); # add to scene
 		cur_game_state.sgn_transition_state.connect(transition_game_state.bind()) # Connect signal
+		tween_modul = get_tree().create_tween()
+		tween_modul.tween_property(self, "modulate", Color(1,1,1,1), 1.5).set_trans(Tween.TRANS_SINE)
+		transition_finished.emit()
 		

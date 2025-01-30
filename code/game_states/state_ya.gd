@@ -5,7 +5,7 @@ extends "res://code/game_states/game_state.gd"
 var npc = preload("res://code/bubbles/npc.tscn")
 
 
-var level_length = 150;
+var level_length = 150 #150
 var pickup = preload("res://code/pickups/pickup.tscn")
 
 var pickup_spawn_time = 2.5;
@@ -13,13 +13,15 @@ var pickup_spawn_time = 2.5;
 func _ready():
 	super._ready();
 	player.show();
-	hud.show()
+	hud.hide()
+	hud.pause_age_counter()
 	player.new_stage_music(3)
 	
 	player.level_active = false;
 	player.aura_tween.kill();
 	player.influence.scale = Vector2(0,0);
 	player.position = Vector2(1920.0/2,1080.0/2)
+	await get_parent().transition_finished
 	await show_tutorial(3_0)
 	player.start_tween();
 	player.level_active = true;
@@ -32,6 +34,7 @@ func _ready():
 	$StageTimer.timeout.connect(finish_stage);
 	$StageTimer.start();
 	hud.start_age_counter(3)
+	hud.show()
 	
 	$Area1Timer.wait_time = randf_range(pickup_spawn_time-0.5,pickup_spawn_time+0.5);
 	$Area1Timer.one_shot = true;

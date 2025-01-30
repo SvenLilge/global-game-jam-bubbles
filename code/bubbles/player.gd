@@ -71,13 +71,13 @@ func _physics_process(delta):
 		else:
 			var left = 0;
 			var up = 0;
-			if(Input.is_key_pressed(KEY_W)) or (Input.is_key_pressed(KEY_UP)):
+			if(Input.is_action_pressed("Up")):
 				up = 1;
-			if(Input.is_key_pressed(KEY_S)) or (Input.is_key_pressed(KEY_DOWN)):
+			if(Input.is_action_pressed("Down")):
 				up = -1;
-			if(Input.is_key_pressed(KEY_A)) or (Input.is_key_pressed(KEY_LEFT)):
+			if(Input.is_action_pressed("Left")):
 				left = 1;
-			if(Input.is_key_pressed(KEY_D)) or (Input.is_key_pressed(KEY_RIGHT)):
+			if(Input.is_action_pressed("Right")):
 				left = -1;
 			move_input = Vector2(-1*left,-1*up);
 			
@@ -325,13 +325,13 @@ func deplete_resources():
 				AGE.INFANT:
 					pass
 				AGE.CHILD:
-					emotions[Bubble.EMOTION.SADNESS] = emotions[Bubble.EMOTION.SADNESS] + 0.3;
+					emotions[Bubble.EMOTION.ANGER] = emotions[Bubble.EMOTION.ANGER] + 0.3;
 				AGE.TEEN:
-					emotions[Bubble.EMOTION.SADNESS] = emotions[Bubble.EMOTION.SADNESS] + 1;
+					emotions[Bubble.EMOTION.ANGER] = emotions[Bubble.EMOTION.ANGER] + 1;
 				AGE.YA:
-					emotions[Bubble.EMOTION.SADNESS] = emotions[Bubble.EMOTION.SADNESS] + 0.5;
+					emotions[Bubble.EMOTION.ANGER] = emotions[Bubble.EMOTION.ANGER] + 0.5;
 				AGE.MATURE:
-					emotions[Bubble.EMOTION.SADNESS] = emotions[Bubble.EMOTION.SADNESS] + 0.4;
+					emotions[Bubble.EMOTION.ANGER] = emotions[Bubble.EMOTION.ANGER] + 0.3;
 				AGE.OLD:
 					pass
 		if resources[RES.ENT] <= 0:
@@ -340,13 +340,13 @@ func deplete_resources():
 				AGE.INFANT:
 					pass
 				AGE.CHILD:
-					emotions[Bubble.EMOTION.ANGER] = emotions[Bubble.EMOTION.ANGER] + 0.3;
+					emotions[Bubble.EMOTION.SADNESS] = emotions[Bubble.EMOTION.SADNESS] + 0.3;
 				AGE.TEEN:
-					emotions[Bubble.EMOTION.ANGER] = emotions[Bubble.EMOTION.ANGER] + 1;
+					emotions[Bubble.EMOTION.SADNESS] = emotions[Bubble.EMOTION.SADNESS] + 1;
 				AGE.YA:
-					emotions[Bubble.EMOTION.ANGER] = emotions[Bubble.EMOTION.ANGER] + 0.5;
+					emotions[Bubble.EMOTION.SADNESS] = emotions[Bubble.EMOTION.SADNESS] + 0.5;
 				AGE.MATURE:
-					emotions[Bubble.EMOTION.ANGER] = emotions[Bubble.EMOTION.ANGER] + 0.3;
+					emotions[Bubble.EMOTION.SADNESS] = emotions[Bubble.EMOTION.SADNESS] + 0.3;
 				AGE.OLD:
 					pass
 		

@@ -1,6 +1,13 @@
-[gd_resource type="Theme" load_steps=2 format=3 uid="uid://4csixlnkvcme"]
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://4csixlnkvcme"]
 
 [ext_resource type="FontFile" uid="uid://d0q2dp6uyp2ht" path="res://resources/themes/Fuzzy_Bubbles/FuzzyBubbles-Bold.ttf" id="1_lxups"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d2wk5"]
+bg_color = Color(0.913725, 0.913725, 0.913725, 0.588235)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
 
 [resource]
 Label/colors/font_color = Color(0, 0, 0, 1)
@@ -9,3 +16,4 @@ Label/constants/shadow_offset_x = 4
 Label/constants/shadow_offset_y = 3
 Label/font_sizes/font_size = 32
 Label/fonts/font = ExtResource("1_lxups")
+Label/styles/normal = SubResource("StyleBoxFlat_d2wk5")

@@ -4,6 +4,7 @@
 [ext_resource type="Theme" uid="uid://cbjo2f8q0s42q" path="res://resources/themes/joy.tres" id="1_eqsng"]
 
 [node name="TextBubble" type="Control"]
+z_index = 50
 layout_mode = 3
 anchors_preset = 0
 theme = ExtResource("1_eqsng")

@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://bgatm4hq14yir"]
+[gd_scene load_steps=6 format=3 uid="uid://bgatm4hq14yir"]
 
 [ext_resource type="Script" path="res://code/game_states/state_old.gd" id="1_njpuh"]
 [ext_resource type="Texture2D" uid="uid://dngl22o0jtrnu" path="res://resources/levels/Old_Bedroom.png" id="2_ffipf"]
+[ext_resource type="AudioStream" uid="uid://e7qvk5xj0kc1" path="res://resources/music/resources/YA.tres" id="3_3sj1p"]
+[ext_resource type="AudioStream" uid="uid://c1ayqs3718ajf" path="res://resources/music/resources/Mall.tres" id="4_3b422"]
+[ext_resource type="AudioStream" uid="uid://dh8ppx7rdxtyw" path="res://resources/music/resources/Anger.tres" id="5_6lvtt"]
 
 [node name="StateOld" type="Node2D"]
 script = ExtResource("1_njpuh")
@@ -11,3 +14,18 @@ z_index = -4
 position = Vector2(960, 540)
 scale = Vector2(0.24, 0.21)
 texture = ExtResource("2_ffipf")
+
+[node name="Stage" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_3sj1p")
+autoplay = true
+bus = &"Stage"
+
+[node name="Location" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_3b422")
+autoplay = true
+bus = &"Location"
+
+[node name="Emotion" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_6lvtt")
+autoplay = true
+bus = &"Emotion"

@@ -4,7 +4,7 @@ extends "res://code/game_states/game_state.gd"
 
 var npc = preload("res://code/bubbles/npc.tscn")
 
-var level_length = 150;
+var level_length = 150 #150
 var pickup = preload("res://code/pickups/pickup.tscn")
 
 var pickup_spawn_time = 3;
@@ -12,13 +12,15 @@ var pickup_spawn_time = 3;
 func _ready():
 	super._ready();
 	player.show();
-	hud.show()
+	hud.hide()
+	hud.pause_age_counter()
 	player.new_stage_music(4)
 	
 	player.level_active = false;
 	player.aura_tween.kill();
 	player.influence.scale = Vector2(0,0);
 	player.position = Vector2(1920.0/2,1080.0/2)
+	await get_parent().transition_finished
 	await show_tutorial(4_0)
 	player.start_tween();
 	player.level_active = true;
@@ -31,6 +33,7 @@ func _ready():
 	$StageTimer.timeout.connect(finish_stage);
 	$StageTimer.start();
 	hud.start_age_counter(4)
+	hud.show()
 	
 	$Area1Timer.wait_time = randf_range(pickup_spawn_time-0.5,pickup_spawn_time+0.5);
 	$Area1Timer.one_shot = true;
@@ -274,6 +277,7 @@ func spawn_bubbles():
 	colors.append(Color(0.2,0.4,0.4));
 	colors.append(Color(0.2,0.4,0.4));
 	colors.append(Color(0.2,0.4,0.4));
+	rando_1.bubble_class = Bubble.BUB_CLASS.RANDOM;
 	rando_1.set_age_state(Bubble.AGE.YA,colors)
 	rando_1.emotions[Bubble.EMOTION.ANGER] = 2;
 	rando_1.emotions[Bubble.EMOTION.SADNESS] = 4;
@@ -282,7 +286,6 @@ func spawn_bubbles():
 	rando_1.position.y = randi_range($Area4Min.position.y,$Area4Max.position.y);
 	rando_1.min_pos = $Area4Min.position;
 	rando_1.max_pos = $Area4Max.position;
-	rando_1.bubble_class = Bubble.BUB_CLASS.RANDOM;
 	add_child(rando_1);
 	
 	var rando_2 = npc.instantiate();
@@ -291,6 +294,7 @@ func spawn_bubbles():
 	colors.append(Color(0.5,0,0.5));
 	colors.append(Color(0.5,0,0.5));
 	colors.append(Color(0.5,0,0.5));
+	rando_2.bubble_class = Bubble.BUB_CLASS.RANDOM;
 	rando_2.set_age_state(Bubble.AGE.YA,colors)
 	rando_2.emotions[Bubble.EMOTION.ANGER] = 5;
 	rando_2.emotions[Bubble.EMOTION.SADNESS] = 5;
@@ -299,7 +303,6 @@ func spawn_bubbles():
 	rando_2.position.y = randi_range($Area4Min.position.y,$Area4Max.position.y);
 	rando_2.min_pos = $Area4Min.position;
 	rando_2.max_pos = $Area4Max.position;
-	rando_2.bubble_class = Bubble.BUB_CLASS.RANDOM;
 	add_child(rando_2);
 	
 	var rando_3 = npc.instantiate();
@@ -308,6 +311,7 @@ func spawn_bubbles():
 	colors.append(Color(0.4,0.4,0.2));
 	colors.append(Color(0.4,0.4,0.2));
 	colors.append(Color(0.4,0.4,0.2));
+	rando_3.bubble_class = Bubble.BUB_CLASS.RANDOM;
 	rando_3.set_age_state(Bubble.AGE.YA,colors)
 	rando_3.emotions[Bubble.EMOTION.ANGER] = 4;
 	rando_3.emotions[Bubble.EMOTION.SADNESS] = 2;
@@ -316,7 +320,6 @@ func spawn_bubbles():
 	rando_3.position.y = randi_range($Area4Min.position.y,$Area4Max.position.y);
 	rando_3.min_pos = $Area4Min.position;
 	rando_3.max_pos = $Area4Max.position;
-	rando_3.bubble_class = Bubble.BUB_CLASS.RANDOM;
 	add_child(rando_3);
 	
 	var rando_4 = npc.instantiate();
@@ -325,6 +328,7 @@ func spawn_bubbles():
 	colors.append(Color(0.1,0.2,0.7));
 	colors.append(Color(0.1,0.2,0.7));
 	colors.append(Color(0.1,0.2,0.7));
+	rando_4.bubble_class = Bubble.BUB_CLASS.RANDOM
 	rando_4.set_age_state(Bubble.AGE.YA,colors)
 	rando_4.emotions[Bubble.EMOTION.ANGER] = 1;
 	rando_4.emotions[Bubble.EMOTION.SADNESS] = 7;
@@ -333,6 +337,5 @@ func spawn_bubbles():
 	rando_4.position.y = randi_range($Area4Min.position.y,$Area4Max.position.y);
 	rando_4.min_pos = $Area4Min.position;
 	rando_4.max_pos = $Area4Max.position;
-	rando_4.bubble_class = Bubble.BUB_CLASS.RANDOM;
 	add_child(rando_4);
 	

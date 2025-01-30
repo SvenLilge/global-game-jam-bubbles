@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://code/game_state_controller.gd" id="1_i0jue"]
 [ext_resource type="PackedScene" uid="uid://bka7q4jgbunek" path="res://code/bubbles/player.tscn" id="2_48ue1"]
-[ext_resource type="PackedScene" path="res://code/hud.tscn" id="3_v7bcj"]
+[ext_resource type="PackedScene" uid="uid://bmb2k3c540uqx" path="res://code/hud.tscn" id="3_v7bcj"]
 
 [node name="GameStateController" type="Node2D"]
 script = ExtResource("1_i0jue")
