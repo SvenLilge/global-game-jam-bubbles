@@ -8,7 +8,7 @@ var bubble = preload("res://code/bubbles/bubble.tscn")
 # results is: {stage: [stage_results]}
 # [stage_results] is: [color] for the 1st age, [color, resources] for 2-3, [color, resources, spread_color] for 4
 # might be part of player?
-var game_results
+var game_results_shown = [0, 0, 0, 0, 0]
 
 var infant
 var child
@@ -141,38 +141,58 @@ func _ready():
 	
 
 func pop_infant_bubble():
+	if game_results_shown[0] != 0:
+		return
+		
 	var results = [];
 	results.append(player.age_colors[0]);
 	results.append(player.age_resources[0]);
 	play_last_stage(0,results);
+	game_results_shown[0] = 1
 
 
 func pop_child_bubble():
+	if game_results_shown[1] != 0:
+		return
+		
 	var results = [];
 	results.append(player.age_colors[1]);
 	results.append(player.age_resources[1]);
 	play_last_stage(1,results);
+	game_results_shown[1] = 1
 
 
 func pop_teen_bubble():
+	if game_results_shown[2] != 0:
+		return
+		
 	var results = [];
 	results.append(player.age_colors[2]);
 	results.append(player.age_resources[2]);
 	play_last_stage(2,results);
+	game_results_shown[2] = 1
 
 
 func pop_ya_bubble():
+	if game_results_shown[3] != 0:
+		return
+		
 	var results = [];
 	results.append(player.age_colors[3]);
 	results.append(player.age_resources[3]);
 	play_last_stage(3,results);
+	game_results_shown[3] = 1
 
 
 func pop_mature_bubble():
+	if game_results_shown[4] != 0:
+		return
+		
 	var results = [];
 	results.append(player.age_colors[4]);
 	results.append(player.age_resources[4]);
 	play_last_stage(4,results);
+	game_results_shown[4] = 1
 
 func _input(event):
 	if event is InputEventMouseButton and StateDelayTimer.time_left == 0 and ready_to_pop:
@@ -187,6 +207,7 @@ func _input(event):
 				pop_ya_bubble();
 			if mature.sprite.get_rect().has_point(mature.sprite.to_local(get_global_mouse_position())):
 				pop_mature_bubble();
+				get_parent().hud.show_restart()
 
 
 func finish_stage():

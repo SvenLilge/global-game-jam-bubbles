@@ -24,6 +24,7 @@ var cur_age
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	reset_hud()
+	age_timer.timeout.connect(on_timeout)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -34,7 +35,6 @@ func reset_hud():
 	set_money(0)
 	set_personal(0)
 	set_age(0)
-	age_timer.timeout.connect(on_timeout)
 	
 	#hide all
 	energy.hide()
@@ -174,9 +174,22 @@ func set_personal(value):
 	
 	value = round(value*10)/10.0
 	personal.text = str(value)
-	
+
+
+func show_restart():
+	$Control/Reset.modulate = Color(1,1,1,0)
+	await get_tree().create_timer(1.0).timeout
+	$Control/Reset.show()
+	var tween_modul = get_tree().create_tween()
+	tween_modul.tween_property($Control/Reset, "modulate", Color(1,1,1,1), 1.5).set_trans(Tween.TRANS_SINE)
+
 
 func _on_button_pressed() -> void:
 	var opt_screen = load("res://code/options.tscn").instantiate()
 	add_child(opt_screen)
-	opt_screen.called_screen = self
+	opt_screen.called_screen = get_parent().cur_game_state
+
+
+func _on_reset_pressed() -> void:
+	print("button pressed")
+	get_parent().cur_game_state.sgn_transition_state.emit(GameState.State.MAIN_MENU)

@@ -107,7 +107,7 @@ func update_location_music(pos:Vector2):
 	
 	left_up_loc_song.volume_db = linear_to_db(left_up_dist) + 15
 	left_down_loc_song.volume_db = linear_to_db(left_down_dist) + 15
-	right_down_loc_song.volume_db = linear_to_db(right_up_dist) + 15
+	right_up_loc_song.volume_db = linear_to_db(right_up_dist) + 15
 	right_down_loc_song.volume_db = linear_to_db(right_down_dist) + 15
 
 

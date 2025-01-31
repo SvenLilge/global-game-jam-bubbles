@@ -1,6 +1,11 @@
 extends "res://code/game_states/game_state.gd" 
 
 
+func _ready() -> void:
+	super._ready()
+	get_parent().restart_game()
+
+
 func _on_new_game_pressed() -> void:
 	sgn_transition_state.emit(State.INFANT)
 

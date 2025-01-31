@@ -59,6 +59,8 @@ var replics = {
 	"Random": ["Gotcha!","Ok, thanks!","I agree!","If you say so!","Refreshing!","Noted!",],
 }
 
+
+# Power version
 var tutorial = {
 	0_0: [Bubble.EMOTION.JOY, ["You are a bubble.", "The Bubble.", "You appeared in this world as a pure bubble.", "Blank state. Tabula Rasa.", "Use arrows/WASD to move"]],
 	0_1: [Bubble.EMOTION.JOY, ["The world has other bubbles.\nThey have power to affect you.", "Some of them bring joy, like this one."]],
@@ -69,7 +71,7 @@ var tutorial = {
 	1_2: [Bubble.EMOTION.SADNESS, ["You need to have some fun to keep spirits up.", "Or you'll get sad."]],
 	1_3: [Bubble.EMOTION.ANGER, ["You need to study, at school.", "For your future. Do you want to suceed?"]],
 	1_4: [Bubble.EMOTION.JOY, ["And try to make meaningful connections.", "Spend time with a close friend?"]],
-	1_5: [Bubble.EMOTION.ANGER, ["Additionally, now you also have power.", "Power to affect others.", "Just a little bit, for now."]],
+	1_5: [Bubble.EMOTION.ANGER, ["Additionally, now you also have power.", "Power to affect others.", "Just a little bit, for now.", "You are your only weapon\nto change the world."]],
 	2_0: [Bubble.EMOTION.ANGER, ["You grow into a teenage bubble.", "Your power grows, and things get messy.", "You need to endure to persist."]],
 	3_0: [Bubble.EMOTION.JOY, ["Who's a big bubble now?", "You are!", "Young and powerful.", "Now you earn a thing called money.", "Did you study well?"]],
 	4_0: [Bubble.EMOTION.JOY, ["Your bubble had its time.\nYou persist.", "You accumulated power.\nBut for what?", "Time to exert your power\nover the other bubbles...", "Or better not?"]],

@@ -51,6 +51,17 @@ func reset_music_player():
 	music_player.play();
 	return;
 
+
+func restart_game():
+	hud.reset_hud()
+	player.queue_free()
+	
+	player = load("res://code/bubbles/player.tscn").instantiate()
+	add_child(player)
+	
+	player.set_hud()
+
+
 func transition_game_state(next_state):
 	if next_state == GameState.State.QUIT_GAME:
 		get_tree().quit();

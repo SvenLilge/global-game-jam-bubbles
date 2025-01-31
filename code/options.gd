@@ -137,6 +137,7 @@ func _on_sfx_drag_ended(_value_changed: bool) -> void:
 func _on_title_pressed() -> void:
 	sound_player.play()
 	get_tree().paused = false
+	queue_free()
 	if called_screen:
 		called_screen.sgn_transition_state.emit(GameState.State.MAIN_MENU)
 

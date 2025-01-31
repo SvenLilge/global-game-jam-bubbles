@@ -147,7 +147,7 @@ func spawn_third_bubble():
 	
 	sad_bubble.speed = 0
 	hud.pause_age_counter()
-	await show_tutorial(0_2, Vector2(1160, 340));
+	await show_tutorial(0_3, Vector2(1160, 340));
 	hud.pause_age_counter(false)
 	sad_bubble.speed = 0.75*sad_bubble.base_speed
 	
